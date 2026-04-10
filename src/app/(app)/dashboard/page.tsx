@@ -46,8 +46,8 @@ export default function DashboardPage() {
             ))}</div>
           </div>
           <div><h2 className="mb-4 text-lg font-semibold">Activity</h2><Card><CardContent className="pt-6">
-            <div className="grid grid-cols-12 gap-1">{heat.map((d,i)=>(<div key={i} className="aspect-square rounded-sm" style={{backgroundColor:d.m===0?"oklch(0.22 0.03 260)":d.m<30?"oklch(0.45 0.08 55)":d.m<60?"oklch(0.6 0.12 55)":"oklch(0.78 0.16 55)"}} title={`${d.m} min`}/>))}</div>
-            <div className="mt-3 flex items-center justify-end gap-2 text-xs text-muted-foreground"><span>Less</span><div className="flex gap-1">{[0,15,45,90].map(m=>(<div key={m} className="h-3 w-3 rounded-sm" style={{backgroundColor:m===0?"oklch(0.22 0.03 260)":m<30?"oklch(0.45 0.08 55)":m<60?"oklch(0.6 0.12 55)":"oklch(0.78 0.16 55)"}}/>))}</div><span>More</span></div>
+            <div className="grid grid-cols-12 gap-1">{heat.map((d,i)=>(<div key={i} className="aspect-square rounded-sm" style={{backgroundColor:d.m===0?"oklch(0.18 0.025 150)":d.m<30?"oklch(0.35 0.1 155)":d.m<60?"oklch(0.5 0.15 155)":"oklch(0.7 0.19 155)"}} title={`${d.m} min`}/>))}</div>
+            <div className="mt-3 flex items-center justify-end gap-2 text-xs text-muted-foreground"><span>Less</span><div className="flex gap-1">{[0,15,45,90].map(m=>(<div key={m} className="h-3 w-3 rounded-sm" style={{backgroundColor:m===0?"oklch(0.18 0.025 150)":m<30?"oklch(0.35 0.1 155)":m<60?"oklch(0.5 0.15 155)":"oklch(0.7 0.19 155)"}}/>))}</div><span>More</span></div>
           </CardContent></Card></div>
         </div>
 

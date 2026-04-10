@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Send, Square, Brain, Trash2, Sparkles, BookOpen, Dumbbell, GraduationCap, RotateCcw, User } from "lucide-react";
@@ -26,7 +27,7 @@ export default function AIChatPage() {
   return (
     <div className="flex h-[calc(100vh-4rem)] flex-col">
       <div className="flex items-center justify-between border-b border-border/50 px-6 py-3">
-        <div className="flex items-center gap-3"><div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary"><Brain className="h-4 w-4"/></div><div><h1 className="text-sm font-semibold">AI Study Buddy</h1><p className="text-xs text-muted-foreground">Ask anything. I&apos;ll teach, not just answer.</p></div></div>
+        <div className="flex items-center gap-3"><Image src="/discordlogo.png" alt="SP" width={32} height={32} className="h-8 w-8 rounded-full" /><div><h1 className="text-sm font-semibold">AI Study Buddy</h1><p className="text-xs text-muted-foreground">Ask anything. I&apos;ll teach, not just answer.</p></div></div>
         <div className="flex items-center gap-2"><Badge variant="outline" className="text-xs">Balanced Mode</Badge>{messages.length>0&&<Button variant="ghost" size="sm" onClick={clearMessages}><Trash2 className="h-3.5 w-3.5"/></Button>}</div>
       </div>
 
@@ -42,7 +43,7 @@ export default function AIChatPage() {
           <div className="mx-auto max-w-3xl space-y-6 px-4 py-6">
             {messages.map(m=>(
               <div key={m.id} className="flex gap-3">
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${m.role==="user"?"bg-muted text-muted-foreground":"bg-primary/10 text-primary"}`}>{m.role==="user"?<User className="h-4 w-4"/>:<Brain className="h-4 w-4"/>}</div>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden">{m.role==="user"?<div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground"><User className="h-4 w-4"/></div>:<Image src="/discordlogo.png" alt="AI" width={32} height={32} />}</div>
                 <div className="flex-1 min-w-0">
                   <p className="mb-1 text-xs font-medium text-muted-foreground">{m.role==="user"?"You":"Soft Path AI"}</p>
                   <div className="text-sm leading-relaxed whitespace-pre-wrap">{m.content||m.isStreaming&&<div className="flex gap-1"><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"0ms"}}/><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"150ms"}}/><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"300ms"}}/></div>}{m.isStreaming&&m.content&&<span className="inline-block h-4 w-0.5 animate-pulse bg-primary ml-0.5"/>}</div>

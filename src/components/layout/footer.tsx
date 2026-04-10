@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const links = {
   Product: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "/pricing" }, { label: "For Education", href: "/pricing#education" }, { label: "For Business", href: "/pricing#business" }],
@@ -12,9 +13,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary font-bold text-primary-foreground text-xs">SP</div>
-              <span className="text-lg font-bold tracking-tight">Soft<span className="text-gradient">Path</span></span>
+            <Link href="/" className="flex items-center">
+              <Image src="/SoftPathLogo.png" alt="Soft Path" width={120} height={35} className="h-9 w-auto" />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">Learn Anything. Your AI Knows How.</p>
             <p className="mt-4 text-xs text-muted-foreground/70">Soft Training Enterprise SRL</p>
@@ -27,7 +27,7 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-10 border-t border-border/50 pt-8 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Soft Training Enterprise SRL. All rights reserved.
+          &copy; {new Date().getFullYear()} Soft Path under Soft Training Enterprise SRL. All rights reserved.
         </div>
       </div>
     </footer>
