@@ -1,7 +1,7 @@
 import type { PlanLimits } from "@/types";
 
-export const APP_NAME = "Soft Path";
-export const COMPANY_NAME = "Soft Training Enterprise SRL";
+export const APP_NAME = "Granted Path";
+export const COMPANY_NAME = "Granted Training Enterprise SRL";
 
 export const PLAN_LIMITS = {
   FREE: { activeCourses: 2, aiMessagesPerDay: 20, exercisesPerDay: 10, examSimsPerWeek: 1, flashcardsPerDay: 5, offlineCourses: 0, studyGroups: 0, hasAds: true, hasCertificates: false, hasVoiceMode: false, hasPanicMode: false, hasAdvancedAI: false, analyticsHistoryDays: 7 } satisfies PlanLimits,

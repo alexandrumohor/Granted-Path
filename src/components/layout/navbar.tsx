@@ -18,7 +18,7 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center">
-          <Image src="/SoftPathLogo.png" alt="Soft Path" width={315} height={90} className="h-[90px] w-auto" priority />
+          <Image src="/GrantedPathLogo.png" alt="Granted Path" width={315} height={90} className="h-[90px] w-auto" priority />
         </Link>
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((l) => (<Link key={l.href} href={l.href} className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{l.label}</Link>))}

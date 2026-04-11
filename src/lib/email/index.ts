@@ -8,7 +8,7 @@ function getResend(): Resend | null {
   return _resend;
 }
 
-export const EMAIL_FROM = process.env.EMAIL_FROM || "Soft Path <noreply@softpath.com>";
+export const EMAIL_FROM = process.env.EMAIL_FROM || "Granted Path <noreply@grantedpath.com>";
 
 export async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
   const resend = getResend();

@@ -39,7 +39,7 @@ export default function MobileLandingPage() {
                 <span className="text-gradient">now in your pocket</span>
               </h1>
               <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-                The full Soft Path experience on iOS and Android. Voice conversations, offline lessons, smart reminders, and genuine AI coaching — everywhere you go.
+                The full Granted Path experience on iOS and Android. Voice conversations, offline lessons, smart reminders, and genuine AI coaching — everywhere you go.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">

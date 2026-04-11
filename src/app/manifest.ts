@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Soft Path — AI Learning",
-    short_name: "Soft Path",
+    name: "Granted Path — AI Learning",
+    short_name: "Granted Path",
     description: "AI-powered learning platform that actually teaches you efficiently.",
     start_url: "/dashboard",
     display: "standalone",

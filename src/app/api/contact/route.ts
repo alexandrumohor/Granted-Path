@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     await sendEmail({
-      to: "contact@softpath.com", // Change to your real email
+      to: "contact@grantedpath.com", // Change to your real email
       subject: `[Contact Form] ${subject}`,
       html: `
         <h2>New Contact Form Submission</h2>

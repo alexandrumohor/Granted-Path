@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center">
-            <Image src="/SoftPathLogo.png" alt="Soft Path" width={160} height={45} className="h-12 w-auto" />
+            <Image src="/GrantedPathLogo.png" alt="Granted Path" width={160} height={45} className="h-12 w-auto" />
           </Link>
         </div>
         {children}

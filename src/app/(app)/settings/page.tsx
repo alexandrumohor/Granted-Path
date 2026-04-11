@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, Shield, CreditCard, Bell, BookOpen, Globe, Lock } from "lucide-react";
+import { User, Shield, CreditCard, Bell, BookOpen, Globe, Lock, KeyRound } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const settingsNav = [
   { href: "/settings/profile", label: "Profile", icon: User, desc: "Name, avatar, bio" },
   { href: "/settings/account", label: "Account", icon: Shield, desc: "Email, password, delete account" },
+  { href: "/settings/security", label: "Security", icon: KeyRound, desc: "2FA, sessions, login history" },
   { href: "/settings/subscription", label: "Subscription", icon: CreditCard, desc: "Plan, billing, invoices" },
   { href: "/settings/notifications", label: "Notifications", icon: Bell, desc: "Email, push, quiet hours" },
   { href: "/settings/learning-prefs", label: "Learning Preferences", icon: BookOpen, desc: "Style, pace, tough love level" },

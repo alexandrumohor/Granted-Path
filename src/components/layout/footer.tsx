@@ -14,10 +14,10 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center">
-              <Image src="/SoftPathLogo.png" alt="Soft Path" width={120} height={35} className="h-9 w-auto" />
+              <Image src="/GrantedPathLogo.png" alt="Granted Path" width={120} height={35} className="h-9 w-auto" />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">Learn Anything. Your AI Knows How.</p>
-            <p className="mt-4 text-xs text-muted-foreground/70">Soft Training Enterprise SRL</p>
+            <p className="mt-4 text-xs text-muted-foreground/70">Granted Training Enterprise SRL</p>
           </div>
           {Object.entries(links).map(([cat, items]) => (
             <div key={cat}>
@@ -27,7 +27,7 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-10 border-t border-border/50 pt-8 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Soft Path under Soft Training Enterprise SRL. All rights reserved.
+          &copy; {new Date().getFullYear()} Granted Path under Granted Training Enterprise SRL. All rights reserved.
         </div>
       </div>
     </footer>

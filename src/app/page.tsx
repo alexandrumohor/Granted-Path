@@ -35,7 +35,7 @@ export default function LandingPage() {
         <div className="overflow-hidden rounded-xl border border-border/50 bg-card shadow-2xl">
           <div className="flex items-center gap-2 border-b border-border/50 bg-muted/50 px-4 py-3">
             <div className="h-3 w-3 rounded-full bg-red-500/60" /><div className="h-3 w-3 rounded-full bg-yellow-500/60" /><div className="h-3 w-3 rounded-full bg-green-500/60" />
-            <span className="ml-3 text-xs text-muted-foreground">Soft Path AI Tutor &mdash; Python Fundamentals</span>
+            <span className="ml-3 text-xs text-muted-foreground">Granted Path AI Tutor &mdash; Python Fundamentals</span>
           </div>
           <div className="space-y-4 p-6">
             <div className="flex justify-end"><div className="max-w-sm rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">I think lists and tuples are the same thing in Python, right?</div></div>
@@ -64,7 +64,7 @@ export default function LandingPage() {
     <section id="features" className="scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why <span className="text-gradient">Soft Path</span>?</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why <span className="text-gradient">Granted Path</span>?</h2>
           <p className="mt-4 text-lg text-muted-foreground">Not just another course platform. A teacher that knows you.</p>
         </div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -106,7 +106,7 @@ export default function BizSettingsPage() {
               <label className="mt-4 block text-xs text-muted-foreground">Custom Subdomain</label>
               <div className="mt-2 flex items-center gap-2">
                 <Input defaultValue="acme" className="flex-1" />
-                <span className="text-sm text-muted-foreground">.softpath.app</span>
+                <span className="text-sm text-muted-foreground">.grantedpath.com</span>
               </div>
             </div>
           </div>

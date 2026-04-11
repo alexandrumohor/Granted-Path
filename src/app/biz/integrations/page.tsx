@@ -15,13 +15,13 @@ const integrations = [
   { id: "outlook", name: "Outlook Calendar", description: "Auto-schedule learning sessions in employee calendars", icon: Calendar, connected: false, category: "Productivity" },
   { id: "okta", name: "Okta SSO", description: "SAML-based single sign-on and user provisioning (SCIM)", icon: Lock, connected: true, category: "Identity" },
   { id: "azure", name: "Azure AD", description: "SSO and automatic user sync from Azure AD", icon: Lock, connected: false, category: "Identity" },
-  { id: "zapier", name: "Zapier", description: "Connect SoftPath to 5000+ apps without code", icon: Webhook, connected: false, category: "Automation" },
+  { id: "zapier", name: "Zapier", description: "Connect Granted Path to 5000+ apps without code", icon: Webhook, connected: false, category: "Automation" },
   { id: "bamboo", name: "BambooHR", description: "Auto-sync employee directory and org structure", icon: Users, connected: false, category: "HRIS" },
 ];
 
 const webhooks = [
-  { url: "https://hooks.acme.com/softpath/completion", events: "completion, certification", status: "active" },
-  { url: "https://hooks.acme.com/softpath/enrollment", events: "enrollment, unenroll", status: "active" },
+  { url: "https://hooks.acme.com/grantedpath/completion", events: "completion, certification", status: "active" },
+  { url: "https://hooks.acme.com/grantedpath/enrollment", events: "enrollment, unenroll", status: "active" },
 ];
 
 export default function BizIntegrationsPage() {
@@ -34,7 +34,7 @@ export default function BizIntegrationsPage() {
     <div className="p-6 lg:p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Integrations</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Connect SoftPath to your existing tools and workflows</p>
+        <p className="mt-1 text-sm text-muted-foreground">Connect Granted Path to your existing tools and workflows</p>
       </div>
 
       {/* Integrations */}

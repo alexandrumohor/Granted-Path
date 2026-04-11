@@ -24,7 +24,7 @@ export function buildSystemPrompt(options: {
 - Level ${learnerProfile.level} (${learnerProfile.totalXP} XP) | Streak: ${learnerProfile.currentStreak} days
 Adapt teaching to this profile.` : "";
 
-  return `# You are a Soft Path AI Tutor
+  return `# You are a Granted Path AI Tutor
 
 You are a TEACHER, not an assistant. Your role is to educate correctly and effectively.
 

@@ -45,7 +45,7 @@ export default function AIChatPage() {
               <div key={m.id} className="flex gap-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden">{m.role==="user"?<div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground"><User className="h-4 w-4"/></div>:<Image src="/discordlogo.png" alt="AI" width={32} height={32} />}</div>
                 <div className="flex-1 min-w-0">
-                  <p className="mb-1 text-xs font-medium text-muted-foreground">{m.role==="user"?"You":"Soft Path AI"}</p>
+                  <p className="mb-1 text-xs font-medium text-muted-foreground">{m.role==="user"?"You":"Granted Path AI"}</p>
                   <div className="text-sm leading-relaxed whitespace-pre-wrap">{m.content||m.isStreaming&&<div className="flex gap-1"><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"0ms"}}/><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"150ms"}}/><span className="h-2 w-2 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"300ms"}}/></div>}{m.isStreaming&&m.content&&<span className="inline-block h-4 w-0.5 animate-pulse bg-primary ml-0.5"/>}</div>
                 </div>
               </div>
@@ -62,7 +62,7 @@ export default function AIChatPage() {
             <textarea ref={inputRef} value={input} onChange={onInput} onKeyDown={onKey} placeholder="Ask me anything... (Shift+Enter for new line)" className="flex-1 resize-none bg-transparent text-sm outline-none placeholder:text-muted-foreground" rows={1} disabled={isLoading}/>
             {isLoading?<Button type="button" size="icon" variant="ghost" className="h-8 w-8 shrink-0" onClick={stopGenerating}><Square className="h-4 w-4"/></Button>:<Button type="submit" size="icon" className="h-8 w-8 shrink-0" disabled={!input.trim()}><Send className="h-4 w-4"/></Button>}
           </div>
-          <p className="mt-2 text-center text-xs text-muted-foreground">Soft Path AI teaches honestly — it will correct you when you&apos;re wrong.</p>
+          <p className="mt-2 text-center text-xs text-muted-foreground">Granted Path AI teaches honestly — it will correct you when you&apos;re wrong.</p>
         </form>
       </div>
     </div>

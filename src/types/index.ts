@@ -1,5 +1,5 @@
 // ============================================
-// SOFT PATH — Core Type Definitions
+// SOFT LEARN — Core Type Definitions
 // ============================================
 
 export type UserRole = "USER" | "TEACHER" | "MANAGER" | "ORG_ADMIN" | "SUPER_ADMIN";

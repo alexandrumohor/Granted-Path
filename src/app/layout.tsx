@@ -9,10 +9,10 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Soft Path — Learn Anything. Your AI Knows How.",
+  title: "Granted Path — Learn Anything. Your AI Knows How.",
   description: "A personal AI tutor that adapts to how you learn, tracks your progress in real-time, and prepares you efficiently for any goal.",
   keywords: ["AI learning", "online courses", "AI tutor", "personalized learning", "exam preparation", "adaptive learning"],
-  authors: [{ name: "Soft Training Enterprise SRL" }],
+  authors: [{ name: "Granted Training Enterprise SRL" }],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

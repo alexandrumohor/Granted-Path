@@ -19,7 +19,7 @@ export default async function VerifyCertificatePage({ params }: { params: Promis
     score: null as number | null,
     hoursSpent: 8,
     issuedAt: "2026-04-05",
-    issuer: "Soft Training Enterprise SRL",
+    issuer: "Granted Training Enterprise SRL",
   };
 
   if (!cert.valid) {
@@ -51,7 +51,7 @@ export default async function VerifyCertificatePage({ params }: { params: Promis
 
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <Image src="/SoftPathLogo.png" alt="Soft Path" width={120} height={35} className="h-9 w-auto" />
+            <Image src="/GrantedPathLogo.png" alt="Granted Path" width={120} height={35} className="h-9 w-auto" />
           </div>
 
           {/* Certificate info */}
