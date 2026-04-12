@@ -65,7 +65,7 @@ export default function CertificatesPage() {
                     {/* Certificate preview */}
                     <div className="md:w-80 bg-gradient-to-br from-background to-muted/50 border-b md:border-b-0 md:border-r border-border/50 p-8 flex flex-col items-center justify-center text-center">
                       <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10">
-                        <Image src="/discordlogo.png" alt="SP" width={36} height={36} className="rounded-full" />
+                        <Image src="/icon.png" alt="SP" width={36} height={36} className="rounded-full" />
                       </div>
                       <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Certificate of {style.label}</p>
                       <p className="text-lg font-bold">{cert.title}</p>

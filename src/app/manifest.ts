@@ -13,14 +13,14 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["education", "productivity"],
     lang: "en",
     icons: [
-      { src: "/discordlogo.png", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/discordlogo.png", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/discordlogo.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+      { src: "/icon.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/icon.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
     ],
     shortcuts: [
-      { name: "Dashboard", short_name: "Home", url: "/dashboard", icons: [{ src: "/discordlogo.png", sizes: "96x96" }] },
-      { name: "AI Chat", short_name: "Chat", url: "/ai-chat", icons: [{ src: "/discordlogo.png", sizes: "96x96" }] },
-      { name: "Voice Tutor", short_name: "Voice", url: "/voice", icons: [{ src: "/discordlogo.png", sizes: "96x96" }] },
+      { name: "Dashboard", short_name: "Home", url: "/dashboard", icons: [{ src: "/icon.png", sizes: "96x96" }] },
+      { name: "AI Chat", short_name: "Chat", url: "/ai-chat", icons: [{ src: "/icon.png", sizes: "96x96" }] },
+      { name: "Voice Tutor", short_name: "Voice", url: "/voice", icons: [{ src: "/icon.png", sizes: "96x96" }] },
     ],
   };
 }

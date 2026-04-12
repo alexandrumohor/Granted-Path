@@ -87,7 +87,7 @@ export default function GroupDetailPage({ params }: { params: Promise<{ id: stri
                 <>
                   <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden ${msg.type === "AI_RESPONSE" ? "" : "bg-muted"}`}>
                     {msg.type === "AI_RESPONSE" ? (
-                      <Image src="/discordlogo.png" alt="AI" width={32} height={32} />
+                      <Image src="/icon.png" alt="AI" width={32} height={32} />
                     ) : (
                       <User className="h-4 w-4 text-muted-foreground" />
                     )}

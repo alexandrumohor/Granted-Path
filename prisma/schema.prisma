@@ -4,7 +4,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 // ===================== AUTH & USERS =====================
@@ -52,7 +51,13 @@ model User {
   @@map("users")
 }
 
-enum UserRole { USER TEACHER MANAGER ORG_ADMIN SUPER_ADMIN }
+enum UserRole {
+  USER
+  TEACHER
+  MANAGER
+  ORG_ADMIN
+  SUPER_ADMIN
+}
 
 model Account {
   id                String  @id @default(cuid())
@@ -109,8 +114,18 @@ model Subscription {
   @@map("subscriptions")
 }
 
-enum SubscriptionTier { FREE STARTER PRO MASTER }
-enum SubscriptionStatus { ACTIVE CANCELLED PAST_DUE TRIALING }
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PRO
+  MASTER
+}
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+  TRIALING
+}
 
 // ===================== LEARNER PROFILE =====================
 
@@ -135,9 +150,22 @@ model LearnerProfile {
   @@map("learner_profiles")
 }
 
-enum PacePreference { SLOW NORMAL FAST }
-enum MotivationType { GOAL CURIOSITY CAREER EXAM }
-enum ToughLoveLevel { GENTLE BALANCED STRICT }
+enum PacePreference {
+  SLOW
+  NORMAL
+  FAST
+}
+enum MotivationType {
+  GOAL
+  CURIOSITY
+  CAREER
+  EXAM
+}
+enum ToughLoveLevel {
+  GENTLE
+  BALANCED
+  STRICT
+}
 
 model OnboardingResponse {
   id       String @id @default(cuid())
@@ -177,8 +205,25 @@ model Course {
   @@map("courses")
 }
 
-enum CourseCategory { IT_PROGRAMMING BUSINESS_MANAGEMENT MARKETING LANGUAGES EXAM_PREP SCIENCES DESIGN_CREATIVITY FINANCE_ACCOUNTING LAW_LEGISLATION HEALTH_MEDICINE SOFT_SKILLS CUSTOM }
-enum Difficulty { BEGINNER INTERMEDIATE ADVANCED }
+enum CourseCategory {
+  IT_PROGRAMMING
+  BUSINESS_MANAGEMENT
+  MARKETING
+  LANGUAGES
+  EXAM_PREP
+  SCIENCES
+  DESIGN_CREATIVITY
+  FINANCE_ACCOUNTING
+  LAW_LEGISLATION
+  HEALTH_MEDICINE
+  SOFT_SKILLS
+  CUSTOM
+}
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
 
 model Module {
   id       String @id @default(cuid())
@@ -206,7 +251,12 @@ model Lesson {
   @@map("lessons")
 }
 
-enum LessonType { TEXT INTERACTIVE VIDEO PRACTICE }
+enum LessonType {
+  TEXT
+  INTERACTIVE
+  VIDEO
+  PRACTICE
+}
 
 // ===================== EXERCISES & QUIZZES =====================
 
@@ -227,7 +277,15 @@ model Exercise {
   @@map("exercises")
 }
 
-enum ExerciseType { MULTIPLE_CHOICE TRUE_FALSE FILL_BLANK OPEN_ENDED CODE MATCHING ORDERING }
+enum ExerciseType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  FILL_BLANK
+  OPEN_ENDED
+  CODE
+  MATCHING
+  ORDERING
+}
 
 model UserExerciseAttempt {
   id              String   @id @default(cuid())
@@ -259,7 +317,12 @@ model Quiz {
   @@map("quizzes")
 }
 
-enum QuizType { LESSON_CHECK MODULE_TEST COURSE_FINAL CUSTOM }
+enum QuizType {
+  LESSON_CHECK
+  MODULE_TEST
+  COURSE_FINAL
+  CUSTOM
+}
 
 model QuizAttempt {
   id              String    @id @default(cuid())
@@ -294,7 +357,12 @@ model UserCourseEnrollment {
   @@map("user_course_enrollments")
 }
 
-enum EnrollmentStatus { ACTIVE COMPLETED PAUSED ABANDONED }
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+  ABANDONED
+}
 
 model UserLessonProgress {
   id         String       @id @default(cuid())
@@ -311,7 +379,11 @@ model UserLessonProgress {
   @@map("user_lesson_progress")
 }
 
-enum LessonStatus { NOT_STARTED IN_PROGRESS COMPLETED }
+enum LessonStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
 
 // ===================== GOALS =====================
 
@@ -332,8 +404,18 @@ model Goal {
   @@map("goals")
 }
 
-enum GoalType { EXAM SKILL CAREER CURIOSITY CUSTOM }
-enum GoalStatus { ACTIVE COMPLETED ABANDONED }
+enum GoalType {
+  EXAM
+  SKILL
+  CAREER
+  CURIOSITY
+  CUSTOM
+}
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  ABANDONED
+}
 
 // ===================== KNOWLEDGE GRAPH =====================
 
@@ -358,7 +440,12 @@ model KnowledgeNode {
   @@map("knowledge_nodes")
 }
 
-enum MasteryStatus { NOT_STARTED LEARNING REVIEWING MASTERED }
+enum MasteryStatus {
+  NOT_STARTED
+  LEARNING
+  REVIEWING
+  MASTERED
+}
 
 model KnowledgeEdge {
   id           String       @id @default(cuid())
@@ -371,7 +458,11 @@ model KnowledgeEdge {
   @@map("knowledge_edges")
 }
 
-enum RelationType { PREREQUISITE RELATED BUILDS_ON }
+enum RelationType {
+  PREREQUISITE
+  RELATED
+  BUILDS_ON
+}
 
 // ===================== GAMIFICATION =====================
 
@@ -397,7 +488,13 @@ model Achievement {
   @@map("achievements")
 }
 
-enum AchievementRarity { COMMON UNCOMMON RARE EPIC LEGENDARY }
+enum AchievementRarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
 
 model UserAchievement {
   id            String   @id @default(cuid())
@@ -427,7 +524,12 @@ model AIConversation {
   @@map("ai_conversations")
 }
 
-enum AIConversationType { STUDY_BUDDY LESSON ASSESSMENT EXAM_PREP }
+enum AIConversationType {
+  STUDY_BUDDY
+  LESSON
+  ASSESSMENT
+  EXAM_PREP
+}
 
 model AIMessage {
   id             String   @id @default(cuid())
@@ -441,7 +543,11 @@ model AIMessage {
   @@map("ai_messages")
 }
 
-enum AIRole { user assistant system }
+enum AIRole {
+  user
+  assistant
+  system
+}
 
 model ConvictionDbState {
   id              String  @id @default(cuid())
@@ -541,7 +647,11 @@ model Certificate {
   @@map("certificates")
 }
 
-enum CertificateType { COMPLETION PROFICIENCY MASTERY }
+enum CertificateType {
+  COMPLETION
+  PROFICIENCY
+  MASTERY
+}
 
 // ===================== EXAM SIMULATOR =====================
 
@@ -608,7 +718,11 @@ model GroupMember {
   @@map("group_members")
 }
 
-enum GroupMemberRole { OWNER ADMIN MEMBER }
+enum GroupMemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
 
 model GroupMessage {
   id        String   @id @default(cuid())
@@ -657,7 +771,12 @@ model Organization {
   @@map("organizations")
 }
 
-enum OrgType { SCHOOL HIGH_SCHOOL UNIVERSITY BUSINESS }
+enum OrgType {
+  SCHOOL
+  HIGH_SCHOOL
+  UNIVERSITY
+  BUSINESS
+}
 
 model OrgSubscription {
   id                   String             @id @default(cuid())
@@ -689,7 +808,14 @@ model OrgMember {
   @@map("org_members")
 }
 
-enum OrgMemberRole { ORG_ADMIN TEACHER STUDENT PARENT MANAGER EMPLOYEE }
+enum OrgMemberRole {
+  ORG_ADMIN
+  TEACHER
+  STUDENT
+  PARENT
+  MANAGER
+  EMPLOYEE
+}
 
 model Class {
   id        String   @id @default(cuid())

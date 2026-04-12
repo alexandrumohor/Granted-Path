@@ -1,22 +1,44 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Star, Users, Clock, BookOpen, ArrowRight } from "lucide-react";
-import { SEED_COURSES } from "@/lib/seed-data";
+import { Search, Star, Users, Clock, BookOpen, ArrowRight, Loader2 } from "lucide-react";
+
+type Course = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  categoryLabel: string;
+  difficulty: string;
+  estimatedHours: number;
+  language: string;
+  rating: number;
+  enrollmentCount: number;
+};
 
 const CATEGORIES = ["All", "IT & Programming", "Marketing", "Foreign Languages", "Exam Preparation", "Business & Management"];
 const DIFFICULTIES = ["All", "BEGINNER", "INTERMEDIATE", "ADVANCED"];
 
 export default function LearnPage() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [difficulty, setDifficulty] = useState("All");
 
-  const filtered = SEED_COURSES.filter((c) => {
+  useEffect(() => {
+    fetch("/api/courses")
+      .then(r => r.json())
+      .then(data => { setCourses(data); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const filtered = courses.filter((c) => {
     if (search && !c.title.toLowerCase().includes(search.toLowerCase()) && !c.description.toLowerCase().includes(search.toLowerCase())) return false;
     if (category !== "All" && c.categoryLabel !== category) return false;
     if (difficulty !== "All" && c.difficulty !== difficulty) return false;
@@ -30,7 +52,6 @@ export default function LearnPage() {
         <p className="mt-1 text-sm text-muted-foreground">Find your next learning adventure. AI personalizes every course for you.</p>
       </div>
 
-      {/* Search & Filters */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -52,8 +73,11 @@ export default function LearnPage() {
         ))}
       </div>
 
-      {/* Results */}
-      {filtered.length === 0 ? (
+      {loading ? (
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="py-20 text-center">
           <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/40 mb-4" />
           <p className="text-lg font-medium">No courses found</p>
@@ -65,22 +89,17 @@ export default function LearnPage() {
             <Link key={course.id} href={`/learn/${course.slug}`}>
               <Card className="h-full transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 group">
                 <CardContent className="flex h-full flex-col pt-6">
-                  {/* Category + Difficulty */}
                   <div className="mb-3 flex items-center gap-2">
                     <Badge variant="secondary" className="text-xs">{course.categoryLabel}</Badge>
                     <Badge variant="outline" className="text-xs">{course.difficulty.charAt(0) + course.difficulty.slice(1).toLowerCase()}</Badge>
                   </div>
-
                   <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">{course.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-muted-foreground line-clamp-2">{course.description}</p>
-
-                  {/* Stats */}
                   <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1"><Star className="h-3.5 w-3.5 text-yellow-500" />{course.rating}</span>
                     <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" />{course.enrollmentCount.toLocaleString()}</span>
                     <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{course.estimatedHours}h</span>
                   </div>
-
                   <div className="mt-4 pt-4 border-t border-border/50">
                     <Button variant="ghost" size="sm" className="w-full group-hover:text-primary">
                       Start Learning <ArrowRight className="ml-2 h-3.5 w-3.5" />

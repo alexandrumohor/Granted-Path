@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description: "A personal AI tutor that adapts to how you learn, tracks your progress in real-time, and prepares you efficiently for any goal.",
   keywords: ["AI learning", "online courses", "AI tutor", "personalized learning", "exam preparation", "adaptive learning"],
   authors: [{ name: "Granted Training Enterprise SRL" }],
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -2,9 +2,12 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
+import { db } from "@/lib/db";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: PrismaAdapter(db),
   pages: { signIn: "/login", newUser: "/onboarding", error: "/login" },
   session: { strategy: "jwt" },
   callbacks: {

@@ -31,7 +31,7 @@ export function AppSidebar() {
     <aside className={cn("sticky top-16 hidden h-[calc(100vh-4rem)] flex-col border-r border-border/50 bg-card/50 transition-all duration-300 lg:flex", collapsed ? "w-16" : "w-60")}>
       {!collapsed && (
         <div className="flex items-center gap-3 border-b border-border/50 px-4 py-3">
-          <Image src="/discordlogo.png" alt="SP" width={28} height={28} className="h-7 w-7 rounded-md" />
+          <Image src="/icon.png" alt="SP" width={28} height={28} className="h-7 w-7 rounded-md" />
           <div className="flex items-center gap-3 text-sm"><div className="flex items-center gap-1"><Flame className="h-3.5 w-3.5 text-orange-500" /><span className="font-semibold">12</span></div><div className="flex items-center gap-1"><Zap className="h-3.5 w-3.5 text-primary" /><span className="font-semibold">1,250</span></div></div>
           <div className="ml-auto text-xs text-muted-foreground">Lv. 8</div>
         </div>

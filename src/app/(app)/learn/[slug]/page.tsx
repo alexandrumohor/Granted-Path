@@ -1,41 +1,56 @@
-"use client";
-import { use } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Users, Clock, BookOpen, ChevronRight, Play, Check } from "lucide-react";
-import { getCourse } from "@/lib/seed-data";
+import { Star, Users, Clock, BookOpen, ChevronRight, Play } from "lucide-react";
+import { db } from "@/lib/db";
 
-export default function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
-  const course = getCourse(slug);
+const CATEGORY_LABELS: Record<string, string> = {
+  IT_PROGRAMMING: "IT & Programming",
+  BUSINESS_MANAGEMENT: "Business & Management",
+  MARKETING: "Marketing",
+  LANGUAGES: "Foreign Languages",
+  EXAM_PREP: "Exam Preparation",
+  SCIENCES: "Sciences",
+  DESIGN_CREATIVITY: "Design & Creativity",
+  FINANCE_ACCOUNTING: "Finance & Accounting",
+  LAW_LEGISLATION: "Law & Legislation",
+  HEALTH_MEDICINE: "Health & Medicine",
+  SOFT_SKILLS: "Soft Skills",
+  CUSTOM: "Custom",
+};
 
-  if (!course) {
-    return (
-      <div className="p-6 lg:p-8 text-center py-20">
-        <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/40 mb-4" />
-        <h1 className="text-xl font-semibold">Course not found</h1>
-        <Link href="/learn"><Button variant="outline" className="mt-4">Browse Courses</Button></Link>
-      </div>
-    );
-  }
+export default async function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  const course = await db.course.findUnique({
+    where: { slug },
+    include: {
+      modules: {
+        orderBy: { order: "asc" },
+        include: { lessons: { orderBy: { order: "asc" } } },
+      },
+    },
+  });
+
+  if (!course) notFound();
 
   const totalLessons = course.modules.reduce((sum, m) => sum + m.lessons.length, 0);
+  const categoryLabel = CATEGORY_LABELS[course.category] || course.category;
+  const firstLessonId = course.modules[0]?.lessons[0]?.id;
 
   return (
     <div className="p-6 lg:p-8 max-w-4xl">
-      {/* Breadcrumb */}
       <div className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
         <Link href="/learn" className="hover:text-foreground">Courses</Link>
         <ChevronRight className="h-3.5 w-3.5" />
         <span className="text-foreground">{course.title}</span>
       </div>
 
-      {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
-          <Badge variant="secondary">{course.categoryLabel}</Badge>
+          <Badge variant="secondary">{categoryLabel}</Badge>
           <Badge variant="outline">{course.difficulty.charAt(0) + course.difficulty.slice(1).toLowerCase()}</Badge>
           <Badge variant="outline">{course.language.toUpperCase()}</Badge>
         </div>
@@ -50,21 +65,21 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
         </div>
 
         <div className="mt-6 flex gap-3">
-          <Link href={`/learn/${course.slug}/lesson/${course.modules[0]?.lessons[0]?.id}`}>
-            <Button size="lg" className="glow-amber"><Play className="mr-2 h-4 w-4" />Start Course</Button>
-          </Link>
+          {firstLessonId && (
+            <Link href={`/learn/${course.slug}/lesson/${firstLessonId}`}>
+              <Button size="lg" className="glow-amber"><Play className="mr-2 h-4 w-4" />Start Course</Button>
+            </Link>
+          )}
           <Button size="lg" variant="outline">Add to Goals</Button>
         </div>
       </div>
 
-      {/* AI Personalization badge */}
       <Card className="mb-8 border-primary/20 bg-primary/5">
         <CardContent className="py-4 text-center">
           <p className="text-sm"><span className="font-semibold text-primary">AI-Personalized</span> — content difficulty and format adapt to your learning style as you progress.</p>
         </CardContent>
       </Card>
 
-      {/* Curriculum */}
       <h2 className="text-xl font-semibold mb-4">Curriculum</h2>
       <div className="space-y-4">
         {course.modules.map((mod, mi) => (
