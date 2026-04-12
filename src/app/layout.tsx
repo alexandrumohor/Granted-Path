@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-full flex flex-col">
         <Providers>
           <Navbar />
-          <main className="flex-1 pt-14">{children}</main>
+          <main className="flex-1 pt-14 animate-page-in">{children}</main>
           <Footer />
         </Providers>
       </body>

@@ -132,3 +132,46 @@
 
 .glow-primary { box-shadow: 0 1px 20px rgba(59, 130, 246, 0.1); }
 .glow-amber { box-shadow: 0 1px 20px rgba(59, 130, 246, 0.1); }
+
+/* ─── Page transition fade-up ─── */
+@keyframes page-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-in {
+  animation: page-fade-up 0.5s ease-out both;
+}
+
+/* ─── Staggered entrance animations ─── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.anim-up { animation: slide-up 0.6s ease-out both; }
+.anim-right { animation: slide-right 0.6s ease-out both; }
+.anim-left { animation: slide-left 0.6s ease-out both; }
+.anim-scale { animation: scale-in 0.5s ease-out both; }
+
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.3s; }
+.delay-7 { animation-delay: 0.35s; }
+.delay-8 { animation-delay: 0.4s; }
+.delay-9 { animation-delay: 0.45s; }
+.delay-10 { animation-delay: 0.5s; }
