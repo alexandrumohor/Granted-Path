@@ -150,7 +150,7 @@ export default function Home() {
                 { title: "Adaptive learning real", desc: "Ajustează format, dificultate și ritm bazat pe cum performezi — nu pe ce bifezi." },
                 { title: "Monitorizare continuă", desc: "Fiecare sesiune, fiecare răspuns — analizat. Detectează tipare și previne uitarea." },
                 { title: "Feedback onest", desc: "Te corectează când greșești, indiferent cât insisti. Ca un profesor bun, nu un chatbot servil." },
-                { title: "Personalizare profundă", desc: "Nu doar „dificultate ușoară/medie/grea". Stilul de prezentare, ritmul, momentul zilei — totul contează." },
+                { title: "Personalizare profundă", desc: "Nu doar dificultate ușoară/medie/grea. Stilul de prezentare, ritmul, momentul zilei — totul contează." },
               ].map((f, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
