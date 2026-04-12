@@ -4,69 +4,49 @@ import Image from "next/image";
 import { useTranslations } from "@/hooks/use-translations";
 
 export function Footer() {
-  const t = useTranslations("footer");
-
-  const sections = [
-    {
-      title: "Produs",
-      items: [
-        { label: "Funcționalități", href: "#cum-functioneaza" },
-        { label: "Prețuri", href: "#pricing" },
-        { label: "Pentru Educație", href: "/pricing#education" },
-        { label: "Pentru Business", href: "/pricing#business" },
-      ],
-    },
-    {
-      title: "Companie",
-      items: [
-        { label: "Despre noi", href: "/about" },
-        { label: "Blog", href: "/blog" },
-        { label: "Contact", href: "/contact" },
-        { label: "Beta", href: "/beta" },
-      ],
-    },
-    {
-      title: "Legal",
-      items: [
-        { label: "Termeni și condiții", href: "/legal/terms" },
-        { label: "Confidențialitate", href: "/legal/privacy" },
-        { label: "GDPR", href: "/legal/gdpr" },
-      ],
-    },
-  ];
+  const tc = useTranslations("common");
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
+      <div className="mx-auto max-w-[1120px] px-6 py-12">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2">
-              <Image src="/icon.png" alt="GP" width={24} height={24} className="h-6 w-6" />
-              <span className="text-sm font-semibold">Granted Path</span>
+              <Image src="/icon.png" alt="" width={20} height={20} className="h-5 w-5" />
+              <span className="text-[14px] font-semibold">Granted Path</span>
             </div>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              Sistemul tău personal de învățare, bazat pe AI.
-            </p>
-            <p className="mt-4 text-xs text-muted-foreground">
-              Granted Training Enterprise SRL
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed max-w-[200px]">
+              Sistemul tău de învățare bazat pe AI.
             </p>
           </div>
-          {sections.map((sec) => (
-            <div key={sec.title}>
-              <h3 className="text-sm font-semibold">{sec.title}</h3>
-              <ul className="mt-3 space-y-2.5">
-                {sec.items.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{l.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h4 className="text-[13px] font-semibold mb-3">Produs</h4>
+            <ul className="space-y-2">
+              <li><Link href="#product" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Funcționalități</Link></li>
+              <li><Link href="#pricing" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Prețuri</Link></li>
+              <li><Link href="/beta" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Beta</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-[13px] font-semibold mb-3">Companie</h4>
+            <ul className="space-y-2">
+              <li><Link href="/contact" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
+              <li><Link href="/mobile" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Aplicație mobilă</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-[13px] font-semibold mb-3">Legal</h4>
+            <ul className="space-y-2">
+              <li><Link href="/legal/terms" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Termeni</Link></li>
+              <li><Link href="/legal/privacy" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">Confidențialitate</Link></li>
+              <li><Link href="/legal/gdpr" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors">GDPR</Link></li>
+            </ul>
+          </div>
         </div>
-        <div className="mt-10 border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Granted Path — Granted Training Enterprise SRL. Toate drepturile rezervate.</p>
-          <p>Bucharest, Romania · CUI: RO00000000</p>
+
+        <div className="mt-10 border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[12px] text-muted-foreground">&copy; {new Date().getFullYear()} Granted Training Enterprise SRL</p>
+          <p className="text-[12px] text-muted-foreground">București, România</p>
         </div>
       </div>
     </footer>
