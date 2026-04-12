@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,8 @@ const NOTIF_SETTINGS = [
 ];
 
 export default function NotificationSettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [prefs, setPrefs] = useState<Record<string, { email: boolean; push: boolean }>>(
     Object.fromEntries(NOTIF_SETTINGS.map(n => [n.id, { email: true, push: true }]))
   );

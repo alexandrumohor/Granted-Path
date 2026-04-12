@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,6 +35,7 @@ const criticalGaps = [
 ];
 
 export default function ExamPredictorPage() {
+  const t = useTranslations("examPredictor");
   const [filter, setFilter] = useState<"all" | "weak" | "strong">("all");
 
   const filtered = predictions.filter(p => {
@@ -49,7 +51,7 @@ export default function ExamPredictorPage() {
           <Sparkles className="h-6 w-6 text-primary" />
           AI Exam Predictor
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">Topic predictions based on exam history, curriculum weight, and your weak points</p>
+        <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {/* Exam Header */}
@@ -57,7 +59,7 @@ export default function ExamPredictorPage() {
         <CardContent className="pt-6">
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex-1 min-w-[200px]">
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">Target Exam</p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("targetExam")}</p>
               <h2 className="mt-1 text-xl font-bold">{exam.name}</h2>
               <div className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" />{exam.date}</span>
@@ -65,12 +67,12 @@ export default function ExamPredictorPage() {
               </div>
             </div>
             <div className="text-center">
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">Readiness</p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("readiness")}</p>
               <p className={cn("mt-1 text-4xl font-bold", exam.readiness >= 75 ? "text-green-500" : exam.readiness >= 60 ? "text-amber-400" : "text-red-500")}>
                 {exam.readiness}%
               </p>
             </div>
-            <Button><Target className="mr-2 h-4 w-4" />Start Targeted Practice</Button>
+            <Button><Target className="mr-2 h-4 w-4" />{t("startTargetedPractice")}</Button>
           </div>
         </CardContent>
       </Card>
@@ -133,15 +135,15 @@ export default function ExamPredictorPage() {
                         <Badge variant="outline" className="text-[10px] capitalize">{p.weight}</Badge>
                         {isGap && <Badge className="bg-orange-500/20 text-orange-400 text-[10px]">Gap</Badge>}
                       </div>
-                      <p className="mt-1 text-xs text-muted-foreground">{p.practice} practice questions available</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{p.practice} {t("practiceQuestions")}</p>
                     </div>
-                    <Button variant="ghost" size="sm"><Dumbbell className="mr-1 h-3 w-3" />Drill</Button>
+                    <Button variant="ghost" size="sm"><Dumbbell className="mr-1 h-3 w-3" />{t("drill")}</Button>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <div>
                       <div className="flex items-center justify-between text-xs">
-                        <span className="flex items-center gap-1 text-muted-foreground"><Brain className="h-3 w-3" />Exam Confidence</span>
+                        <span className="flex items-center gap-1 text-muted-foreground"><Brain className="h-3 w-3" />{t("examConfidence")}</span>
                         <span className="font-semibold">{p.confidence}%</span>
                       </div>
                       <div className="mt-1 h-1.5 rounded-full bg-muted">
@@ -150,7 +152,7 @@ export default function ExamPredictorPage() {
                     </div>
                     <div>
                       <div className="flex items-center justify-between text-xs">
-                        <span className="flex items-center gap-1 text-muted-foreground"><Target className="h-3 w-3" />Your Mastery</span>
+                        <span className="flex items-center gap-1 text-muted-foreground"><Target className="h-3 w-3" />{t("yourMastery")}</span>
                         <span className="font-semibold">{p.yourMastery}%</span>
                       </div>
                       <div className="mt-1 h-1.5 rounded-full bg-muted">

@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +9,8 @@ import { CheckCircle, Award, Calendar, Clock, User } from "lucide-react";
 // In production, fetch certificate from DB by ID
 
 export default async function VerifyCertificatePage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { id } = await params;
 
   // Mock data — will be replaced with DB lookup

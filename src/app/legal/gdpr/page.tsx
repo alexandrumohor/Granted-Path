@@ -1,6 +1,10 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 export const metadata = { title: "GDPR — Granted Path" };
 
 export default function GdprPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <>
       <h1>GDPR Rights &amp; Compliance</h1>

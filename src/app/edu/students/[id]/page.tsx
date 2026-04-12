@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { use } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { User, Brain, BookOpen, Dumbbell, TrendingUp, Clock, Target, ChevronRight, MessageSquare } from "lucide-react";
 
 export default function StudentDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { id } = use(params);
 
   const student = {

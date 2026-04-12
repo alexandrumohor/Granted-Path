@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,8 @@ const EXERCISES = [
 ];
 
 export default function PracticePage() {
+  const t = useTranslations("learn");
+  const tc = useTranslations("common");
   const [mode, setMode] = useState<"menu" | "practice" | "results">("menu");
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -49,7 +52,7 @@ export default function PracticePage() {
   // Menu
   if (mode === "menu") return (
     <div className="p-6 lg:p-8">
-      <h1 className="text-2xl font-bold">Practice</h1>
+      <h1 className="text-2xl font-bold">{tc("practice") || "Practice"}</h1>
       <p className="mt-1 text-sm text-muted-foreground">Sharpen your skills with exercises, quizzes, and flashcards.</p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

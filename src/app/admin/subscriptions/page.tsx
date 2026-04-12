@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -37,6 +39,8 @@ const eventIcons: Record<string, { icon: React.ComponentType<{ className?: strin
 };
 
 export default function AdminSubscriptionsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-6 flex items-center justify-between">

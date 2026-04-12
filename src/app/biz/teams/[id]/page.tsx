@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -56,6 +58,8 @@ const teams: Record<string, {
 };
 
 export default async function TeamDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { id } = await params;
   const team = teams[id];
   if (!team) notFound();

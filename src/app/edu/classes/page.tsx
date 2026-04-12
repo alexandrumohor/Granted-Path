@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,8 @@ const CLASSES = [
 ];
 
 export default function ClassesPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [search, setSearch] = useState("");
   const [showCreate, setShowCreate] = useState(false);
 

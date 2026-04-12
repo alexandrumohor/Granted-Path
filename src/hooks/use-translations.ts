@@ -7,7 +7,7 @@ const messages: Record<string, Record<string, Record<string, string>>> = { en, r
 
 export function useTranslations(namespace: string = "common") {
   const locale = useLanguageStore((s) => s.locale);
-  const dict = messages[locale]?.[namespace] ?? messages.en[namespace] ?? {};
+  const dict = messages[locale]?.[namespace] ?? messages["en"]?.[namespace] ?? {};
   return (key: string) => dict[key] ?? key;
 }
 

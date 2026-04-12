@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,6 +33,8 @@ const severityStyles: Record<string, string> = {
 };
 
 export default function AdminContentPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [tab, setTab] = useState<"flagged" | "ai">("flagged");
 
   return (

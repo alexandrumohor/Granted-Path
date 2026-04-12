@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +36,8 @@ const statusStyles: Record<string, { label: string; color: string }> = {
 };
 
 export default function AdminSupportPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<"all" | "open" | "in_progress" | "urgent">("all");
 

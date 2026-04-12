@@ -1,9 +1,16 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Target, BarChart3, ShieldCheck, Sparkles, Trophy, Clock, BookOpen, MessageSquare, Zap, GraduationCap, Building2, ArrowRight, Check } from "lucide-react";
+import { useTranslations } from "@/hooks/use-translations";
 
 export default function LandingPage() {
+  const t = useTranslations("hero");
+  const tf = useTranslations("features");
+  const tc = useTranslations("common");
+  const tp = useTranslations("pricing");
+
   return (<>
     {/* HERO */}
     <section className="relative overflow-hidden">
@@ -12,18 +19,18 @@ export default function LandingPage() {
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-3xl text-center">
           <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm"><Sparkles className="mr-1.5 h-3.5 w-3.5" />AI-Powered Learning Platform</Badge>
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">Learn Anything.<br /><span className="text-gradient">Your AI Knows How.</span></h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">A personal AI tutor that adapts to how you learn, tracks your progress in real-time, and prepares you efficiently for any goal. Not a course platform &mdash; a teacher that knows you.</p>
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-7xl">{t("title")}<br /><span className="text-gradient">{t("titleHighlight")}</span></h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">{t("subtitle")}</p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/register"><Button size="lg" className="glow-amber text-base px-8 h-12">Start Learning Free<ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
-            <Link href="#how-it-works"><Button variant="outline" size="lg" className="text-base px-8 h-12">See How It Works</Button></Link>
+            <Link href="/register"><Button size="lg" className="glow-amber text-base px-8 h-12">{tc("getStarted")}<ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
+            <Link href="#how-it-works"><Button variant="outline" size="lg" className="text-base px-8 h-12">{tc("learnMore")}</Button></Link>
           </div>
           <div className="mt-14 flex items-center justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">12+</span><span>Domains</span></div>
+            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">12+</span><span>Domenii</span></div>
             <div className="h-8 w-px bg-border" />
-            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">24/7</span><span>AI Tutor</span></div>
+            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">24/7</span><span>Tutor AI</span></div>
             <div className="h-8 w-px bg-border" />
-            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">100%</span><span>Personalized</span></div>
+            <div className="flex flex-col items-center"><span className="text-2xl font-bold text-foreground">100%</span><span>Personalizat</span></div>
           </div>
         </div>
       </div>
@@ -35,7 +42,7 @@ export default function LandingPage() {
         <div className="overflow-hidden rounded-xl border border-border/50 bg-card shadow-2xl">
           <div className="flex items-center gap-2 border-b border-border/50 bg-muted/50 px-4 py-3">
             <div className="h-3 w-3 rounded-full bg-red-500/60" /><div className="h-3 w-3 rounded-full bg-yellow-500/60" /><div className="h-3 w-3 rounded-full bg-green-500/60" />
-            <span className="ml-3 text-xs text-muted-foreground">Granted Path AI Tutor &mdash; Python Fundamentals</span>
+            <span className="ml-3 text-xs text-muted-foreground">{t("aiDemo")}</span>
           </div>
           <div className="space-y-4 p-6">
             <div className="flex justify-end"><div className="max-w-sm rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">I think lists and tuples are the same thing in Python, right?</div></div>
@@ -52,11 +59,11 @@ export default function LandingPage() {
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <div className="flex gap-1"><span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"0ms"}} /><span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"150ms"}} /><span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" style={{animationDelay:"300ms"}} /></div>
-              <span>AI is waiting for your response...</span>
+              <span>{t("aiWaiting")}</span>
             </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-sm text-muted-foreground">Our AI corrects you when you&apos;re wrong &mdash; like a real teacher, not a yes-man.</p>
+        <p className="mt-4 text-center text-sm text-muted-foreground">{t("aiHonest")}</p>
       </div></div>
     </section>
 
@@ -64,16 +71,16 @@ export default function LandingPage() {
     <section id="features" className="scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why <span className="text-gradient">Granted Path</span>?</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Not just another course platform. A teacher that knows you.</p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{tf("title")} <span className="text-gradient">Granted Path</span>?</h2>
+          <p className="mt-4 text-lg text-muted-foreground">{tf("subtitle")}</p>
         </div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <FC icon={<Brain className="h-5 w-5" />} title="Adaptive AI Teaching" desc="The AI adjusts content format, difficulty, and pace based on how YOU learn best." />
-          <FC icon={<BarChart3 className="h-5 w-5" />} title="Real-Time Progress Tracking" desc="Every session, every answer, every pattern — tracked and analyzed to optimize your learning." />
-          <FC icon={<ShieldCheck className="h-5 w-5" />} title="Honest AI — No Yes-Man" desc="Our AI corrects you when you're wrong, no matter how much you insist. Like a real teacher." />
-          <FC icon={<Zap className="h-5 w-5" />} title="Panic Mode — Exam Prep" desc="Exam tomorrow? Panic Mode creates a laser-focused plan based on what you still need to learn." />
-          <FC icon={<Target className="h-5 w-5" />} title="Knowledge Graph" desc="See what you know, what you don't, and what you're about to forget — all visualized." />
-          <FC icon={<Trophy className="h-5 w-5" />} title="Learn & Have Fun" desc="XP, levels, streaks, 50+ achievements, and leaderboards. No pay-to-win." />
+          <FC icon={<Brain className="h-5 w-5" />} title={tf("adaptive")} desc={tf("adaptiveDesc")} />
+          <FC icon={<BarChart3 className="h-5 w-5" />} title={tf("tracking")} desc={tf("trackingDesc")} />
+          <FC icon={<ShieldCheck className="h-5 w-5" />} title={tf("honest")} desc={tf("honestDesc")} />
+          <FC icon={<Zap className="h-5 w-5" />} title={tf("panic")} desc={tf("panicDesc")} />
+          <FC icon={<Target className="h-5 w-5" />} title={tf("knowledge")} desc={tf("knowledgeDesc")} />
+          <FC icon={<Trophy className="h-5 w-5" />} title={tf("fun")} desc={tf("funDesc")} />
         </div>
       </div>
     </section>
@@ -81,46 +88,46 @@ export default function LandingPage() {
     {/* HOW IT WORKS */}
     <section id="how-it-works" className="scroll-mt-20 border-y border-border/50 bg-muted/20">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">How It Works</h2><p className="mt-4 text-lg text-muted-foreground">From sign-up to mastery in 4 steps.</p></div>
+        <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">{tc("learnMore")}</h2></div>
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <SC step={1} icon={<MessageSquare className="h-5 w-5" />} title="Tell Us Your Goal" desc="Exam in 2 days? New career skill? Tell the AI what you need." />
-          <SC step={2} icon={<Brain className="h-5 w-5" />} title="AI Creates Your Plan" desc="Your AI tutor builds a personalized path based on your goal and schedule." />
-          <SC step={3} icon={<BookOpen className="h-5 w-5" />} title="Learn Your Way" desc="Lessons, exercises, flashcards, AI conversations — adapted to your style." />
-          <SC step={4} icon={<Clock className="h-5 w-5" />} title="AI Keeps You On Track" desc="Smart reminders, spaced repetition, and encouragement to keep you consistent." />
+          <SC step={1} icon={<MessageSquare className="h-5 w-5" />} title="Spune-ne obiectivul" desc="Examen in 2 zile? Skill nou? Spune AI-ului ce ai nevoie." />
+          <SC step={2} icon={<Brain className="h-5 w-5" />} title="AI creeaza planul" desc="Tutorul tau AI construieste un parcurs personalizat." />
+          <SC step={3} icon={<BookOpen className="h-5 w-5" />} title="Invata in stilul tau" desc="Lectii, exercitii, flashcard-uri, conversatii AI — adaptate stilului tau." />
+          <SC step={4} icon={<Clock className="h-5 w-5" />} title="AI te tine pe drumul cel bun" desc="Memento-uri inteligente si repetitie spatiata." />
         </div>
       </div>
     </section>
 
     {/* DOMAINS */}
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">Learn <span className="text-gradient">Anything</span></h2><p className="mt-4 text-lg text-muted-foreground">12+ domains and growing.</p></div>
+      <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">{t("title")} <span className="text-gradient">Orice</span></h2><p className="mt-4 text-lg text-muted-foreground">12+ domenii si in crestere.</p></div>
       <div className="mt-12 flex flex-wrap justify-center gap-3">
-        {["IT & Programming","Marketing","Business & Management","Foreign Languages","Exam Preparation","Sciences","Design & Creativity","Finance & Accounting","Law & Legislation","Health & Medicine","Soft Skills","Driving School","Custom Topics"].map((d) => (<Badge key={d} variant="outline" className="px-4 py-2 text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors">{d}</Badge>))}
+        {["IT & Programare","Marketing","Business & Management","Limbi Straine","Pregatire Examene","Stiinte","Design & Creativitate","Finante & Contabilitate","Drept & Legislatie","Sanatate & Medicina","Soft Skills","Scoala de Soferi","Subiecte Custom"].map((d) => (<Badge key={d} variant="outline" className="px-4 py-2 text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors">{d}</Badge>))}
       </div>
     </section>
 
     {/* FOR EVERYONE */}
     <section className="border-y border-border/50 bg-muted/20">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">Built for Everyone</h2><p className="mt-4 text-lg text-muted-foreground">Individuals, schools, universities, and companies.</p></div>
+        <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">Construit pentru Toata Lumea</h2><p className="mt-4 text-lg text-muted-foreground">Persoane fizice, scoli, universitati si companii.</p></div>
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          <AC icon={<Sparkles className="h-6 w-6" />} title="For Individuals" desc="A personal AI tutor available 24/7." features={["Personalized learning paths","AI study buddy","Exam simulators","Certificates"]} cta="Start Free" href="/register" />
-          <AC icon={<GraduationCap className="h-6 w-6" />} title="For Education" desc="Give every student a personal AI tutor." features={["Teacher dashboards","Assignment system","Class analytics","Parental access"]} cta="Education Plans" href="/pricing#education" />
-          <AC icon={<Building2 className="h-6 w-6" />} title="For Business" desc="Upskill your team with AI training." features={["Team management","Skill matrix","Compliance tracking","SSO integration"]} cta="Business Plans" href="/pricing#business" />
+          <AC icon={<Sparkles className="h-6 w-6" />} title="Pentru Persoane Fizice" desc="Un tutor AI personal disponibil 24/7." features={["Parcursuri personalizate","Asistent AI de studiu","Simulatoare de examen","Certificate"]} cta={tc("getStarted")} href="/register" />
+          <AC icon={<GraduationCap className="h-6 w-6" />} title="Pentru Educatie" desc="Ofera fiecarui elev un tutor AI personal." features={["Panouri pentru profesori","Sistem de teme","Analize clase","Acces parinti"]} cta="Planuri Educatie" href="/pricing#education" />
+          <AC icon={<Building2 className="h-6 w-6" />} title="Pentru Afaceri" desc="Dezvolta echipa cu training AI." features={["Managementul echipelor","Matricea competentelor","Urmarire conformitate","Integrare SSO"]} cta="Planuri Business" href="/pricing#business" />
         </div>
       </div>
     </section>
 
     {/* PRICING PREVIEW */}
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">Simple, Transparent Pricing</h2><p className="mt-4 text-lg text-muted-foreground">Start free. Upgrade when you&apos;re ready.</p></div>
+      <div className="mx-auto max-w-2xl text-center"><h2 className="text-3xl font-bold sm:text-4xl">{tp("title")}</h2><p className="mt-4 text-lg text-muted-foreground">{tp("subtitle")}</p></div>
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <PC name="Explorer" price="Free" desc="Get started" features={["2 active courses","20 AI messages/day","Basic analytics"]} />
-        <PC name="Starter" price={"\u20AC10"} period="/mo" desc="More courses, no ads" features={["5 active courses","100 AI messages/day","Voice mode"]} />
-        <PC name="Pro" price={"\u20AC30"} period="/mo" desc="Unlimited + advanced AI" features={["Unlimited courses","Unlimited AI","Panic Mode"]} highlighted />
-        <PC name="Master" price={"\u20AC60"} period="/mo" desc="1-on-1 AI tutoring" features={["AI tutoring sessions","Interview simulator","Expert review"]} />
+        <PC name="Explorer" price={tc("free")} desc="Pentru inceput" features={["2 cursuri active","20 mesaje AI/zi","Analize de baza"]} freePlan ctaLabel={tc("getStarted")} regLabel={tc("register")} />
+        <PC name="Starter" price={"\u20AC10"} period={tc("perMonth")} desc="Mai multe cursuri, fara reclame" features={["5 cursuri active","100 mesaje AI/zi","Mod vocal"]} ctaLabel="Aboneaza-te" regLabel={tc("register")} />
+        <PC name="Pro" price={"\u20AC30"} period={tc("perMonth")} desc="Nelimitat + AI avansat" features={["Cursuri nelimitate","AI nelimitat","Mod Panica"]} highlighted ctaLabel="Aboneaza-te" regLabel={tc("register")} popLabel={tp("mostPopular")} />
+        <PC name="Master" price={"\u20AC60"} period={tc("perMonth")} desc="Tutoring AI 1-la-1" features={["Sesiuni de tutoring AI","Simulator interviuri","Review expert"]} ctaLabel="Aboneaza-te" regLabel={tc("register")} />
       </div>
-      <div className="mt-8 text-center"><Link href="/pricing"><Button variant="outline" size="lg">See Full Pricing<ArrowRight className="ml-2 h-4 w-4" /></Button></Link></div>
+      <div className="mt-8 text-center"><Link href="/pricing"><Button variant="outline" size="lg">{tp("title")}<ArrowRight className="ml-2 h-4 w-4" /></Button></Link></div>
     </section>
 
     {/* FINAL CTA */}
@@ -128,9 +135,9 @@ export default function LandingPage() {
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">Ready to Learn <span className="text-gradient">Smarter</span>?</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Start free, no credit card required.</p>
-          <div className="mt-8"><Link href="/register"><Button size="lg" className="glow-amber text-base px-10 h-12">Start Learning Free<ArrowRight className="ml-2 h-4 w-4" /></Button></Link></div>
+          <h2 className="text-3xl font-bold sm:text-4xl">Gata sa inveti <span className="text-gradient">mai destept</span>?</h2>
+          <p className="mt-4 text-lg text-muted-foreground">Incepe gratuit, fara card de credit.</p>
+          <div className="mt-8"><Link href="/register"><Button size="lg" className="glow-amber text-base px-10 h-12">{tc("getStarted")}<ArrowRight className="ml-2 h-4 w-4" /></Button></Link></div>
         </div>
       </div>
     </section>
@@ -158,13 +165,13 @@ function AC({ icon, title, desc, features, cta, href }: { icon: React.ReactNode;
     <Link href={href} className="mt-6"><Button variant="outline" className="w-full">{cta}<ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
   </div>);
 }
-function PC({ name, price, period, desc, features, highlighted }: { name: string; price: string; period?: string; desc: string; features: string[]; highlighted?: boolean }) {
+function PC({ name, price, period, desc, features, highlighted, freePlan, ctaLabel, regLabel, popLabel }: { name: string; price: string; period?: string; desc: string; features: string[]; highlighted?: boolean; freePlan?: boolean; ctaLabel: string; regLabel: string; popLabel?: string }) {
   return (<div className={`relative flex flex-col rounded-xl border p-6 ${highlighted ? "border-primary/50 bg-primary/5 shadow-lg shadow-primary/10" : "border-border/50 bg-card"}`}>
-    {highlighted && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
+    {highlighted && popLabel && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">{popLabel}</Badge>}
     <h3 className="text-lg font-semibold">{name}</h3>
     <div className="mt-2 flex items-baseline"><span className="text-3xl font-bold">{price}</span>{period && <span className="ml-1 text-sm text-muted-foreground">{period}</span>}</div>
     <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
     <ul className="mt-4 flex-1 space-y-2">{features.map((f) => (<li key={f} className="flex items-center gap-2 text-sm"><Check className="h-3.5 w-3.5 text-primary" />{f}</li>))}</ul>
-    <Link href="/register" className="mt-6"><Button variant={highlighted ? "default" : "outline"} className={`w-full ${highlighted ? "glow-amber" : ""}`}>{price === "Free" ? "Start Free" : "Subscribe"}</Button></Link>
+    <Link href="/register" className="mt-6"><Button variant={highlighted ? "default" : "outline"} className={`w-full ${highlighted ? "glow-amber" : ""}`}>{freePlan ? ctaLabel : ctaLabel}</Button></Link>
   </div>);
 }

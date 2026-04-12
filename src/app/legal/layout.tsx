@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { FileText, Shield, Scale } from "lucide-react";
 
@@ -8,6 +10,8 @@ const legalNav = [
 ];
 
 export default function LegalLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="mx-auto max-w-5xl px-6 py-12 lg:py-16">
       <div className="mb-8 flex flex-wrap gap-2">

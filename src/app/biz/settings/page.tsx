@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,6 +15,8 @@ const roles = [
 ];
 
 export default function BizSettingsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [company, setCompany] = useState({
     name: "Acme Corp",
     domain: "acme.com",

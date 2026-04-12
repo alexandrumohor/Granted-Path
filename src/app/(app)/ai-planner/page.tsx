@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -56,6 +57,7 @@ const typeStyles: Record<Block["type"], { color: string; icon: React.ComponentTy
 
 export default function AIPlannerPage() {
   const [goal, setGoal] = useState("");
+  const t = useTranslations("aiPlanner");
 
   return (
     <div className="p-6 lg:p-8">
@@ -65,11 +67,11 @@ export default function AIPlannerPage() {
             <Sparkles className="h-6 w-6 text-primary" />
             AI Study Planner
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">Adaptive weekly schedule built around your energy, deadlines, and weak points</p>
+          <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline"><Brain className="mr-2 h-4 w-4" />Explain Plan</Button>
-          <Button><RefreshCcw className="mr-2 h-4 w-4" />Regenerate</Button>
+          <Button variant="outline"><Brain className="mr-2 h-4 w-4" />{t("explainPlan")}</Button>
+          <Button><RefreshCcw className="mr-2 h-4 w-4" />{t("regenerate")}</Button>
         </div>
       </div>
 
@@ -81,7 +83,7 @@ export default function AIPlannerPage() {
               <Brain className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Why this plan?</p>
+              <p className="text-sm font-semibold">{t("whyThisPlan")}</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 I front-loaded your deep work Mon/Tue/Thu mornings — that's when your assessment scores are 34% higher. Wednesday is intentionally light because you've averaged 11h/week for 3 weeks and I'm seeing early fatigue signals. Voice sessions land on evenings because speaking practice works better when you're not aiming for accuracy. Your Kubernetes deadline (May 15) drove module sequencing.
               </p>
@@ -96,17 +98,17 @@ export default function AIPlannerPage() {
           <div className="flex items-center gap-3">
             <Zap className="h-5 w-5 text-primary" />
             <div className="flex-1">
-              <p className="text-sm font-semibold">Change your goal or constraint</p>
+              <p className="text-sm font-semibold">{t("changeGoal")}</p>
               <p className="text-xs text-muted-foreground">e.g., "I have an exam May 20", "only 30 min/day this week"</p>
             </div>
             <div className="flex flex-1 max-w-md gap-2">
               <input
                 value={goal}
                 onChange={e => setGoal(e.target.value)}
-                placeholder="Tell me what changed..."
+                placeholder={t("tellMeChanged")}
                 className="h-9 flex-1 rounded-md border border-border bg-background px-3 text-sm"
               />
-              <Button size="sm">Replan</Button>
+              <Button size="sm">{t("replan")}</Button>
             </div>
           </div>
         </CardContent>

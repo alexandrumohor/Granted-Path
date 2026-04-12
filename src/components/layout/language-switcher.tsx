@@ -13,7 +13,7 @@ export function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { locale, setLocale } = useLanguageStore();
-  const current = languages.find((l) => l.code === locale) ?? languages[0];
+  const current = languages.find((l) => l.code === locale) ?? languages[0]!;
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {

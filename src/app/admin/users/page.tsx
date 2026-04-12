@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,6 +32,8 @@ const planColors: Record<string, string> = {
 };
 
 export default function AdminUsersPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const [plan, setPlan] = useState("all");
   const [status, setStatus] = useState("all");

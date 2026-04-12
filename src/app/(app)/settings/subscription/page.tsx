@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CreditCard, ArrowRight, Loader2, Check, ExternalLink } from "lucide-react";
 
 export default function SubscriptionSettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [loading, setLoading] = useState("");
 
   // Mock current plan — will come from session/API

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +36,8 @@ const statusStyles: Record<string, { color: string; icon: React.ComponentType<{ 
 };
 
 export default function AdminSystemPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [maintenance, setMaintenance] = useState(false);
 
   return (

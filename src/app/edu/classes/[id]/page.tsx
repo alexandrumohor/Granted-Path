@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { use } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,8 @@ const ASSIGNMENTS = [
 ];
 
 export default function ClassDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { id } = use(params);
 
   return (

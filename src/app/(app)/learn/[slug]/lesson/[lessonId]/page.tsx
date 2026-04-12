@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { use, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,8 @@ import { getLesson, SEED_COURSES } from "@/lib/seed-data";
 import type { ContentBlock } from "@/lib/seed-data";
 
 export default function LessonPage({ params }: { params: Promise<{ slug: string; lessonId: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { slug, lessonId } = use(params);
   const data = getLesson(slug, lessonId);
 

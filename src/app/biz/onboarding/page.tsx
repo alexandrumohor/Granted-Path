@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,8 @@ const builderSteps = [
 ];
 
 export default function BizOnboardingPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-6 flex items-center justify-between">

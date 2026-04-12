@@ -3,24 +3,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { User, Shield, CreditCard, Bell, BookOpen, Globe, Lock, KeyRound } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const settingsNav = [
-  { href: "/settings/profile", label: "Profile", icon: User, desc: "Name, avatar, bio" },
-  { href: "/settings/account", label: "Account", icon: Shield, desc: "Email, password, delete account" },
-  { href: "/settings/security", label: "Security", icon: KeyRound, desc: "2FA, sessions, login history" },
-  { href: "/settings/subscription", label: "Subscription", icon: CreditCard, desc: "Plan, billing, invoices" },
-  { href: "/settings/notifications", label: "Notifications", icon: Bell, desc: "Email, push, quiet hours" },
-  { href: "/settings/learning-prefs", label: "Learning Preferences", icon: BookOpen, desc: "Style, pace, tough love level" },
-  { href: "/settings/language", label: "Language", icon: Globe, desc: "App & content language" },
-  { href: "/settings/privacy", label: "Privacy", icon: Lock, desc: "Data export, GDPR controls" },
-];
+import { useTranslations } from "@/hooks/use-translations";
 
 export default function SettingsPage() {
   const pathname = usePathname();
+  const t = useTranslations("settings");
+
+  const settingsNav = [
+    { href: "/settings/profile", label: t("profile"), icon: User, desc: t("profileDesc") },
+    { href: "/settings/account", label: t("account"), icon: Shield, desc: t("accountDesc") },
+    { href: "/settings/security", label: t("security"), icon: KeyRound, desc: t("securityDesc") },
+    { href: "/settings/subscription", label: t("subscription"), icon: CreditCard, desc: t("subscriptionDesc") },
+    { href: "/settings/notifications", label: t("notifications"), icon: Bell, desc: t("notificationsDesc") },
+    { href: "/settings/learning-prefs", label: t("learningPrefs"), icon: BookOpen, desc: t("learningPrefsDesc") },
+    { href: "/settings/language", label: t("language"), icon: Globe, desc: t("languageDesc") },
+    { href: "/settings/privacy", label: t("privacySettings"), icon: Lock, desc: t("privacyDesc") },
+  ];
+
   return (
     <div className="p-6 lg:p-8">
-      <h1 className="text-2xl font-bold">Settings</h1>
-      <p className="mt-1 text-sm text-muted-foreground">Manage your account and preferences.</p>
+      <h1 className="text-2xl font-bold">{t("title")}</h1>
+      <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {settingsNav.map((item) => {
           const Icon = item.icon;

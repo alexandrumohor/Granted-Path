@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,8 @@ const MOCK_GROUPS: StudyGroup[] = [
 ];
 
 export default function GroupsPage() {
+  const t = useTranslations("groups");
+  const tc = useTranslations("common");
   const [search, setSearch] = useState("");
   const [showCreate, setShowCreate] = useState(false);
   const [newName, setNewName] = useState("");
@@ -43,10 +46,10 @@ export default function GroupsPage() {
     <div className="p-6 lg:p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2"><Users className="h-6 w-6 text-primary" />Study Groups</h1>
+          <h1 className="text-2xl font-bold flex items-center gap-2"><Users className="h-6 w-6 text-primary" />{t("title")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">Learn together. Challenge each other. Grow faster.</p>
         </div>
-        <Button onClick={() => setShowCreate(!showCreate)}><Plus className="mr-2 h-4 w-4" />Create Group</Button>
+        <Button onClick={() => setShowCreate(!showCreate)}><Plus className="mr-2 h-4 w-4" />{t("createGroup")}</Button>
       </div>
 
       {/* Create form */}
@@ -57,7 +60,7 @@ export default function GroupsPage() {
             <div className="space-y-2"><Label>Description</Label><textarea value={newDesc} onChange={e => setNewDesc(e.target.value)} className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm min-h-[60px] resize-none" placeholder="What's this group about?" /></div>
             <div className="space-y-2"><Label>Topic</Label><Input value={newTopic} onChange={e => setNewTopic(e.target.value)} placeholder="e.g., Python, Marketing, English" /></div>
             <div className="flex gap-2">
-              <Button className="glow-amber">Create Group</Button>
+              <Button className="glow-amber">{t("createGroup")}</Button>
               <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
             </div>
           </CardContent>
@@ -67,7 +70,7 @@ export default function GroupsPage() {
       {/* Search */}
       <div className="mb-6 relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input placeholder="Search groups..." value={search} onChange={e => setSearch(e.target.value)} className="pl-10" />
+        <Input placeholder={t("searchGroups")} value={search} onChange={e => setSearch(e.target.value)} className="pl-10" />
       </div>
 
       {/* Groups list */}

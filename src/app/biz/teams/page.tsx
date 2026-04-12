@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,8 @@ const teams = [
 ];
 
 export default function BizTeamsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const filtered = teams.filter(t => t.name.toLowerCase().includes(q.toLowerCase()) || t.lead.toLowerCase().includes(q.toLowerCase()));
 

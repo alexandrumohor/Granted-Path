@@ -1,6 +1,10 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 export const metadata = { title: "Terms of Service — Granted Path" };
 
 export default function TermsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <>
       <h1>Terms of Service</h1>

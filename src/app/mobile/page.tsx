@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,6 +25,8 @@ const testimonials = [
 ];
 
 export default function MobileLandingPage() {
+  const t = useTranslations("mobile");
+  const tc = useTranslations("common");
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -36,7 +40,7 @@ export default function MobileLandingPage() {
               </Badge>
               <h1 className="text-4xl font-bold leading-tight lg:text-5xl">
                 Your AI tutor,<br />
-                <span className="text-gradient">now in your pocket</span>
+                <span className="text-gradient">{t("titleHighlight")}</span>
               </h1>
               <p className="mt-6 max-w-lg text-lg text-muted-foreground">
                 The full Granted Path experience on iOS and Android. Voice conversations, offline lessons, smart reminders, and genuine AI coaching — everywhere you go.
@@ -120,7 +124,7 @@ export default function MobileLandingPage() {
       {/* Features */}
       <section className="container mx-auto px-6 py-20">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold lg:text-4xl">Built for how you actually learn</h2>
+          <h2 className="text-3xl font-bold lg:text-4xl">{t("builtForLearning")}</h2>
           <p className="mt-4 text-muted-foreground">
             Every feature is designed around one principle: respect your time and push you forward.
           </p>
@@ -148,7 +152,7 @@ export default function MobileLandingPage() {
         <div className="container mx-auto px-6 py-16">
           <div className="mx-auto max-w-2xl rounded-2xl border border-border/50 bg-card p-8 text-center">
             <QrCode className="mx-auto mb-4 h-32 w-32 text-primary" />
-            <h3 className="text-xl font-bold">Scan to download</h3>
+            <h3 className="text-xl font-bold">{t("scanDownload")}</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               Point your phone camera at the QR code and tap the link. Auto-detects iOS or Android.
             </p>
@@ -158,7 +162,7 @@ export default function MobileLandingPage() {
 
       {/* Testimonials */}
       <section className="container mx-auto px-6 py-20">
-        <h2 className="mb-12 text-center text-3xl font-bold">Loved by learners everywhere</h2>
+        <h2 className="mb-12 text-center text-3xl font-bold">{t("lovedByLearners")}</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Card key={i}>
@@ -184,12 +188,12 @@ export default function MobileLandingPage() {
         <Card className="border-primary/30 bg-gradient-to-br from-primary/10 to-transparent">
           <CardContent className="py-16 text-center">
             <Shield className="mx-auto mb-4 h-8 w-8 text-primary" />
-            <h2 className="text-3xl font-bold">Free to start. No credit card.</h2>
+            <h2 className="text-3xl font-bold">{t("freeToStart")}</h2>
             <p className="mt-4 text-muted-foreground">Install the app and start your first lesson in under 60 seconds.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Button size="lg" className="h-12 gap-2 px-6"><Apple className="h-5 w-5" />App Store</Button>
               <Button size="lg" variant="outline" className="h-12 gap-2 px-6"><Download className="h-5 w-5" />Google Play</Button>
-              <Link href="/register"><Button size="lg" variant="ghost" className="h-12">Start on web</Button></Link>
+              <Link href="/register"><Button size="lg" variant="ghost" className="h-12">{t("startOnWeb")}</Button></Link>
             </div>
           </CardContent>
         </Card>

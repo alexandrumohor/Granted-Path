@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -39,6 +41,8 @@ const mock = {
 };
 
 export default function BizDashboardPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8 flex items-center justify-between">

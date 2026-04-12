@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -16,6 +17,8 @@ const navItems = [
 ];
 
 export default function EduLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const pathname = usePathname();
   return (
     <div className="flex">

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -20,6 +21,8 @@ const navItems = [
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const pathname = usePathname();
   return (
     <div className="flex">

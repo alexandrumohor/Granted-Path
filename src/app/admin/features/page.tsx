@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,6 +31,8 @@ const initialFlags: Flag[] = [
 ];
 
 export default function AdminFeaturesPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [flags, setFlags] = useState(initialFlags);
   const [search, setSearch] = useState("");
 

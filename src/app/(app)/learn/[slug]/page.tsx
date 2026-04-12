@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -22,6 +24,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 export default async function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { slug } = await params;
 
   const course = await db.course.findUnique({

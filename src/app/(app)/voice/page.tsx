@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,6 +27,7 @@ const voices = [
 
 export default function VoiceTutorPage() {
   const [recording, setRecording] = useState(false);
+  const t = useTranslations("voice");
   const [turns] = useState<Turn[]>(initialTurns);
   const [selectedVoice, setSelectedVoice] = useState("alice");
   const [speed, setSpeed] = useState(1);
@@ -52,8 +54,8 @@ export default function VoiceTutorPage() {
               <Waves className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h1 className="font-semibold">Voice AI Tutor</h1>
-              <p className="text-xs text-muted-foreground">Natural conversation practice with Claude</p>
+              <h1 className="font-semibold">{t("title")}</h1>
+              <p className="text-xs text-muted-foreground">{t("subtitle")}</p>
             </div>
           </div>
           <Badge className="bg-green-500/20 text-green-500">
@@ -86,7 +88,7 @@ export default function VoiceTutorPage() {
                 <User className="h-4 w-4" />
               </div>
               <div className="flex items-center gap-2 rounded-2xl bg-muted/60 px-4 py-3">
-                <span className="text-xs text-muted-foreground">Listening...</span>
+                <span className="text-xs text-muted-foreground">{t("listening")}</span>
               </div>
             </div>
           )}
@@ -119,7 +121,7 @@ export default function VoiceTutorPage() {
             </Button>
           </div>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            {recording ? "Tap to stop and send" : "Tap the mic to start speaking"}
+            {recording ? t("tapToStop") : t("tapToStart")}
           </p>
         </div>
       </div>
@@ -129,7 +131,7 @@ export default function VoiceTutorPage() {
         <div className="border-b border-border/50 px-5 py-4">
           <div className="flex items-center gap-2">
             <Settings2 className="h-4 w-4" />
-            <h2 className="text-sm font-semibold">Voice Settings</h2>
+            <h2 className="text-sm font-semibold">{t("settings")}</h2>
           </div>
         </div>
 
@@ -157,7 +159,7 @@ export default function VoiceTutorPage() {
 
           <div>
             <label className="mb-2 flex items-center justify-between text-xs font-medium text-muted-foreground">
-              <span className="flex items-center gap-2"><Gauge className="h-3.5 w-3.5" />Speed</span>
+              <span className="flex items-center gap-2"><Gauge className="h-3.5 w-3.5" />{t("speed")}</span>
               <span className="font-mono">{speed.toFixed(1)}x</span>
             </label>
             <input
@@ -175,10 +177,10 @@ export default function VoiceTutorPage() {
             <CardContent className="pt-6">
               <div className="mb-2 flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-primary" />
-                <p className="text-sm font-semibold">Pro Tip</p>
+                <p className="text-sm font-semibold">{t("proTip")}</p>
               </div>
               <p className="text-xs text-muted-foreground">
-                Speaking practice is most effective in 10–15 minute focused sessions. Claude will gently correct pronunciation and grammar without interrupting your flow.
+                {t("proTipText")}
               </p>
             </CardContent>
           </Card>

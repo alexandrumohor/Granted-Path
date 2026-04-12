@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +30,8 @@ const overdueList = [
 ];
 
 export default function BizCompliancePage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const total = requiredTrainings.reduce((s, t) => s + t.required, 0);
   const done = requiredTrainings.reduce((s, t) => s + t.completed, 0);
   const rate = Math.round((done / total) * 100);

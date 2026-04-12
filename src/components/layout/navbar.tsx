@@ -7,17 +7,22 @@ import { Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { useTranslations } from "@/hooks/use-translations";
 
-const navLinks = [
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "/pricing", label: "Pricing" },
+const navLinks = (t: (k: string) => string) => [
+  { href: "#features", label: t("features") },
+  { href: "#how-it-works", label: t("howItWorks") },
+  { href: "/pricing", label: t("pricing") },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
   const loggedIn = status === "authenticated" && !!session?.user;
+  const t = useTranslations("nav");
+  const tc = useTranslations("common");
+
+  const links = navLinks(t);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
@@ -26,14 +31,14 @@ export function Navbar() {
           <Image src="/GrantedPathLogo.png" alt="Granted Path" width={315} height={90} className="h-[90px] w-auto" priority />
         </Link>
         <div className="hidden items-center gap-1 md:flex">
-          {!loggedIn && navLinks.map((l) => (
+          {!loggedIn && links.map((l) => (
             <Link key={l.href} href={l.href} className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{l.label}</Link>
           ))}
           {loggedIn && (
             <>
-              <Link href="/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Dashboard</Link>
-              <Link href="/learn" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Learn</Link>
-              <Link href="/ai-chat" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">AI Chat</Link>
+              <Link href="/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{tc("dashboard")}</Link>
+              <Link href="/learn" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("learn")}</Link>
+              <Link href="/ai-chat" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("aiChat")}</Link>
             </>
           )}
         </div>
@@ -50,14 +55,14 @@ export function Navbar() {
               </Link>
               <LanguageSwitcher />
               <Button variant="ghost" size="sm" onClick={() => signOut({ callbackUrl: "/" })}>
-                <LogOut className="mr-2 h-4 w-4" />Sign Out
+                <LogOut className="mr-2 h-4 w-4" />{tc("logout")}
               </Button>
             </>
           ) : (
             <>
               <LanguageSwitcher />
-              <Link href="/login"><Button variant="ghost" size="sm">Log In</Button></Link>
-              <Link href="/register"><Button size="sm" className="glow-amber">Start Free</Button></Link>
+              <Link href="/login"><Button variant="ghost" size="sm">{tc("login")}</Button></Link>
+              <Link href="/register"><Button size="sm" className="glow-amber">{tc("startFree")}</Button></Link>
             </>
           )}
         </div>
@@ -82,18 +87,20 @@ export function Navbar() {
                     </div>
                   </div>
                   <div className="my-2 h-px bg-border" />
-                  <Link href="/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground"><LayoutDashboard className="h-4 w-4" />Dashboard</Link>
-                  <Link href="/learn" onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">Learn</Link>
-                  <Link href="/settings" onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">Settings</Link>
+                  <Link href="/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground"><LayoutDashboard className="h-4 w-4" />{tc("dashboard")}</Link>
+                  <Link href="/learn" onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">{t("learn")}</Link>
+                  <Link href="/settings" onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">{tc("settings")}</Link>
                   <div className="my-2 h-px bg-border" />
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => { setIsOpen(false); signOut({ callbackUrl: "/" }); }}><LogOut className="mr-2 h-4 w-4" />Sign Out</Button>
+                  <div className="px-3"><LanguageSwitcher /></div>
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => { setIsOpen(false); signOut({ callbackUrl: "/" }); }}><LogOut className="mr-2 h-4 w-4" />{tc("logout")}</Button>
                 </>
               ) : (
                 <>
-                  {navLinks.map((l) => (<Link key={l.href} href={l.href} onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">{l.label}</Link>))}
+                  {links.map((l) => (<Link key={l.href} href={l.href} onClick={() => setIsOpen(false)} className="rounded-md px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground">{l.label}</Link>))}
                   <div className="my-2 h-px bg-border" />
-                  <Link href="/login" onClick={() => setIsOpen(false)}><Button variant="ghost" className="w-full justify-start">Log In</Button></Link>
-                  <Link href="/register" onClick={() => setIsOpen(false)}><Button className="w-full">Start Free</Button></Link>
+                  <div className="px-3"><LanguageSwitcher /></div>
+                  <Link href="/login" onClick={() => setIsOpen(false)}><Button variant="ghost" className="w-full justify-start">{tc("login")}</Button></Link>
+                  <Link href="/register" onClick={() => setIsOpen(false)}><Button className="w-full">{tc("startFree")}</Button></Link>
                 </>
               )}
             </div>

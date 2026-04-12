@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +41,7 @@ const insights = [
 ];
 
 export default function AICoachPage() {
+  const t = useTranslations("aiCoach");
   return (
     <div className="mx-auto max-w-6xl p-6 lg:p-8">
       <div className="mb-6 flex items-center justify-between">
@@ -48,9 +50,9 @@ export default function AICoachPage() {
             <Sparkles className="h-6 w-6 text-primary" />
             AI Coach
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">Weekly 1-on-1 sessions that push back, not cheer you on</p>
+          <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
-        <Button size="lg"><MessageSquare className="mr-2 h-4 w-4" />Start Session</Button>
+        <Button size="lg"><MessageSquare className="mr-2 h-4 w-4" />{t("startSession")}</Button>
       </div>
 
       {/* Next Session CTA */}
@@ -63,13 +65,13 @@ export default function AICoachPage() {
               </div>
               <div>
                 <Badge className="mb-2 bg-primary/20 text-primary">Session 8 — ready now</Badge>
-                <h2 className="text-lg font-semibold">Weekly check-in</h2>
+                <h2 className="text-lg font-semibold">{t("weeklyCheckin")}</h2>
                 <p className="mt-1 max-w-xl text-sm text-muted-foreground">
                   I've reviewed your week. I have 3 questions for you — some will feel uncomfortable. That's the point. Sessions average 15–20 minutes.
                 </p>
               </div>
             </div>
-            <Button>Begin<ArrowRight className="ml-2 h-4 w-4" /></Button>
+            <Button>{t("begin")}<ArrowRight className="ml-2 h-4 w-4" /></Button>
           </div>
         </CardContent>
       </Card>
@@ -79,7 +81,7 @@ export default function AICoachPage() {
         <Card>
           <CardContent className="pt-6">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Study Hours</span>
+              <span className="text-muted-foreground">{t("studyHours")}</span>
               <Clock className="h-3.5 w-3.5 text-muted-foreground" />
             </div>
             <p className="text-2xl font-bold">{weekReview.studyHours}h <span className="text-sm font-normal text-muted-foreground">/ {weekReview.studyGoal}h</span></p>
@@ -100,7 +102,7 @@ export default function AICoachPage() {
         <Card>
           <CardContent className="pt-6">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Weak Points Resolved</span>
+              <span className="text-muted-foreground">{t("weakPointsResolved")}</span>
               <Check className="h-3.5 w-3.5 text-green-500" />
             </div>
             <p className="text-2xl font-bold">{weekReview.weakPointsResolved}</p>
@@ -109,7 +111,7 @@ export default function AICoachPage() {
         <Card>
           <CardContent className="pt-6">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">New Weak Points</span>
+              <span className="text-muted-foreground">{t("newWeakPoints")}</span>
               <AlertTriangle className="h-3.5 w-3.5 text-amber-500" />
             </div>
             <p className="text-2xl font-bold">{weekReview.newWeakPoints}</p>
@@ -121,7 +123,7 @@ export default function AICoachPage() {
         <div className="space-y-6 lg:col-span-2">
           {/* Last Session */}
           <div>
-            <h2 className="mb-4 text-lg font-semibold">Last Session</h2>
+            <h2 className="mb-4 text-lg font-semibold">{t("lastSession")}</h2>
             <Card>
               <CardContent className="pt-6">
                 <div className="mb-4 flex items-center gap-2 text-xs text-muted-foreground">
@@ -132,7 +134,7 @@ export default function AICoachPage() {
                   <span>{lastSession.duration}</span>
                 </div>
                 <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{lastSession.summary}</p>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Commitments</p>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t("commitments")}</p>
                 <ul className="space-y-2">
                   {lastSession.commitments.map((c, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
@@ -153,7 +155,7 @@ export default function AICoachPage() {
 
           {/* Coach's Questions */}
           <div>
-            <h2 className="mb-4 text-lg font-semibold">What I'll ask you today</h2>
+            <h2 className="mb-4 text-lg font-semibold">{t("whatIllAsk")}</h2>
             <div className="space-y-3">
               {coachQuestions.map((q, i) => (
                 <Card key={i}>

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +36,7 @@ const lastScore = {
 
 export default function PronunciationPage() {
   const [idx, setIdx] = useState(0);
+  const t = useTranslations("pronunciation");
   const [recording, setRecording] = useState(false);
   const [showScore, setShowScore] = useState(true);
   const current = practiceSet.items[idx]!;
@@ -43,7 +45,7 @@ export default function PronunciationPage() {
     <div className="mx-auto max-w-5xl p-6 lg:p-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Pronunciation Practice</h1>
+          <h1 className="text-2xl font-bold">{t("title")}</h1>
           <p className="mt-1 text-sm text-muted-foreground flex items-center gap-2">
             <Languages className="h-4 w-4" />
             {practiceSet.lang} · {practiceSet.level}
@@ -58,7 +60,7 @@ export default function PronunciationPage() {
       {/* Practice Card */}
       <Card className="mb-6">
         <CardContent className="pt-8 pb-8">
-          <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">Repeat after the speaker</p>
+          <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">{t("repeatAfter")}</p>
           <p className="text-3xl font-bold leading-relaxed">{current.phrase}</p>
           <p className="mt-3 font-mono text-sm text-muted-foreground">{current.phonetic}</p>
 
@@ -85,7 +87,7 @@ export default function PronunciationPage() {
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
-            {recording ? "Speak now — tap the mic when done" : "Tap mic to record your attempt"}
+            {recording ? t("speakNow") : t("tapToRecord")}
           </p>
         </CardContent>
       </Card>
@@ -97,24 +99,24 @@ export default function PronunciationPage() {
             <Card className="border-primary/30">
               <CardContent className="pt-6 text-center">
                 <p className="text-4xl font-bold text-primary">{lastScore.overall}</p>
-                <p className="mt-1 text-xs text-muted-foreground">Overall Score</p>
+                <p className="mt-1 text-xs text-muted-foreground">{t("overallScore")}</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
-                <div className="flex items-center gap-2 mb-2"><Target className="h-4 w-4 text-primary" /><span className="text-xs text-muted-foreground">Accuracy</span></div>
+                <div className="flex items-center gap-2 mb-2"><Target className="h-4 w-4 text-primary" /><span className="text-xs text-muted-foreground">{t("accuracy")}</span></div>
                 <p className="text-2xl font-bold">{lastScore.accuracy}%</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
-                <div className="flex items-center gap-2 mb-2"><TrendingUp className="h-4 w-4 text-blue-400" /><span className="text-xs text-muted-foreground">Fluency</span></div>
+                <div className="flex items-center gap-2 mb-2"><TrendingUp className="h-4 w-4 text-blue-400" /><span className="text-xs text-muted-foreground">{t("fluency")}</span></div>
                 <p className="text-2xl font-bold">{lastScore.fluency}%</p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6">
-                <div className="flex items-center gap-2 mb-2"><Volume2 className="h-4 w-4 text-amber-400" /><span className="text-xs text-muted-foreground">Intonation</span></div>
+                <div className="flex items-center gap-2 mb-2"><Volume2 className="h-4 w-4 text-amber-400" /><span className="text-xs text-muted-foreground">{t("intonation")}</span></div>
                 <p className="text-2xl font-bold">{lastScore.intonation}%</p>
               </CardContent>
             </Card>

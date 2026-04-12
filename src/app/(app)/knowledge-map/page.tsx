@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -62,6 +63,8 @@ function getStatusLabel(status: string): string {
 }
 
 export default function KnowledgeMapPage() {
+  const t = useTranslations("knowledgeMap");
+  const tc = useTranslations("common");
   const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState<KnowledgeNode | null>(null);
 
@@ -73,7 +76,7 @@ export default function KnowledgeMapPage() {
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold flex items-center gap-2"><Network className="h-6 w-6 text-primary" />Knowledge Map</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-2"><Network className="h-6 w-6 text-primary" />{t("title")}</h1>
         <p className="mt-1 text-sm text-muted-foreground">See what you know, what you don&apos;t, and what you&apos;re about to forget.</p>
       </div>
 

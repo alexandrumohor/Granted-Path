@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Camera, Loader2 } from "lucide-react";
 
 export default function ProfileSettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [name, setName] = useState("User");
   const [bio, setBio] = useState("");
   const [saving, setSaving] = useState(false);

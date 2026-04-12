@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,8 @@ const employees = [
 ];
 
 export default function BizEmployeesPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const [team, setTeam] = useState("all");
   const [status, setStatus] = useState("all");

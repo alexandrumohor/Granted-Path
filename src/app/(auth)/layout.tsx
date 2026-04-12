@@ -1,6 +1,10 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import Image from "next/image";
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">

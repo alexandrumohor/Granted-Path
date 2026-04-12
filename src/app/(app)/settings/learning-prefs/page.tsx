@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +15,8 @@ const STYLES = [
 ];
 
 export default function LearningPrefsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [pace, setPace] = useState("NORMAL");
   const [toughLove, setToughLove] = useState("BALANCED");
   const [styles, setStyles] = useState(["mix"]);

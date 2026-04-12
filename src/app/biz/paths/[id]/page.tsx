@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +10,8 @@ import {
 } from "lucide-react";
 
 export default async function PathDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const { id } = await params;
 
   const path = {

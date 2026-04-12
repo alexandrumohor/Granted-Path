@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Flame, BookOpen, Brain, Target, Zap, Star, Clock, Users, Award, Lock } from "lucide-react";
@@ -40,20 +41,22 @@ const RARITY_STYLES: Record<string, { bg: string; text: string; border: string }
 };
 
 export default function AchievementsPage() {
+  const t = useTranslations("achievements");
+  const tc = useTranslations("common");
   const unlocked = ACHIEVEMENTS.filter(a => a.unlocked);
   const locked = ACHIEVEMENTS.filter(a => !a.unlocked);
 
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold flex items-center gap-2"><Trophy className="h-6 w-6 text-primary" />Achievements</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-2"><Trophy className="h-6 w-6 text-primary" />{t("title")}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{unlocked.length}/{ACHIEVEMENTS.length} unlocked</p>
       </div>
 
       {/* Unlocked */}
       {unlocked.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-4">Unlocked</h2>
+          <h2 className="text-lg font-semibold mb-4">{t("unlocked")}</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {unlocked.map(a => <AchievementCard key={a.id} achievement={a} />)}
           </div>
@@ -61,7 +64,7 @@ export default function AchievementsPage() {
       )}
 
       {/* Locked */}
-      <h2 className="text-lg font-semibold mb-4">Locked</h2>
+      <h2 className="text-lg font-semibold mb-4">{t("locked")}</h2>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {locked.map(a => <AchievementCard key={a.id} achievement={a} />)}
       </div>

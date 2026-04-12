@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -49,6 +51,8 @@ const eventStyles: Record<string, { icon: typeof Check; color: string }> = {
 };
 
 export default function AdminDashboardPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const totalMrr = revenueBreakdown.reduce((s, p) => s + p.mrr, 0);
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -39,6 +40,8 @@ const faqs = [
 ];
 
 export default function PricingPage() {
+  const t = useTranslations("pricing");
+  const tc = useTranslations("common");
   const [billing, setBilling] = useState<"m"|"y">("m");
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -48,9 +51,9 @@ export default function PricingPage() {
       </div>
       <Tabs defaultValue="individual" className="mt-12">
         <TabsList className="mx-auto grid w-full max-w-md grid-cols-3">
-          <TabsTrigger value="individual" className="gap-1.5"><Users className="h-4 w-4" />Individual</TabsTrigger>
-          <TabsTrigger value="education" className="gap-1.5"><GraduationCap className="h-4 w-4" />Education</TabsTrigger>
-          <TabsTrigger value="business" className="gap-1.5"><Building2 className="h-4 w-4" />Business</TabsTrigger>
+          <TabsTrigger value="individual" className="gap-1.5"><Users className="h-4 w-4" />{t("individual")}</TabsTrigger>
+          <TabsTrigger value="education" className="gap-1.5"><GraduationCap className="h-4 w-4" />{t("education")}</TabsTrigger>
+          <TabsTrigger value="business" className="gap-1.5"><Building2 className="h-4 w-4" />{t("business")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="individual" className="mt-8">
@@ -60,7 +63,7 @@ export default function PricingPage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {indPlans.map((p)=>(<div key={p.name} className={`relative flex flex-col rounded-xl border p-6 ${p.highlighted?"border-primary/50 bg-primary/5 shadow-lg shadow-primary/10":"border-border/50 bg-card"}`}>
-              {p.highlighted && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
+              {p.highlighted && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">{t("mostPopular")}</Badge>}
               <h3 className="text-xl font-semibold">{p.name}</h3>
               <div className="mt-3 flex items-baseline">{p.price.m===0?<span className="text-4xl font-bold">Free</span>:<><span className="text-4xl font-bold">{"\u20AC"}{billing==="m"?p.price.m:Math.round(p.price.y/12)}</span><span className="ml-1 text-muted-foreground">/mo</span></>}</div>
               {billing==="y"&&p.price.y>0&&<p className="mt-1 text-xs text-muted-foreground">{"\u20AC"}{p.price.y}/yr billed annually</p>}
@@ -75,7 +78,7 @@ export default function PricingPage() {
         <TabsContent value="education" className="mt-8" id="education">
           <p className="mb-8 text-center text-muted-foreground">Per-student pricing with volume discounts.</p>
           <div className="grid gap-6 md:grid-cols-3">{eduPlans.map((p)=>(<div key={p.name} className={`relative flex flex-col rounded-xl border p-6 ${p.highlighted?"border-primary/50 bg-primary/5 shadow-lg shadow-primary/10":"border-border/50 bg-card"}`}>
-            {p.highlighted&&<Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
+            {p.highlighted&&<Badge className="absolute -top-3 left-1/2 -translate-x-1/2">{t("mostPopular")}</Badge>}
             <h3 className="text-xl font-semibold">{p.name}</h3><p className="text-sm text-muted-foreground">{p.sub}</p>
             <div className="mt-3 flex items-baseline"><span className="text-4xl font-bold">{"\u20AC"}{p.price}</span><span className="ml-1 text-muted-foreground">/student/mo</span></div>
             <p className="mt-1 text-xs text-muted-foreground">Min {p.min} students</p>
@@ -88,7 +91,7 @@ export default function PricingPage() {
         <TabsContent value="business" className="mt-8" id="business">
           <p className="mb-8 text-center text-muted-foreground">Per-employee pricing. More employees = lower cost.</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{bizPlans.map((p)=>(<div key={p.name} className={`relative flex flex-col rounded-xl border p-6 ${p.highlighted?"border-primary/50 bg-primary/5 shadow-lg shadow-primary/10":"border-border/50 bg-card"}`}>
-            {p.highlighted&&<Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
+            {p.highlighted&&<Badge className="absolute -top-3 left-1/2 -translate-x-1/2">{t("mostPopular")}</Badge>}
             <h3 className="text-xl font-semibold">{p.name}</h3><p className="text-sm text-muted-foreground">{p.range} employees</p>
             <div className="mt-3 flex items-baseline">{p.price?<><span className="text-4xl font-bold">{"\u20AC"}{p.price}</span><span className="ml-1 text-muted-foreground">/emp/mo</span></>:<span className="text-2xl font-bold">Custom</span>}</div>
             <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
@@ -99,7 +102,7 @@ export default function PricingPage() {
       </Tabs>
 
       <section className="mx-auto mt-24 max-w-3xl">
-        <h2 className="text-center text-2xl font-bold">Frequently Asked Questions</h2>
+        <h2 className="text-center text-2xl font-bold">{t("faq")}</h2>
         <Accordion className="mt-8">{faqs.map((f,i)=>(<AccordionItem key={i} value={`faq-${i}`}><AccordionTrigger className="text-left text-base">{f.q}</AccordionTrigger><AccordionContent className="text-muted-foreground">{f.a}</AccordionContent></AccordionItem>))}</Accordion>
       </section>
     </div>

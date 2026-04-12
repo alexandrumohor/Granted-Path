@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Settings, Upload, Loader2 } from "lucide-react";
 
 export default function EduSettingsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [schoolName, setSchoolName] = useState("Liceul Teoretic Example");
   const [country, setCountry] = useState("Romania");
   const [city, setCity] = useState("Bucharest");

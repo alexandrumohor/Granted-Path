@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Download, Loader2, Shield } from "lucide-react";
 
 export default function PrivacySettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [publicProfile, setPublicProfile] = useState(true);
   const [showOnLeaderboard, setShowOnLeaderboard] = useState(true);
   const [showActivity, setShowActivity] = useState(false);

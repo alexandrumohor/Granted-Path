@@ -1,10 +1,13 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CreditCard, Users, Plus, Minus, ArrowRight, ExternalLink } from "lucide-react";
 
 export default function EduBillingPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const plan = {
     type: "HIGH_SCHOOL",
     name: "High School Plan",

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,6 +18,8 @@ const FLASHCARDS = [
 ];
 
 export default function FlashcardsPage() {
+  const t = useTranslations("learn");
+  const tc = useTranslations("common");
   const [currentIdx, setCurrentIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [results, setResults] = useState<{ id: string; knew: boolean }[]>([]);

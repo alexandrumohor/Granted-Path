@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, Clock, BookOpen, Dumbbell, Flame, Zap, TrendingUp, TrendingDown, Calendar } from "lucide-react";
@@ -29,6 +30,8 @@ const BEST_HOURS = [
 const maxHour = Math.max(...BEST_HOURS.map(h => h.pct));
 
 export default function StatsPage() {
+  const t = useTranslations("stats");
+  const tc = useTranslations("common");
   const w = WEEKLY_STATS;
   const minDiff = w.thisWeek.minutes - w.lastWeek.minutes;
   const minPct = Math.round((minDiff / w.lastWeek.minutes) * 100);
@@ -36,7 +39,7 @@ export default function StatsPage() {
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold flex items-center gap-2"><BarChart3 className="h-6 w-6 text-primary" />Statistics</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-2"><BarChart3 className="h-6 w-6 text-primary" />{t("title")}</h1>
         <p className="mt-1 text-sm text-muted-foreground">Your learning analytics and progress insights.</p>
       </div>
 
@@ -51,7 +54,7 @@ export default function StatsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Daily study time bar chart */}
         <Card>
-          <CardHeader><CardTitle className="text-base">Daily Study Time</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-base">{t("dailyStudy")}</CardTitle></CardHeader>
           <CardContent>
             <div className="flex items-end gap-2 h-40">
               {DAILY_DATA.map(d => (
@@ -87,7 +90,7 @@ export default function StatsPage() {
 
         {/* Best study time */}
         <Card>
-          <CardHeader><CardTitle className="text-base">Best Study Time</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-base">{t("bestStudyTime")}</CardTitle></CardHeader>
           <CardContent>
             <div className="flex items-end gap-2 h-32">
               {BEST_HOURS.map(h => (

@@ -1,17 +1,20 @@
+"use client";
 import Link from "next/link";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { WifiOff, RefreshCw, BookOpen } from "lucide-react";
 
 export default function OfflinePage() {
+  const t = useTranslations("errors");
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="max-w-md text-center">
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
           <WifiOff className="h-8 w-8 text-primary" />
         </div>
-        <h1 className="text-2xl font-bold">You're offline</h1>
+        <h1 className="text-2xl font-bold">{t("offline")}</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          No internet connection right now. Your progress is safe — it'll sync automatically when you're back online.
+          {t("offlineDesc")}
         </p>
 
         <div className="mt-6 rounded-lg border border-border/50 bg-card/50 p-4 text-left">
@@ -26,7 +29,7 @@ export default function OfflinePage() {
         </div>
 
         <Link href="/dashboard">
-          <Button className="mt-6"><RefreshCw className="mr-2 h-4 w-4" />Try again</Button>
+          <Button className="mt-6"><RefreshCw className="mr-2 h-4 w-4" />{t("tryAgain") || "Try again"}</Button>
         </Link>
       </div>
     </div>

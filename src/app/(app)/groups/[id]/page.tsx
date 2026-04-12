@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { use, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -41,6 +42,8 @@ const MOCK_MEMBERS: Member[] = [
 ];
 
 export default function GroupDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("groups");
+  const tc = useTranslations("common");
   const { id } = use(params);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState(MOCK_MESSAGES);

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,8 @@ const CONTENT = [
 ];
 
 export default function EduContentPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8 flex items-center justify-between">

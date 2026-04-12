@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,6 +24,8 @@ const typeIcon: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export default function BizContentPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const filtered = content.filter(c => c.name.toLowerCase().includes(q.toLowerCase()));
 

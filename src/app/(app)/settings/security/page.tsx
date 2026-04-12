@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,6 +28,8 @@ const loginHistory = [
 ];
 
 export default function SecuritySettingsPage() {
+  const t = useTranslations("security");
+  const tc = useTranslations("common");
   const [has2fa, setHas2fa] = useState(false);
   const [setup2fa, setSetup2fa] = useState(false);
 
@@ -53,7 +56,7 @@ export default function SecuritySettingsPage() {
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold">Two-Factor Authentication (2FA)</h3>
+                <h3 className="font-semibold">{t("twoFactor")}</h3>
                 {has2fa ? (
                   <Badge className="bg-green-500/20 text-green-500"><CheckCircle2 className="mr-1 h-3 w-3" />Enabled</Badge>
                 ) : (
@@ -119,7 +122,7 @@ export default function SecuritySettingsPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className="font-medium">{s.device}</p>
-                      {s.current && <Badge className="bg-green-500/20 text-green-500 text-[10px]">Current</Badge>}
+                      {s.current && <Badge className="bg-green-500/20 text-green-500 text-[10px]">{t("current")}</Badge>}
                     </div>
                     <p className="mt-0.5 text-xs text-muted-foreground truncate">
                       {s.browser} · {s.os} · {s.location}
@@ -160,7 +163,7 @@ export default function SecuritySettingsPage() {
                       <span className="font-mono">{l.ip}</span>
                       <span>·</span>
                       <span>{l.location}</span>
-                      {l.status === "blocked" && <Badge className="ml-2 bg-red-500/20 text-red-400 text-[9px]">Blocked</Badge>}
+                      {l.status === "blocked" && <Badge className="ml-2 bg-red-500/20 text-red-400 text-[9px]">{t("blocked")}</Badge>}
                     </p>
                   </div>
                   <span className="text-xs text-muted-foreground shrink-0">{l.date}</span>

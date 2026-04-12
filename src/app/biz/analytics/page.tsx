@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Brain, Users, Award, Clock, DollarSign } from "lucide-react";
@@ -25,6 +27,8 @@ const aiRecs = [
 ];
 
 export default function BizAnalyticsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const kpis = [
     { label: "Total Learning Hours", value: "4,287", icon: Clock, change: "+12%" },
     { label: "Completion Rate", value: "68%", icon: TrendingUp, change: "+5%" },

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +52,8 @@ const EXAM_QUESTIONS: ExamQuestion[] = [
 type Phase = "select" | "exam" | "results";
 
 export default function ExamSimPage() {
+  const t = useTranslations("learn");
+  const tc = useTranslations("common");
   const [phase, setPhase] = useState<Phase>("select");
   const [questions, setQuestions] = useState<ExamQuestion[]>([]);
   const [currentQ, setCurrentQ] = useState(0);

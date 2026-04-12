@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,8 @@ const paths = [
 ];
 
 export default function BizPathsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("all");
   const cats = ["all", ...Array.from(new Set(paths.map(p => p.category)))];

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -30,6 +31,8 @@ const TYPE_STYLES = {
 };
 
 export default function CertificatesPage() {
+  const t = useTranslations("certificates");
+  const tc = useTranslations("common");
   const [copied, setCopied] = useState<string | null>(null);
 
   function copyLink(id: string, url: string) {
@@ -41,7 +44,7 @@ export default function CertificatesPage() {
   return (
     <div className="p-6 lg:p-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold flex items-center gap-2"><Award className="h-6 w-6 text-primary" />Certificates</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-2"><Award className="h-6 w-6 text-primary" />{t("title")}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{MOCK_CERTS.length} certificates earned. Share them with employers.</p>
       </div>
 
@@ -105,9 +108,9 @@ export default function CertificatesPage() {
                       </div>
 
                       <div className="flex flex-wrap gap-2">
-                        <Button size="sm" variant="outline"><Download className="mr-2 h-3.5 w-3.5" />Download PDF</Button>
+                        <Button size="sm" variant="outline"><Download className="mr-2 h-3.5 w-3.5" />{t("download")}</Button>
                         <Button size="sm" variant="outline" onClick={() => copyLink(cert.id, cert.verifyUrl)}>
-                          {copied === cert.id ? <><Check className="mr-2 h-3.5 w-3.5" />Copied!</> : <><Copy className="mr-2 h-3.5 w-3.5" />Copy Link</>}
+                          {copied === cert.id ? <><Check className="mr-2 h-3.5 w-3.5" />Copied!</> : <><Copy className="mr-2 h-3.5 w-3.5" />{t("copyLink")}</>}
                         </Button>
                         <Button size="sm" variant="outline"><Share2 className="mr-2 h-3.5 w-3.5" />Add to LinkedIn</Button>
                         <Link href={cert.verifyUrl}><Button size="sm" variant="outline"><ExternalLink className="mr-2 h-3.5 w-3.5" />Verify</Button></Link>

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +17,8 @@ const ASSIGNMENTS = [
 ];
 
 export default function AssignmentsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const [showCreate, setShowCreate] = useState(false);
   const [filter, setFilter] = useState("all");
 

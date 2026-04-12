@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +14,8 @@ const LANGUAGES = [
 ];
 
 export default function LanguageSettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [appLang, setAppLang] = useState("en");
   const [contentLang, setContentLang] = useState("en");
   const [saving, setSaving] = useState(false);

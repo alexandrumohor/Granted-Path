@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,8 @@ const webhooks = [
 ];
 
 export default function BizIntegrationsPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const byCategory = integrations.reduce<Record<string, typeof integrations>>((acc, i) => {
     (acc[i.category] ??= []).push(i);
     return acc;

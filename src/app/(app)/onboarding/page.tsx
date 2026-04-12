@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,8 @@ const STYLES = [
 const TIMES = [{id:"morning",label:"Morning",icon:Sun},{id:"afternoon",label:"Afternoon",icon:Sunset},{id:"evening",label:"Evening",icon:Moon},{id:"night",label:"Night",icon:CloudMoon}];
 
 export default function OnboardingPage() {
+  const t = useTranslations("onboarding");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [step,setStep] = useState(1);
   const [loading,setLoading] = useState(false);

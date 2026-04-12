@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, AlertTriangle } from "lucide-react";
 
 export default function AccountSettingsPage() {
+  const t = useTranslations("settings");
+  const tc = useTranslations("common");
   const [email] = useState("user@example.com");
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,8 @@ const MOCK_GOALS: Goal[] = [
 ];
 
 export default function GoalsPage() {
+  const t = useTranslations("goals");
+  const tc = useTranslations("common");
   const [goals] = useState(MOCK_GOALS);
   const [showAdd, setShowAdd] = useState(false);
   const [newTitle, setNewTitle] = useState("");
@@ -39,10 +42,10 @@ export default function GoalsPage() {
     <div className="p-6 lg:p-8 max-w-3xl">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2"><Target className="h-6 w-6 text-primary" />Goals</h1>
+          <h1 className="text-2xl font-bold flex items-center gap-2"><Target className="h-6 w-6 text-primary" />{t("title")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">Track your learning objectives. AI creates a plan for each.</p>
         </div>
-        <Button onClick={() => setShowAdd(!showAdd)}><Plus className="mr-2 h-4 w-4" />Add Goal</Button>
+        <Button onClick={() => setShowAdd(!showAdd)}><Plus className="mr-2 h-4 w-4" />{t("addGoal")}</Button>
       </div>
 
       {/* Add Goal Form */}

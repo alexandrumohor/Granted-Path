@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "@/hooks/use-translations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,8 @@ const invoices = [
 ];
 
 export default function BizBillingPage() {
+  const t = useTranslations("common");
+  const tc = useTranslations("common");
   const seats = { used: 247, total: 300, price: 9 };
   const monthly = seats.used * seats.price;
   const yearly = monthly * 12;
