@@ -1,252 +1,172 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Check, BookOpen, Brain, BarChart3, Shield } from "lucide-react";
 import { useTranslations } from "@/hooks/use-translations";
 
+type Stats = { users: number; courses: number; lessons: number; achievements: number };
+
 export default function Home() {
-  const [faq, setFaq] = useState<number | null>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
   const tc = useTranslations("common");
 
+  useEffect(() => {
+    fetch("/api/stats").then(r => r.json()).then(setStats).catch(() => {});
+  }, []);
+
   return (
-    <>
-      {/* ═══════ HERO ═══════ */}
-      <section className="relative isolate">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-[-40%] left-[50%] -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-primary/[0.04] blur-[120px]" />
-        </div>
+    <div className="snap-y snap-mandatory h-[calc(100vh-3.5rem)] overflow-y-auto">
 
-        <div className="mx-auto max-w-[1120px] px-6 pt-32 pb-24 lg:pt-44 lg:pb-32">
-          <div className="max-w-[680px]">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-[13px] text-muted-foreground backdrop-blur-sm mb-8">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              Beta deschis — locuri limitate
-            </div>
-
-            <h1 className="text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.025em]">
-              Învață orice,<br />
-              cu un AI care te<br />
-              <span className="text-primary">cunoaște pe tine</span>
-            </h1>
-
-            <p className="mt-6 max-w-[520px] text-[17px] leading-[1.6] text-muted-foreground">
-              Nu un chatbot. Un sistem de învățare care analizează cum performezi,
-              detectează ce uiți, și te corectează când greșești.
-            </p>
-
-            <div className="mt-10 flex items-center gap-4">
-              <Link href="/register">
-                <Button className="h-11 px-6 text-[15px] font-medium">
-                  Începe gratuit
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="#product" className="text-[15px] text-muted-foreground hover:text-foreground transition-colors">
-                Vezi cum funcționează →
-              </Link>
-            </div>
-
-            <div className="mt-16 flex items-center gap-6 text-[13px] text-muted-foreground">
-              <span>2,800+ utilizatori</span>
-              <span className="h-3 w-px bg-border" />
-              <span>12+ domenii</span>
-              <span className="h-3 w-px bg-border" />
-              <span>Gratuit pentru totdeauna</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ PRODUCT DEMO ═══════ */}
-      <section id="product" className="scroll-mt-20 border-t border-border/50">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32">
-          <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">Produsul</p>
-          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] max-w-[480px]">
-            Un tutor care predă, nu doar răspunde
-          </h2>
-
-          {/* Live AI conversation demo */}
-          <div className="mt-12 rounded-xl border border-border bg-card overflow-hidden">
-            <div className="flex items-center gap-2 border-b border-border px-5 py-3">
-              <div className="flex gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/20" />
-                <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/20" />
-                <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/20" />
-              </div>
-              <span className="ml-3 text-[12px] text-muted-foreground">Granted Path AI — Sesiune de studiu</span>
-            </div>
-            <div className="p-6 lg:p-8 space-y-6 max-w-3xl">
-              {/* User message */}
-              <div className="flex justify-end">
-                <div className="rounded-2xl rounded-br-md bg-primary/10 border border-primary/20 px-4 py-2.5 max-w-md">
-                  <p className="text-[14px]">Cred că listele și tuplele sunt același lucru în Python, nu?</p>
-                </div>
-              </div>
-              {/* AI response */}
-              <div className="space-y-3">
-                <p className="text-[12px] text-primary font-medium">Granted Path AI</p>
-                <div className="text-[14px] leading-[1.7] text-muted-foreground space-y-3">
-                  <p><strong className="text-foreground">Nu chiar.</strong> Arată similar, dar diferența e fundamentală:</p>
-                  <div className="rounded-lg border border-border bg-muted/50 p-4 text-[13px] space-y-2">
-                    <p><strong className="text-foreground">List</strong> = mutabil → poți modifica după creare</p>
-                    <p><strong className="text-foreground">Tuple</strong> = imutabil → odată creat, nu se schimbă</p>
-                  </div>
-                  <p>Gândește-te la un scenariu în care ai nevoie de date care <em>nu trebuie</em> să se schimbe niciodată. Când ai folosi un tuple în loc de o listă?</p>
-                </div>
-              </div>
-              {/* Key insight */}
-              <div className="rounded-lg border border-primary/20 bg-primary/[0.04] px-4 py-3">
-                <p className="text-[13px] text-muted-foreground">
-                  <span className="text-primary font-medium">De reținut:</span> AI-ul nu confirmă presupuneri greșite. Te corectează și te provoacă să gândești.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ HOW IT WORKS ═══════ */}
-      <section className="border-t border-border/50">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32">
-          <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">Cum funcționează</p>
-          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] max-w-[480px]">
-            De la obiectiv la rezultat, în trei pași
-          </h2>
-
-          <div className="mt-16 grid gap-16 lg:grid-cols-3 lg:gap-12">
-            {[
-              { n: "01", title: "Definește obiectivul", desc: "Examen, certificare, skill nou — spune AI-ului ce vrei să obții și în cât timp." },
-              { n: "02", title: "AI-ul construiește planul", desc: "Analizează nivelul tău, stilul de învățare, și creează un parcurs adaptat ritmului tău." },
-              { n: "03", title: "Înveți cu feedback real", desc: "Lecții, exerciții, flashcard-uri — cu un AI care te corectează instant și previne uitarea." },
-            ].map((s, i) => (
-              <div key={i}>
-                <span className="text-[48px] font-bold leading-none text-border">{s.n}</span>
-                <h3 className="mt-4 text-[17px] font-semibold">{s.title}</h3>
-                <p className="mt-2 text-[15px] text-muted-foreground leading-[1.6]">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ WHY DIFFERENT ═══════ */}
-      <section className="border-t border-border/50 bg-card">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32">
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+      {/* ═══════ SCREEN 1 — HERO ═══════ */}
+      <section className="snap-start min-h-[calc(100vh-3.5rem)] flex items-center relative">
+        <div className="mx-auto w-full max-w-[1120px] px-6">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            {/* Left — Message */}
             <div>
-              <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">De ce Granted Path</p>
-              <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em]">
-                Construit ca sistem de învățare, nu ca wrapper peste un LLM
-              </h2>
-              <p className="mt-4 text-[15px] text-muted-foreground leading-[1.6]">
-                Majoritatea platformelor pun un chat peste GPT și numesc asta "AI tutoring".
-                Noi am construit un sistem care monitorizează, analizează și se adaptează la
-                fiecare interacțiune.
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-[13px] text-muted-foreground mb-8">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                {stats ? `${stats.users} utilizatori activi` : "Platform activa"}
+              </div>
+
+              <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.03em]">
+                Sistemul tau de invatare,{" "}
+                <span className="text-primary">bazat pe AI</span>
+              </h1>
+
+              <p className="mt-5 max-w-[440px] text-[16px] leading-[1.65] text-muted-foreground">
+                Un AI care analizeaza cum performezi, detecteaza ce uiti
+                si te corecteaza cand gresesti. Nu un chatbot — un tutor real.
               </p>
+
+              <div className="mt-8 flex items-center gap-4">
+                <Link href="/register">
+                  <Button className="h-10 px-5 text-[14px]">
+                    {tc("getStarted")}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="#product" className="text-[14px] text-muted-foreground hover:text-foreground transition-colors">
+                  Vezi produsul →
+                </Link>
+              </div>
+
+              {stats && (
+                <div className="mt-12 flex items-center gap-5 text-[13px] text-muted-foreground">
+                  <span><strong className="text-foreground">{stats.courses}</strong> cursuri</span>
+                  <span className="h-3 w-px bg-border" />
+                  <span><strong className="text-foreground">{stats.lessons}</strong> lectii</span>
+                  <span className="h-3 w-px bg-border" />
+                  <span><strong className="text-foreground">{stats.achievements}</strong> realizari</span>
+                </div>
+              )}
             </div>
-            <div className="space-y-6">
-              {[
-                { title: "Adaptive learning real", desc: "Ajustează format, dificultate și ritm bazat pe cum performezi — nu pe ce bifezi." },
-                { title: "Monitorizare continuă", desc: "Fiecare sesiune, fiecare răspuns — analizat. Detectează tipare și previne uitarea." },
-                { title: "Feedback onest", desc: "Te corectează când greșești, indiferent cât insisti. Ca un profesor bun, nu un chatbot servil." },
-                { title: "Personalizare profundă", desc: "Nu doar dificultate ușoară/medie/grea. Stilul de prezentare, ritmul, momentul zilei — totul contează." },
-              ].map((f, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <Check className="h-3 w-3 text-primary" />
+
+            {/* Right — Real product preview */}
+            <div className="hidden lg:block">
+              <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xl shadow-primary/[0.03]">
+                <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+                  <div className="flex gap-1.5">
+                    <div className="h-2 w-2 rounded-full bg-muted-foreground/15" />
+                    <div className="h-2 w-2 rounded-full bg-muted-foreground/15" />
+                    <div className="h-2 w-2 rounded-full bg-muted-foreground/15" />
+                  </div>
+                  <span className="ml-2 text-[11px] text-muted-foreground">Granted Path — Sesiune AI</span>
+                </div>
+                <div className="p-5 space-y-4">
+                  <div className="flex justify-end">
+                    <div className="rounded-xl rounded-br-sm bg-primary/10 border border-primary/20 px-3.5 py-2 max-w-[280px]">
+                      <p className="text-[13px]">Cred ca listele si tuplele sunt acelasi lucru in Python</p>
+                    </div>
                   </div>
                   <div>
-                    <p className="text-[15px] font-medium">{f.title}</p>
-                    <p className="mt-1 text-[14px] text-muted-foreground leading-[1.6]">{f.desc}</p>
+                    <p className="text-[11px] text-primary font-medium mb-1.5">Granted Path AI</p>
+                    <div className="text-[13px] leading-[1.7] text-muted-foreground space-y-2">
+                      <p><strong className="text-foreground">Nu chiar.</strong> Diferenta e fundamentala:</p>
+                      <div className="rounded-md border border-border bg-muted/50 p-3 text-[12px] space-y-1">
+                        <p><strong className="text-foreground">List</strong> = mutabil</p>
+                        <p><strong className="text-foreground">Tuple</strong> = imutabil</p>
+                      </div>
+                      <p className="text-[12px]">Cand ai folosi un tuple?</p>
+                    </div>
+                  </div>
+                  <div className="rounded-md bg-primary/[0.05] border border-primary/10 px-3 py-2">
+                    <p className="text-[11px] text-muted-foreground"><span className="text-primary font-medium">Nota:</span> AI-ul corecteaza presupuneri gresite, nu le confirma.</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ NUMBERS ═══════ */}
-      <section className="border-t border-border/50">
-        <div className="mx-auto max-w-[1120px] px-6 py-20">
-          <div className="flex flex-col items-center justify-center gap-12 sm:flex-row sm:gap-20">
-            {[
-              { value: "+60%", label: "retenție informații" },
-              { value: "2×", label: "viteză de învățare" },
-              { value: "24/7", label: "disponibilitate tutor" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <p className="text-[40px] font-bold tracking-tight">{s.value}</p>
-                <p className="mt-1 text-[14px] text-muted-foreground">{s.label}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ FOR WHOM ═══════ */}
-      <section className="border-t border-border/50 bg-card">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border border-border bg-background p-8 lg:p-10">
-              <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">Pentru persoane fizice</p>
-              <h3 className="text-xl font-semibold">Tutorul tău personal, non-stop</h3>
-              <p className="mt-3 text-[15px] text-muted-foreground leading-[1.6]">
-                Pregătire examene, skill-uri noi, schimbare carieră — cu un AI care se adaptează la tine, nu invers.
-              </p>
-              <ul className="mt-6 space-y-2.5">
-                {["Parcursuri personalizate", "Tutor vocal", "Mod Panica pentru examene", "Certificate de completare"].map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-[14px]"><Check className="h-3.5 w-3.5 text-primary shrink-0" />{f}</li>
-                ))}
-              </ul>
-              <Link href="/register" className="mt-8 block"><Button variant="outline" className="h-10">Începe gratuit <ArrowRight className="ml-2 h-3.5 w-3.5" /></Button></Link>
-            </div>
-            <div className="rounded-xl border border-border bg-background p-8 lg:p-10">
-              <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">Pentru organizații</p>
-              <h3 className="text-xl font-semibold">Training AI pentru echipe</h3>
-              <p className="mt-3 text-[15px] text-muted-foreground leading-[1.6]">
-                Școli, universități, companii — fiecare membru primește un tutor AI personal. Tu primești analytics în timp real.
-              </p>
-              <ul className="mt-6 space-y-2.5">
-                {["Portal management echipă", "Analize progres pe grupuri", "Integrare SSO", "Support dedicat"].map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-[14px]"><Check className="h-3.5 w-3.5 text-primary shrink-0" />{f}</li>
-                ))}
-              </ul>
-              <Link href="/contact" className="mt-8 block"><Button variant="outline" className="h-10">Contactează-ne <ArrowRight className="ml-2 h-3.5 w-3.5" /></Button></Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════ PRICING ═══════ */}
-      <section id="pricing" className="scroll-mt-20 border-t border-border/50">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32">
-          <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-4">Prețuri</p>
-          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em]">Simplu. Fără surprize.</h2>
-          <p className="mt-3 text-[15px] text-muted-foreground">Începe gratuit, fără card de credit.</p>
+      {/* ═══════ SCREEN 2 — PRODUCT ═══════ */}
+      <section id="product" className="snap-start min-h-[calc(100vh-3.5rem)] flex items-center border-t border-border">
+        <div className="mx-auto w-full max-w-[1120px] px-6 py-16">
+          <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-3">Produsul</p>
+          <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em] max-w-[420px]">
+            Un tutor care preda, nu doar raspunde
+          </h2>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { name: "Free", price: "€0", period: "", desc: "Pentru explorare", features: ["2 cursuri active", "20 mesaje AI / zi", "Analize de bază"], cta: "Începe gratuit", primary: false },
-              { name: "Pro", price: "€30", period: "/lună", desc: "Învățare serioasă", features: ["Cursuri nelimitate", "AI nelimitat", "Tutor vocal", "Mod Panica", "Certificate"], cta: "Începe Pro", primary: true },
-              { name: "Business", price: "€9", period: "/loc/lună", desc: "Pentru echipe", features: ["Tot din Pro", "Portal management", "Analize echipă", "SSO", "Support prioritar"], cta: "Contactează-ne", primary: false },
-            ].map((p, i) => (
-              <div key={i} className={`flex flex-col rounded-xl border p-8 ${p.primary ? "border-primary/40 ring-1 ring-primary/10" : "border-border"}`}>
-                {p.primary && <p className="text-[12px] font-medium text-primary mb-4">Recomandat</p>}
-                <h3 className="text-lg font-semibold">{p.name}</h3>
-                <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-[36px] font-bold tracking-tight">{p.price}</span>
-                  {p.period && <span className="text-[14px] text-muted-foreground">{p.period}</span>}
+              { icon: Brain, title: "Adaptive learning", desc: "Ajusteaza dificultatea si formatul bazat pe performanta ta reala." },
+              { icon: BarChart3, title: "Monitorizare continua", desc: "Fiecare sesiune si raspuns este analizat pentru a-ti optimiza parcursul." },
+              { icon: Shield, title: "Feedback onest", desc: "Te corecteaza cand gresesti. Nu te aproba fals." },
+              { icon: BookOpen, title: "Continut structurat", desc: stats ? `${stats.courses} cursuri cu ${stats.lessons} lectii, create de experti si AI.` : "Cursuri si lectii create de experti si AI." },
+            ].map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <div key={i} className="rounded-lg border border-border bg-card p-5">
+                  <Icon className="h-5 w-5 text-primary mb-3" />
+                  <h3 className="text-[14px] font-semibold">{f.title}</h3>
+                  <p className="mt-1.5 text-[13px] text-muted-foreground leading-[1.6]">{f.desc}</p>
                 </div>
-                <p className="mt-1 text-[14px] text-muted-foreground">{p.desc}</p>
-                <ul className="mt-6 flex-1 space-y-2.5">
+              );
+            })}
+          </div>
+
+          {/* Real courses from DB */}
+          <div className="mt-10 rounded-xl border border-border bg-card overflow-hidden">
+            <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+              <span className="text-[13px] font-medium">Cursuri disponibile</span>
+              <Link href="/learn" className="text-[12px] text-primary hover:underline">Vezi toate →</Link>
+            </div>
+            <CoursesPreview />
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ SCREEN 3 — PRICING ═══════ */}
+      <section id="pricing" className="snap-start min-h-[calc(100vh-3.5rem)] flex items-center border-t border-border bg-card">
+        <div className="mx-auto w-full max-w-[1120px] px-6 py-16">
+          <p className="text-[13px] font-medium text-primary tracking-wide uppercase mb-3">Preturi</p>
+          <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.02em]">Simplu. Fara surprize.</h2>
+          <p className="mt-2 text-[14px] text-muted-foreground">Incepe gratuit, fara card de credit.</p>
+
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {[
+              { name: "Free", price: "0", desc: "Pentru explorare", features: ["2 cursuri active", "20 mesaje AI / zi", "Analize de baza"], primary: false },
+              { name: "Pro", price: "30", desc: "Invatare seriosa", features: ["Cursuri nelimitate", "AI nelimitat", "Tutor vocal", "Mod Panica", "Certificate"], primary: true },
+              { name: "Business", price: "9", period: "/loc", desc: "Pentru echipe", features: ["Tot din Pro", "Portal management", "Analize echipa", "SSO", "Support prioritar"], primary: false },
+            ].map((p, i) => (
+              <div key={i} className={`flex flex-col rounded-xl border p-6 ${p.primary ? "border-primary ring-1 ring-primary/20 bg-primary/[0.02]" : "border-border"}`}>
+                {p.primary && <p className="text-[11px] font-medium text-primary mb-3 uppercase tracking-wide">Recomandat</p>}
+                <h3 className="text-base font-semibold">{p.name}</h3>
+                <div className="mt-2 flex items-baseline gap-0.5">
+                  <span className="text-[32px] font-bold tracking-tight">&euro;{p.price}</span>
+                  <span className="text-[13px] text-muted-foreground">{p.period || ""}/luna</span>
+                </div>
+                <p className="mt-1 text-[13px] text-muted-foreground">{p.desc}</p>
+                <ul className="mt-5 flex-1 space-y-2">
                   {p.features.map(f => (
-                    <li key={f} className="flex items-center gap-2.5 text-[14px]"><Check className="h-3.5 w-3.5 text-primary shrink-0" />{f}</li>
+                    <li key={f} className="flex items-center gap-2 text-[13px]"><Check className="h-3.5 w-3.5 text-primary shrink-0" />{f}</li>
                   ))}
                 </ul>
-                <Link href={p.name === "Business" ? "/contact" : "/register"} className="mt-8">
-                  <Button variant={p.primary ? "default" : "outline"} className="w-full h-10">{p.cta}</Button>
+                <Link href={p.name === "Business" ? "/contact" : "/register"} className="mt-6">
+                  <Button variant={p.primary ? "default" : "outline"} className="w-full h-9 text-[13px]">
+                    {p.name === "Business" ? "Contacteaza-ne" : p.primary ? "Incepe Pro" : tc("getStarted")}
+                  </Button>
                 </Link>
               </div>
             ))}
@@ -254,52 +174,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════ FAQ ═══════ */}
-      <section className="border-t border-border/50 bg-card">
-        <div className="mx-auto max-w-[640px] px-6 py-24 lg:py-32">
-          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-center">Întrebări frecvente</h2>
-
-          <div className="mt-12 divide-y divide-border">
-            {[
-              { q: "E gratuit?", a: "Da. Planul Free e gratuit pe viață — 2 cursuri active și 20 mesaje AI pe zi. Upgrade oricând." },
-              { q: "Ce limbă vorbește AI-ul?", a: "Română și engleză. Detectează automat sau setezi manual din preferințe." },
-              { q: "Funcționează pentru examene?", a: "Da. Modul Panica creează un plan focusat pe lacunele tale. Avem cursuri BAC, permis auto, certificări IT." },
-              { q: "Pot folosi pentru echipa mea?", a: "Da. Business include portal management, analize pe echipă, SSO și support dedicat." },
-              { q: "Datele mele sunt în siguranță?", a: "Complet GDPR compliant. Date stocate în EU, criptate, nefolosite pentru antrenare AI." },
-            ].map((item, i) => (
-              <div key={i}>
-                <button onClick={() => setFaq(faq === i ? null : i)} className="flex w-full items-center justify-between py-5 text-left">
-                  <span className="text-[15px] font-medium pr-4">{item.q}</span>
-                  <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 ${faq === i ? "rotate-180" : ""}`} />
-                </button>
-                <div className={`grid transition-all duration-200 ${faq === i ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden">
-                    <p className="text-[14px] text-muted-foreground leading-[1.6]">{item.a}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ FINAL CTA ═══════ */}
-      <section className="border-t border-border/50">
-        <div className="mx-auto max-w-[1120px] px-6 py-24 lg:py-32 text-center">
-          <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.02em]">
-            Gata să înveți diferit?
+      {/* ═══════ SCREEN 4 — FINAL CTA ═══════ */}
+      <section className="snap-start min-h-[calc(100vh-3.5rem)] flex items-center border-t border-border">
+        <div className="mx-auto w-full max-w-[1120px] px-6 text-center">
+          <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.025em]">
+            Gata sa inveti diferit?
           </h2>
-          <p className="mt-3 text-[15px] text-muted-foreground">Cont gratuit în 30 de secunde. Fără card.</p>
-          <div className="mt-8">
+          <p className="mt-4 text-[15px] text-muted-foreground max-w-[380px] mx-auto">
+            Cont gratuit in 30 de secunde. Fara card. Fara obligatii.
+          </p>
+          <div className="mt-8 flex items-center justify-center gap-4">
             <Link href="/register">
-              <Button className="h-11 px-8 text-[15px] font-medium">
-                Crează cont gratuit
+              <Button className="h-11 px-8 text-[15px]">
+                Creeaza cont gratuit
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
+          {stats && (
+            <p className="mt-8 text-[13px] text-muted-foreground">
+              Alatura-te celor {stats.users} utilizatori care invata deja cu Granted Path
+            </p>
+          )}
         </div>
       </section>
-    </>
+    </div>
+  );
+}
+
+function CoursesPreview() {
+  const [courses, setCourses] = useState<Array<{id:string;title:string;categoryLabel:string;difficulty:string;estimatedHours:number}>>([]);
+
+  useEffect(() => {
+    fetch("/api/courses")
+      .then(r => r.json())
+      .then(d => setCourses(d.slice(0, 4)))
+      .catch(() => {});
+  }, []);
+
+  if (courses.length === 0) return <div className="p-5 text-[13px] text-muted-foreground">Se incarca...</div>;
+
+  return (
+    <div className="divide-y divide-border">
+      {courses.map(c => (
+        <Link key={c.id} href={`/learn/${c.id}`} className="flex items-center justify-between px-5 py-3 hover:bg-muted/50 transition-colors">
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-4 w-4 text-muted-foreground" />
+            <div>
+              <p className="text-[13px] font-medium">{c.title}</p>
+              <p className="text-[11px] text-muted-foreground">{c.categoryLabel}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+            <span>{c.difficulty}</span>
+            <span>{c.estimatedHours}h</span>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
