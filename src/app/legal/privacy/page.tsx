@@ -1,6 +1,5 @@
 "use client";
 import { useTranslations } from "@/hooks/use-translations";
-export const metadata = { title: "Privacy Policy — Granted Path" };
 
 export default function PrivacyPage() {
   const t = useTranslations("common");
