@@ -17,11 +17,11 @@ export default function Home() {
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex items-center">
-      <div className="mx-auto w-full max-w-[1280px] px-4 py-8">
+      <div className="w-full px-8 lg:px-16 xl:px-24 py-8">
         <div className="grid lg:grid-cols-[1fr_1px_1fr] items-center gap-0">
 
           {/* ── LEFT ── */}
-          <div className="flex flex-col justify-center px-4 lg:px-8">
+          <div className="flex flex-col justify-center pr-6 lg:pr-12">
             <div className="anim-right delay-1 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-[13px] text-muted-foreground mb-5 w-fit">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               {stats ? `${stats.users} utilizatori activi` : "Platforma activa"}
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="hidden lg:block w-px bg-border self-stretch my-8" />
 
           {/* ── RIGHT ── */}
-          <div className="flex flex-col justify-center px-4 lg:px-8 mt-10 lg:mt-0">
+          <div className="flex flex-col justify-center pl-6 lg:pl-12 mt-10 lg:mt-0">
             <h2 className="anim-left delay-2 text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] whitespace-nowrap">
               Un tutor care preda, nu doar raspunde
             </h2>

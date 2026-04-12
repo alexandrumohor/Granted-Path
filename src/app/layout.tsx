@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/shared/providers";
+import { PageTransition } from "@/components/shared/page-transition";
 
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"] });
 const mono = JetBrains_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-full flex flex-col">
         <Providers>
           <Navbar />
-          <main className="flex-1 pt-14 animate-page-in">{children}</main>
+          <main className="flex-1 pt-14"><PageTransition>{children}</PageTransition></main>
           <Footer />
         </Providers>
       </body>
