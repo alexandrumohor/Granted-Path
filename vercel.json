@@ -13,7 +13,7 @@
     },
     {
       "path": "/api/cron/forgotten-topic-check",
-      "schedule": "0 */6 * * *"
+      "schedule": "0 10 * * *"
     }
   ],
   "headers": [
