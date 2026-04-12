@@ -138,7 +138,9 @@
 }
 
 /* Legacy compat */
-.glow-amber { @apply glow-primary; }
+.glow-amber {
+  box-shadow: 0 0 24px rgba(0, 200, 83, 0.15), 0 0 48px rgba(0, 200, 83, 0.05);
+}
 
 /* ─── Fade-in animation ─── */
 @keyframes fade-up {
