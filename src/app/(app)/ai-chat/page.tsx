@@ -14,11 +14,14 @@ export default function AIChatPage() {
   const {messages,isLoading,error,sendMessage,stopGenerating,clearMessages}=useAIChat({toughLove:"BALANCED"});
   const t = useTranslations("aiChat");
 
+  const locale = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("gp-language") || "{}").state?.locale : "en";
+  const isRo = locale === "ro";
+
   const QP = [
-    {icon:BookOpen,label:t("explainConcept"),prompt:"Explain to me how "},
-    {icon:Dumbbell,label:t("practiceExercises"),prompt:"Give me practice exercises on "},
-    {icon:GraduationCap,label:t("quizMe"),prompt:"Quiz me on "},
-    {icon:RotateCcw,label:t("reviewTopic"),prompt:"Help me review "},
+    {icon:BookOpen,label:t("explainConcept"),prompt:isRo?"Explica-mi cum ":"Explain to me how "},
+    {icon:Dumbbell,label:t("practiceExercises"),prompt:isRo?"Da-mi exercitii practice despre ":"Give me practice exercises on "},
+    {icon:GraduationCap,label:t("quizMe"),prompt:isRo?"Testeaza-ma la ":"Quiz me on "},
+    {icon:RotateCcw,label:t("reviewTopic"),prompt:isRo?"Ajuta-ma sa revizuiesc ":"Help me review "},
   ];
 
   useEffect(()=>{
