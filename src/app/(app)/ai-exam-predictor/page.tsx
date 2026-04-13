@@ -1,48 +1,83 @@
 "use client";
 import { useTranslations } from "@/hooks/use-translations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Sparkles, Calendar, Target, AlertTriangle, TrendingUp,
-  Brain, CheckCircle2, Clock, Dumbbell, ArrowRight,
+  Sparkles, Target, Brain, BookOpen, Loader2,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const exam = {
-  name: "AWS Solutions Architect Associate",
-  date: "18 Mai, 2026",
-  daysAway: 37,
-  readiness: 64,
-};
-
-const predictions = [
-  { topic: "Retele VPC si grupuri de securitate", confidence: 94, yourMastery: 71, weight: "mare", practice: 18 },
-  { topic: "Roluri IAM si acces cross-account", confidence: 92, yourMastery: 58, weight: "mare", practice: 14 },
-  { topic: "Criptare S3 si politici de ciclu de viata", confidence: 88, yourMastery: 82, weight: "medie", practice: 12 },
-  { topic: "Politici de rutare Route 53", confidence: 85, yourMastery: 45, weight: "medie", practice: 11 },
-  { topic: "RDS multi-AZ vs replici de citire", confidence: 83, yourMastery: 77, weight: "medie", practice: 10 },
-  { topic: "Auto Scaling si configurare ELB", confidence: 81, yourMastery: 63, weight: "medie", practice: 9 },
-  { topic: "CloudFront si cache la margine", confidence: 72, yourMastery: 51, weight: "mica", practice: 7 },
-  { topic: "Lambda cold starts si concurenta provizionata", confidence: 68, yourMastery: 39, weight: "mica", practice: 6 },
-];
-
-const criticalGaps = [
-  { topic: "Politici de rutare Route 53", reason: "Subiect cu incredere mare dar stapanire sub 50%", priority: "urgent" },
-  { topic: "Lambda cold starts", reason: "A aparut in 4 din ultimele 5 examene similare", priority: "ridicat" },
-  { topic: "Acces IAM cross-account", reason: "Subiectul tau cel mai slab cu pondere mare", priority: "ridicat" },
-];
 
 export default function ExamPredictorPage() {
   const t = useTranslations("examPredictor");
-  const [filter, setFilter] = useState<"all" | "weak" | "strong">("all");
+  const tc = useTranslations("common");
+  const [hasData, setHasData] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = predictions.filter(p => {
-    if (filter === "weak") return p.yourMastery < 65;
-    if (filter === "strong") return p.yourMastery >= 65;
-    return true;
-  });
+  useEffect(() => {
+    Promise.all([
+      fetch("/api/user/goals").then(r => r.ok ? r.json() : []),
+      fetch("/api/user/knowledge").then(r => r.ok ? r.json() : []),
+    ])
+      .then(([goals, nodes]) => {
+        const examGoals = goals.filter((g: { type: string }) => g.type === "EXAM");
+        setHasData(examGoals.length > 0 && nodes.length > 0);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!hasData) {
+    return (
+      <div className="p-6 lg:p-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold flex items-center gap-3">
+            <Sparkles className="h-6 w-6 text-primary" />
+            {t("title")}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
+        </div>
+
+        <Card className="border-dashed">
+          <CardContent className="py-16 text-center">
+            <Brain className="mx-auto h-12 w-12 text-muted-foreground/30 mb-4" />
+            <p className="text-lg font-medium">{t("noData")}</p>
+            <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto">{t("noDataDesc")}</p>
+
+            <div className="mt-8 grid gap-4 max-w-lg mx-auto sm:grid-cols-2">
+              <Card className="border-primary/20">
+                <CardContent className="pt-6 text-center">
+                  <Target className="mx-auto h-8 w-8 text-primary mb-3" />
+                  <p className="text-sm font-medium">{t("step1")}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t("step1Desc")}</p>
+                  <Link href="/goals"><Button variant="outline" size="sm" className="mt-3">{t("addExamGoal")}</Button></Link>
+                </CardContent>
+              </Card>
+              <Card className="border-primary/20">
+                <CardContent className="pt-6 text-center">
+                  <BookOpen className="mx-auto h-8 w-8 text-primary mb-3" />
+                  <p className="text-sm font-medium">{t("step2")}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t("step2Desc")}</p>
+                  <Link href="/learn"><Button variant="outline" size="sm" className="mt-3">{t("startLearning")}</Button></Link>
+                </CardContent>
+              </Card>
+            </div>
+
+            <p className="mt-6 text-xs text-muted-foreground">{t("unlockAfter")}</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 lg:p-8">
@@ -54,124 +89,14 @@ export default function ExamPredictorPage() {
         <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
-      {/* Exam Header */}
-      <Card className="mb-6 border-primary/30">
-        <CardContent className="pt-6">
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="flex-1 min-w-[200px]">
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("targetExam")}</p>
-              <h2 className="mt-1 text-xl font-bold">{exam.name}</h2>
-              <div className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" />{exam.date}</span>
-                <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{exam.daysAway} zile ramase</span>
-              </div>
-            </div>
-            <div className="text-center">
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("readiness")}</p>
-              <p className={cn("mt-1 text-4xl font-bold", exam.readiness >= 75 ? "text-green-500" : exam.readiness >= 60 ? "text-amber-400" : "text-red-500")}>
-                {exam.readiness}%
-              </p>
-            </div>
-            <Button><Target className="mr-2 h-4 w-4" />{t("startTargetedPractice")}</Button>
-          </div>
+      <Card className="border-primary/20 bg-primary/5">
+        <CardContent className="py-12 text-center">
+          <Brain className="mx-auto h-10 w-10 text-primary mb-4" />
+          <p className="font-medium">{t("analyzing")}</p>
+          <p className="text-sm text-muted-foreground mt-2">{t("analyzingDesc")}</p>
+          <Badge variant="secondary" className="mt-4">{t("comingSoon")}</Badge>
         </CardContent>
       </Card>
-
-      {/* {t("criticalGaps")} */}
-      <div className="mb-6">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-          <AlertTriangle className="h-5 w-5 text-red-500" />
-          {t("criticalGaps")}
-        </h2>
-        <div className="grid gap-3 md:grid-cols-3">
-          {criticalGaps.map((g, i) => (
-            <Card key={i} className={g.priority === "urgent" ? "border-red-500/30" : "border-orange-500/30"}>
-              <CardContent className="pt-6">
-                <Badge className={g.priority === "urgent" ? "bg-red-500/20 text-red-400 text-xs" : "bg-orange-500/20 text-orange-400 text-xs"}>
-                  {g.priority.toUpperCase()}
-                </Badge>
-                <p className="mt-3 font-semibold">{g.topic}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{g.reason}</p>
-                <Button variant="outline" size="sm" className="mt-4 w-full">
-                  Exerseaza Acum<ArrowRight className="ml-2 h-3 w-3" />
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Predictions */}
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Subiecte Prezise ({predictions.length})</h2>
-          <div className="flex gap-1 rounded-lg border border-border/50 p-1">
-            {(["all", "weak", "strong"] as const).map(f => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={cn(
-                  "rounded px-3 py-1 text-xs font-medium transition-colors",
-                  filter === f ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {f === "all" ? "Toate" : f === "weak" ? "Slabe (<65%)" : "Puternice (≥65%)"}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          {filtered.map((p, i) => {
-            const gap = p.confidence - p.yourMastery;
-            const isGap = gap > 20;
-            return (
-              <Card key={i} className={isGap ? "border-orange-500/20" : ""}>
-                <CardContent className="pt-6">
-                  <div className="mb-3 flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium">{p.topic}</p>
-                        <Badge variant="outline" className="text-[10px] capitalize">{p.weight}</Badge>
-                        {isGap && <Badge className="bg-orange-500/20 text-orange-400 text-[10px]">Gap</Badge>}
-                      </div>
-                      <p className="mt-1 text-xs text-muted-foreground">{p.practice} {t("practiceQuestions")}</p>
-                    </div>
-                    <Button variant="ghost" size="sm"><Dumbbell className="mr-1 h-3 w-3" />{t("drill")}</Button>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="flex items-center gap-1 text-muted-foreground"><Brain className="h-3 w-3" />{t("examConfidence")}</span>
-                        <span className="font-semibold">{p.confidence}%</span>
-                      </div>
-                      <div className="mt-1 h-1.5 rounded-full bg-muted">
-                        <div className="h-1.5 rounded-full bg-primary" style={{ width: `${p.confidence}%` }} />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="flex items-center gap-1 text-muted-foreground"><Target className="h-3 w-3" />{t("yourMastery")}</span>
-                        <span className="font-semibold">{p.yourMastery}%</span>
-                      </div>
-                      <div className="mt-1 h-1.5 rounded-full bg-muted">
-                        <div
-                          className={cn(
-                            "h-1.5 rounded-full",
-                            p.yourMastery >= 75 ? "bg-green-500" : p.yourMastery >= 50 ? "bg-amber-500" : "bg-red-500"
-                          )}
-                          style={{ width: `${p.yourMastery}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
     </div>
   );
 }

@@ -196,6 +196,7 @@ model Course {
   rating          Float          @default(0)
   enrollmentCount Int            @default(0)
   creatorId       String?
+  sources         Json           @default("[]")
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   creator     User?                 @relation("CourseCreator", fields: [creatorId], references: [id])
@@ -237,13 +238,15 @@ model Module {
 }
 
 model Lesson {
-  id               String     @id @default(cuid())
-  moduleId         String
-  title            String
-  order            Int
-  type             LessonType @default(TEXT)
-  content          Json       @default("[]")
-  estimatedMinutes Int        @default(10)
+  id                 String     @id @default(cuid())
+  moduleId           String
+  title              String
+  order              Int
+  type               LessonType @default(TEXT)
+  content            Json       @default("[]")
+  sourceUrls         Json       @default("[]")
+  contentGeneratedAt DateTime?
+  estimatedMinutes   Int        @default(10)
   module    Module               @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   progress  UserLessonProgress[]
   exercises Exercise[]

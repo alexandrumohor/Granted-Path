@@ -1,13 +1,13 @@
 "use client";
 import { useTranslations } from "@/hooks/use-translations";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
-  Sparkles, Check, Clock, Users, Zap, Shield, Gift,
-  Rocket, ArrowRight, Brain,
+  Sparkles, Check, Users, Zap, Shield, Gift,
+  Rocket, ArrowRight, Brain, BookOpen,
 } from "lucide-react";
 
 export default function BetaWaitlistPage() {
@@ -15,6 +15,11 @@ export default function BetaWaitlistPage() {
   const t = useTranslations("beta");
   const tc = useTranslations("common");
   const [submitted, setSubmitted] = useState(false);
+  const [stats, setStats] = useState<{ users: number; courses: number; lessons: number } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/stats").then(r => r.json()).then(setStats).catch(() => {});
+  }, []);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +34,14 @@ export default function BetaWaitlistPage() {
     { icon: Brain, title: t("shapeProduct"), detail: t("shapeProductDesc") },
   ];
 
+  const steps = [
+    { step: "1", title: t("step1Title"), detail: t("step1Desc") },
+    { step: "2", title: t("step2Title"), detail: t("step2Desc") },
+    { step: "3", title: t("step3Title"), detail: t("step3Desc") },
+    { step: "4", title: t("step4Title"), detail: t("step4Desc") },
+    { step: "5", title: t("step5Title"), detail: t("step5Desc") },
+  ];
+
   return (
     <div className="min-h-[calc(100vh-4rem)]">
       {/* Hero */}
@@ -40,7 +53,7 @@ export default function BetaWaitlistPage() {
               <Sparkles className="mr-1.5 h-3 w-3" />{t("title")}
             </Badge>
             <h1 className="text-4xl font-bold leading-tight lg:text-6xl">
-              Be among the first <span className="text-gradient">1,000 learners</span> on Granted Path
+              {t("heading")} <span className="text-gradient">{t("headingHighlight")}</span> {t("headingEnd")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground lg:text-xl">
               {t("subtitle")}
@@ -59,7 +72,7 @@ export default function BetaWaitlistPage() {
                     className="h-12 text-base"
                   />
                   <Button type="submit" size="lg" className="h-12 px-8 whitespace-nowrap">
-                    Join Waitlist<ArrowRight className="ml-2 h-4 w-4" />
+                    {t("joinWaitlist")}<ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
                 <p className="mt-3 text-xs text-muted-foreground">
@@ -74,29 +87,34 @@ export default function BetaWaitlistPage() {
                   </div>
                   <p className="font-semibold">{t("onTheList")}</p>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    We'll email <span className="font-mono text-foreground">{email}</span> when your invitation is ready. Expected wait: 2–4 weeks.
+                    {t("weWillEmail")} <span className="font-mono text-foreground">{email}</span> {t("whenReady")}
                   </p>
                 </CardContent>
               </Card>
             )}
 
-            {/* Counters */}
-            <div className="mt-10 flex items-center justify-center gap-8 text-sm">
-              <div>
-                <p className="text-3xl font-bold text-primary">2,847</p>
-                <p className="text-xs text-muted-foreground">{t("onWaitlist")}</p>
+            {/* Real stats from DB */}
+            {stats && (
+              <div className="mt-10 flex items-center justify-center gap-8 text-sm">
+                <div>
+                  <p className="text-3xl font-bold text-primary">{stats.users}</p>
+                  <p className="text-xs text-muted-foreground">{tc("members")}</p>
+                </div>
+                <div className="h-12 w-px bg-border" />
+                <div>
+                  <p className="text-3xl font-bold">{stats.courses}</p>
+                  <p className="text-xs text-muted-foreground">{tc("courses")}</p>
+                </div>
+                <div className="h-12 w-px bg-border" />
+                <div className="flex items-center gap-1.5">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  <div>
+                    <p className="text-3xl font-bold">{stats.lessons}</p>
+                    <p className="text-xs text-muted-foreground">{tc("lessons")}</p>
+                  </div>
+                </div>
               </div>
-              <div className="h-12 w-px bg-border" />
-              <div>
-                <p className="text-3xl font-bold">1,000</p>
-                <p className="text-xs text-muted-foreground">{t("betaSeats")}</p>
-              </div>
-              <div className="h-12 w-px bg-border" />
-              <div>
-                <p className="text-3xl font-bold flex items-center gap-1"><Clock className="h-6 w-6 text-amber-400" />~3wk</p>
-                <p className="text-xs text-muted-foreground">{t("untilLaunch")}</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -134,13 +152,7 @@ export default function BetaWaitlistPage() {
           <div className="mx-auto max-w-2xl">
             <h2 className="mb-8 text-center text-3xl font-bold">{t("whatToExpect")}</h2>
             <div className="space-y-6">
-              {[
-                { step: "1", title: "You join the list today", detail: "We queue you in order. First in, first served." },
-                { step: "2", title: "We email you in 2–4 weeks", detail: "With a unique activation link. Set it up in 60 seconds." },
-                { step: "3", title: "Full platform access", detail: "All features unlocked: AI tutor, voice mode, exam predictor, knowledge map, everything." },
-                { step: "4", title: "Weekly check-ins", detail: "We genuinely want your feedback. Answer a short survey each week." },
-                { step: "5", title: "Founding member forever", detail: "When we go public, your 50% discount and badge stick for life." },
-              ].map((s, i) => (
+              {steps.map((s, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
                     {s.step}
@@ -165,7 +177,7 @@ export default function BetaWaitlistPage() {
             <p className="mt-4 text-muted-foreground">{t("readySubtitle")}</p>
             <div className="mt-8">
               <Button size="lg" onClick={() => document.querySelector<HTMLInputElement>("input[type=email]")?.focus()}>
-                <Shield className="mr-2 h-4 w-4" />Reserve My Spot
+                <Shield className="mr-2 h-4 w-4" />{t("reserveSpot")}
               </Button>
             </div>
           </CardContent>

@@ -1,39 +1,52 @@
 "use client";
 import { useTranslations } from "@/hooks/use-translations";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dumbbell, Layers, GraduationCap, Zap, Brain, ArrowRight, Check, X, RotateCcw, Trophy } from "lucide-react";
+import { Dumbbell, Layers, GraduationCap, Zap, Brain, ArrowRight, Check, X, RotateCcw, Trophy, Loader2 } from "lucide-react";
 
-const EXERCISES = [
-  { id: "1", type: "MULTIPLE_CHOICE", topic: "Python", difficulty: 3, question: "Care este output-ul: print(type(3.14))?", options: ["<class 'int'>", "<class 'float'>", "<class 'str'>", "<class 'double'>"], correct: 1, explanation: "3.14 este un numar zecimal, deci Python il clasifica ca float. Python nu are tip 'double'." },
-  { id: "2", type: "TRUE_FALSE", topic: "Python", difficulty: 2, question: "In Python, indentarea este optionala si doar pentru lizibilitate.", options: ["Adevarat", "Fals"], correct: 1, explanation: "Fals! Python foloseste indentarea pentru a defini blocuri de cod. Este obligatorie, nu optionala." },
-  { id: "3", type: "MULTIPLE_CHOICE", topic: "Marketing", difficulty: 2, question: "Ce inseamna SEO?", options: ["Social Engine Optimization", "Search Engine Optimization", "Search Email Outreach", "Site Enhancement Operations"], correct: 1, explanation: "SEO = Search Engine Optimization — practica de optimizare a site-urilor pentru a se clasa mai sus in rezultatele cautarilor." },
-  { id: "4", type: "MULTIPLE_CHOICE", topic: "Python", difficulty: 4, question: "Ce va afisa acest cod?\n\nx = [1, 2, 3]\ny = x\ny.append(4)\nprint(len(x))", options: ["3", "4", "Eroare", "None"], correct: 1, explanation: "y = x nu copiaza lista — ambele variabile indica aceeasi lista in memorie. Adaugarea la y afecteaza si x. len(x) este 4." },
-  { id: "5", type: "TRUE_FALSE", topic: "Marketing", difficulty: 3, question: "PPC (Pay-Per-Click) inseamna ca platesti de fiecare data cand reclama ta este afisata.", options: ["Adevarat", "Fals"], correct: 1, explanation: "Fals! PPC inseamna ca platesti cand cineva DA CLICK pe reclama, nu cand este afisata. Plata per afisare se numeste CPM." },
-  { id: "6", type: "MULTIPLE_CHOICE", topic: "JavaScript", difficulty: 3, question: "Care este diferenta intre == si === in JavaScript?", options: ["Nicio diferenta", "=== verifica si tipul", "== e doar pentru stringuri", "=== e depreciat"], correct: 1, explanation: "== face conversie de tip (\"5\" == 5 e true), in timp ce === verifica si valoarea SI tipul (\"5\" === 5 e false). Foloseste intotdeauna ===." },
-];
+interface Exercise {
+  id: string;
+  type: string;
+  question: string;
+  options: string[] | null;
+  correctAnswer: number | string;
+  explanation: string;
+  difficulty: number;
+  topic: string;
+}
 
 export default function PracticePage() {
-  const t = useTranslations("learn");
+  const t = useTranslations("practice");
   const tc = useTranslations("common");
   const [mode, setMode] = useState<"menu" | "practice" | "results">("menu");
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [answers, setAnswers] = useState<{ correct: boolean; exerciseId: string }[]>([]);
-  const [exercises] = useState(EXERCISES);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/user/exercises")
+      .then(r => r.ok ? r.json() : [])
+      .then(setExercises)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   function startPractice() {
+    if (exercises.length === 0) return;
     setMode("practice"); setCurrentQ(0); setAnswers([]); setSelected(null); setSubmitted(false);
   }
 
   function handleSubmit() {
     if (selected === null) return;
     const ex = exercises[currentQ]!;
-    const correct = selected === ex.correct;
+    const correctIdx = typeof ex.correctAnswer === "number" ? ex.correctAnswer : parseInt(String(ex.correctAnswer));
+    const correct = selected === correctIdx;
     setAnswers(prev => [...prev, { correct, exerciseId: ex.id }]);
     setSubmitted(true);
   }
@@ -48,19 +61,38 @@ export default function PracticePage() {
 
   const score = answers.filter(a => a.correct).length;
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
   if (mode === "menu") return (
     <div className="p-6 lg:p-8">
-      <h1 className="text-2xl font-bold">Exerseaza</h1>
-      <p className="mt-1 text-sm text-muted-foreground">Imbunatateste-ti abilitatile cu exercitii, quiz-uri si flashcard-uri.</p>
+      <h1 className="text-2xl font-bold">{t("title")}</h1>
+      <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <PracticeCard icon={<Dumbbell className="h-6 w-6" />} title="Practica Rapida" desc="Exercitii mixte din subiectele tale. Dificultate adaptiva." badge={`${exercises.length} exercitii`} onClick={startPractice} />
-        <PracticeCard icon={<Zap className="h-6 w-6" />} title="Provocarea Zilnica" desc="5 exercitii alese pentru punctele tale slabe. Bonus XP!" badge="50 XP bonus" onClick={startPractice} />
-        <PracticeCard icon={<Brain className="h-6 w-6" />} title="Puncte Slabe" desc="Concentreaza-te pe subiectele cu scor scazut." badge="Selectat de AI" onClick={startPractice} />
-        <Link href="/practice/flashcards"><PracticeCard icon={<Layers className="h-6 w-6" />} title="Revizuire Flashcard-uri" desc="Repetitie spatiata — revizuieste inainte sa uiti." badge="8 de revizuit" /></Link>
-        <Link href="/practice/exam-sim"><PracticeCard icon={<GraduationCap className="h-6 w-6" />} title="Simulator Examen" desc="Simuleaza conditii reale de examen cu cronometru." badge="3 examene" /></Link>
-        <PracticeCard icon={<Trophy className="h-6 w-6" />} title="Provocare Cronometrata" desc="Cate poti raspunde in 5 minute?" badge="Clasament" onClick={startPractice} />
-      </div>
+      {exercises.length === 0 ? (
+        <Card className="mt-8 border-dashed">
+          <CardContent className="py-16 text-center">
+            <Dumbbell className="mx-auto h-12 w-12 text-muted-foreground/30 mb-4" />
+            <p className="text-lg font-medium">{t("noExercises")}</p>
+            <p className="text-sm text-muted-foreground mt-1">{t("noExercisesDesc")}</p>
+            <Link href="/learn"><Button className="mt-4">{t("startLearning")}</Button></Link>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <PracticeCard icon={<Dumbbell className="h-6 w-6" />} title={t("quickPractice")} desc={t("quickPracticeDesc")} badge={`${exercises.length} ${tc("lessons")}`} onClick={startPractice} />
+          <PracticeCard icon={<Zap className="h-6 w-6" />} title={t("dailyChallenge")} desc={t("dailyChallengeDesc")} badge="50 XP bonus" onClick={startPractice} />
+          <PracticeCard icon={<Brain className="h-6 w-6" />} title={t("weakPoints")} desc={t("weakPointsDesc")} badge={t("aiSelected")} onClick={startPractice} />
+          <Link href="/practice/flashcards"><PracticeCard icon={<Layers className="h-6 w-6" />} title={t("flashcardReview")} desc={t("flashcardReviewDesc")} badge={t("dueForReview")} /></Link>
+          <Link href="/practice/exam-sim"><PracticeCard icon={<GraduationCap className="h-6 w-6" />} title={t("examSimulator")} desc={t("examSimulatorDesc")} badge={t("exams")} /></Link>
+          <PracticeCard icon={<Trophy className="h-6 w-6" />} title={t("timedChallenge")} desc={t("timedChallengeDesc")} badge={t("leaderboard")} onClick={startPractice} />
+        </div>
+      )}
     </div>
   );
 
@@ -69,9 +101,9 @@ export default function PracticePage() {
       <div className={`mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full ${score >= exercises.length * 0.7 ? "bg-green-500/10" : "bg-yellow-500/10"}`}>
         <Trophy className={`h-10 w-10 ${score >= exercises.length * 0.7 ? "text-green-500" : "text-yellow-500"}`} />
       </div>
-      <h1 className="text-2xl font-bold">Practica Completa!</h1>
+      <h1 className="text-2xl font-bold">{t("practiceComplete")}</h1>
       <p className="mt-2 text-4xl font-bold text-primary">{score}/{exercises.length}</p>
-      <p className="text-muted-foreground">raspunsuri corecte</p>
+      <p className="text-muted-foreground">{t("correctAnswers")}</p>
 
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         {answers.map((a, i) => (
@@ -81,30 +113,25 @@ export default function PracticePage() {
         ))}
       </div>
 
-      <div className="mt-6 rounded-lg bg-primary/5 border border-primary/20 p-4 text-sm text-muted-foreground">
-        <p className="font-medium text-primary mb-1">Analiza AI</p>
-        {score === exercises.length ? "Scor perfect! Ai stapanit aceste subiecte." :
-         score >= exercises.length * 0.7 ? "Buna treaba! Revizuieste intrebarile gresite — ele dezvaluie mici lacune." :
-         "Ai nevoie de mai multa practica pe aceste subiecte. Iti recomand sa revizuiesti lectiile inainte de a incerca din nou."}
-      </div>
-
       <div className="mt-8 flex justify-center gap-3">
-        <Button variant="outline" onClick={() => setMode("menu")}><ArrowRight className="mr-2 h-4 w-4 rotate-180" />Inapoi</Button>
-        <Button onClick={startPractice} className="glow-amber"><RotateCcw className="mr-2 h-4 w-4" />Exerseaza din Nou</Button>
+        <Button variant="outline" onClick={() => setMode("menu")}><ArrowRight className="mr-2 h-4 w-4 rotate-180" />{tc("back")}</Button>
+        <Button onClick={startPractice} className="glow-amber"><RotateCcw className="mr-2 h-4 w-4" />{t("practiceAgain")}</Button>
       </div>
     </div>
   );
 
   const ex = exercises[currentQ]!;
-  const isCorrect = selected === ex.correct;
+  const correctIdx = typeof ex.correctAnswer === "number" ? ex.correctAnswer : parseInt(String(ex.correctAnswer));
+  const isCorrect = selected === correctIdx;
+  const options = (ex.options as string[]) ?? [];
 
   return (
     <div className="p-6 lg:p-8 max-w-2xl mx-auto">
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">Intrebarea {currentQ + 1} din {exercises.length}</span>
+        <span className="text-sm text-muted-foreground">{t("question")} {currentQ + 1} / {exercises.length}</span>
         <div className="flex items-center gap-2">
           <Badge variant="outline">{ex.topic}</Badge>
-          <Badge variant="secondary" className="text-xs">Dificultate {ex.difficulty}/5</Badge>
+          <Badge variant="secondary" className="text-xs">{t("difficulty")} {ex.difficulty}/10</Badge>
         </div>
       </div>
       <div className="mb-8 h-2 rounded-full bg-muted"><div className="h-2 rounded-full bg-primary transition-all" style={{ width: `${((currentQ + (submitted ? 1 : 0)) / exercises.length) * 100}%` }} /></div>
@@ -114,18 +141,18 @@ export default function PracticePage() {
           <p className="text-base font-semibold whitespace-pre-line mb-4">{ex.question}</p>
 
           <div className="space-y-2">
-            {ex.options.map((opt, i) => {
+            {options.map((opt, i) => {
               let style = "border-border/50 hover:border-primary/30";
-              if (submitted && i === ex.correct) style = "border-green-500 bg-green-500/10";
+              if (submitted && i === correctIdx) style = "border-green-500 bg-green-500/10";
               else if (submitted && i === selected && !isCorrect) style = "border-red-500 bg-red-500/10";
               else if (!submitted && i === selected) style = "border-primary bg-primary/10";
 
               return (
                 <button key={i} onClick={() => !submitted && setSelected(i)} disabled={submitted}
                   className={`flex w-full items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-sm transition-all ${style}`}>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium">{ex.type === "TRUE_FALSE" ? opt.charAt(0) : String.fromCharCode(65 + i)}</span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium">{String.fromCharCode(65 + i)}</span>
                   <span className="flex-1">{opt}</span>
-                  {submitted && i === ex.correct && <Check className="h-4 w-4 text-green-500" />}
+                  {submitted && i === correctIdx && <Check className="h-4 w-4 text-green-500" />}
                   {submitted && i === selected && !isCorrect && <X className="h-4 w-4 text-red-500" />}
                 </button>
               );
@@ -134,17 +161,17 @@ export default function PracticePage() {
 
           {submitted && (
             <div className={`mt-4 rounded-lg p-4 text-sm ${isCorrect ? "bg-green-500/10" : "bg-red-500/10"}`}>
-              <p className={`font-medium ${isCorrect ? "text-green-400" : "text-red-400"}`}>{isCorrect ? "Corect!" : "Nu chiar."}</p>
+              <p className={`font-medium ${isCorrect ? "text-green-400" : "text-red-400"}`}>{isCorrect ? t("correct") : t("notQuite")}</p>
               <p className="mt-1 text-muted-foreground">{ex.explanation}</p>
             </div>
           )}
 
           <div className="mt-6 flex justify-end">
             {!submitted ? (
-              <Button onClick={handleSubmit} disabled={selected === null}>Verifica Raspunsul</Button>
+              <Button onClick={handleSubmit} disabled={selected === null}>{t("checkAnswer")}</Button>
             ) : (
               <Button onClick={handleNext} className="glow-amber">
-                {currentQ < exercises.length - 1 ? "Urmatoarea Intrebare" : "Vezi Rezultatele"}<ArrowRight className="ml-2 h-4 w-4" />
+                {currentQ < exercises.length - 1 ? t("nextQuestion") : t("seeResults")}<ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}
           </div>

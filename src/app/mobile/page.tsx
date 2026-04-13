@@ -5,28 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Apple, Smartphone, Bell, Wifi, Mic, Brain,
-  Star, Download, QrCode, Zap, Shield, Cloud,
+  Apple, Smartphone, Mic, Brain,
+  Download, QrCode, Zap, Shield, Cloud, Bell, Wifi, Clock,
 } from "lucide-react";
-
-const features = [
-  { icon: Brain, title: "AI Tutor in your pocket", description: "Ask anything, get explanations tailored to what you already know. Works offline for saved lessons." },
-  { icon: Mic, title: "Voice conversations", description: "Practice pronunciation and speaking naturally with your AI tutor — anywhere, anytime." },
-  { icon: Wifi, title: "Works offline", description: "Download lessons and flashcards. Your progress syncs automatically when you're back online." },
-  { icon: Bell, title: "Smart notifications", description: "Personalized reminders based on your peak learning hours — not nagging schedule spam." },
-  { icon: Zap, title: "2-minute micro-sessions", description: "Learn in the gaps: waiting in line, on the bus, between meetings. Every minute counts." },
-  { icon: Cloud, title: "Seamless sync", description: "Start on mobile, continue on desktop. Your AI tutor remembers every conversation." },
-];
-
-const testimonials = [
-  { name: "Maria P.", role: "Medical student", text: "I prep for exams on the metro. The AI coach actually challenges me instead of just giving answers.", rating: 5 },
-  { name: "Dan I.", role: "Engineer", text: "Voice mode is genuinely useful for practicing technical interviews. Way better than I expected.", rating: 5 },
-  { name: "Elena C.", role: "Language learner", text: "Finally an app where the AI gives feedback like a real tutor would. Pronunciation scoring is no joke.", rating: 5 },
-];
 
 export default function MobileLandingPage() {
   const t = useTranslations("mobile");
   const tc = useTranslations("common");
+
+  const features = [
+    { icon: Brain, title: t("aiPocket"), description: t("aiPocketDesc") },
+    { icon: Mic, title: t("voiceConversations"), description: t("voiceDesc") },
+    { icon: Wifi, title: t("worksOffline"), description: t("offlineDesc") },
+    { icon: Bell, title: t("smartNotifications"), description: t("notifDesc") },
+    { icon: Zap, title: t("microSessions"), description: t("microDesc") },
+    { icon: Cloud, title: t("seamlessSync"), description: t("syncDesc") },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -36,47 +31,37 @@ export default function MobileLandingPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
               <Badge className="mb-4 bg-primary/20 text-primary">
-                <Smartphone className="mr-1.5 h-3 w-3" />Mobile App
+                <Smartphone className="mr-1.5 h-3 w-3" />{t("badge")}
               </Badge>
               <h1 className="text-4xl font-bold leading-tight lg:text-5xl">
-                Your AI tutor,<br />
+                {t("title")}<br />
                 <span className="text-gradient">{t("titleHighlight")}</span>
               </h1>
               <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-                The full Granted Path experience on iOS and Android. Voice conversations, offline lessons, smart reminders, and genuine AI coaching — everywhere you go.
+                {t("subtitle")}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button size="lg" className="h-14 gap-3 px-6">
-                  <Apple className="h-6 w-6" />
-                  <div className="text-left">
-                    <div className="text-[10px] opacity-80">Download on the</div>
-                    <div className="text-sm font-semibold">App Store</div>
-                  </div>
-                </Button>
-                <Button size="lg" variant="outline" className="h-14 gap-3 px-6">
-                  <Download className="h-6 w-6" />
-                  <div className="text-left">
-                    <div className="text-[10px] opacity-80">Get it on</div>
-                    <div className="text-sm font-semibold">Google Play</div>
-                  </div>
-                </Button>
+              <div className="mt-8">
+                <Badge variant="outline" className="text-sm px-4 py-2">
+                  <Clock className="mr-2 h-4 w-4" />{t("comingSoon")}
+                </Badge>
               </div>
 
-              <div className="mt-8 flex items-center gap-6">
-                <div>
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    ))}
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Button size="lg" className="h-14 gap-3 px-6" disabled>
+                  <Apple className="h-6 w-6" />
+                  <div className="text-left">
+                    <div className="text-[10px] opacity-80">{t("downloadOn")}</div>
+                    <div className="text-sm font-semibold">{t("appStore")}</div>
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground">4.9 · 12,400 reviews</p>
-                </div>
-                <div className="h-8 w-px bg-border" />
-                <div>
-                  <p className="text-2xl font-bold">250k+</p>
-                  <p className="text-xs text-muted-foreground">Active learners</p>
-                </div>
+                </Button>
+                <Button size="lg" variant="outline" className="h-14 gap-3 px-6" disabled>
+                  <Download className="h-6 w-6" />
+                  <div className="text-left">
+                    <div className="text-[10px] opacity-80">{t("getItOn")}</div>
+                    <div className="text-sm font-semibold">{t("googlePlay")}</div>
+                  </div>
+                </Button>
               </div>
             </div>
 
@@ -86,20 +71,20 @@ export default function MobileLandingPage() {
                 <div className="absolute left-1/2 top-0 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-foreground/80" />
                 <div className="h-full w-full rounded-[1.8rem] bg-card p-6 pt-10">
                   <div className="mb-6 flex items-center justify-between">
-                    <p className="text-sm font-semibold">Today</p>
-                    <Badge className="bg-primary/20 text-primary text-xs">Day 12 🔥</Badge>
+                    <p className="text-sm font-semibold">{t("mockToday")}</p>
+                    <Badge className="bg-primary/20 text-primary text-xs">{t("mockStreak")}</Badge>
                   </div>
                   <div className="mb-4 rounded-xl bg-primary/10 p-4">
                     <div className="flex items-center gap-2 text-xs text-primary">
                       <Brain className="h-3 w-3" />
-                      <span className="font-semibold">AI Coach</span>
+                      <span className="font-semibold">{t("mockCoach")}</span>
                     </div>
-                    <p className="mt-2 text-sm">Ready for a 15-min async practice session?</p>
+                    <p className="mt-2 text-sm">{t("mockCoachMsg")}</p>
                   </div>
                   <div className="space-y-2">
-                    {["Cloud Fundamentals · 8 min", "Flashcards · 12 cards", "Voice practice · 5 min"].map((t, i) => (
+                    {[t("mockLesson1"), t("mockLesson2"), t("mockLesson3")].map((item, i) => (
                       <div key={i} className="rounded-lg border border-border/50 p-3 text-xs">
-                        {t}
+                        {item}
                       </div>
                     ))}
                   </div>
@@ -110,9 +95,9 @@ export default function MobileLandingPage() {
                   <CardContent className="pt-4">
                     <div className="flex items-center gap-2 text-xs">
                       <Mic className="h-3 w-3 text-primary" />
-                      <span className="font-semibold">Voice Mode</span>
+                      <span className="font-semibold">{t("mockVoice")}</span>
                     </div>
-                    <p className="mt-1 text-[10px] text-muted-foreground">Natural speaking practice with real-time feedback</p>
+                    <p className="mt-1 text-[10px] text-muted-foreground">{t("mockVoiceDesc")}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -126,7 +111,7 @@ export default function MobileLandingPage() {
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="text-3xl font-bold lg:text-4xl">{t("builtForLearning")}</h2>
           <p className="mt-4 text-muted-foreground">
-            Every feature is designed around one principle: respect your time and push you forward.
+            {t("builtSubtitle")}
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -154,32 +139,9 @@ export default function MobileLandingPage() {
             <QrCode className="mx-auto mb-4 h-32 w-32 text-primary" />
             <h3 className="text-xl font-bold">{t("scanDownload")}</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Point your phone camera at the QR code and tap the link. Auto-detects iOS or Android.
+              {t("scanDesc")}
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="container mx-auto px-6 py-20">
-        <h2 className="mb-12 text-center text-3xl font-bold">{t("lovedByLearners")}</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Card key={i}>
-              <CardContent className="pt-6">
-                <div className="mb-3 flex items-center gap-1">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed">&ldquo;{t.text}&rdquo;</p>
-                <div className="mt-4 border-t border-border/50 pt-4">
-                  <p className="text-sm font-semibold">{t.name}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
         </div>
       </section>
 
@@ -189,10 +151,10 @@ export default function MobileLandingPage() {
           <CardContent className="py-16 text-center">
             <Shield className="mx-auto mb-4 h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold">{t("freeToStart")}</h2>
-            <p className="mt-4 text-muted-foreground">Install the app and start your first lesson in under 60 seconds.</p>
+            <p className="mt-4 text-muted-foreground">{t("installApp")}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="h-12 gap-2 px-6"><Apple className="h-5 w-5" />App Store</Button>
-              <Button size="lg" variant="outline" className="h-12 gap-2 px-6"><Download className="h-5 w-5" />Google Play</Button>
+              <Button size="lg" className="h-12 gap-2 px-6" disabled><Apple className="h-5 w-5" />{t("appStore")}</Button>
+              <Button size="lg" variant="outline" className="h-12 gap-2 px-6" disabled><Download className="h-5 w-5" />{t("googlePlay")}</Button>
               <Link href="/register"><Button size="lg" variant="ghost" className="h-12">{t("startOnWeb")}</Button></Link>
             </div>
           </CardContent>

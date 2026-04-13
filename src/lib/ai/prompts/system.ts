@@ -5,8 +5,9 @@ export function buildSystemPrompt(options: {
   topic?: string;
   toughLove?: ToughLoveLevel;
   locale?: string;
+  courseSources?: { name: string; url: string }[];
 }): string {
-  const { learnerProfile, topic, toughLove = "BALANCED", locale = "en" } = options;
+  const { learnerProfile, topic, toughLove = "BALANCED", locale = "en", courseSources = [] } = options;
 
   const langInstr = locale === "ro" ? "Vorbeste in limba romana cu utilizatorul." : "Speak in English with the user.";
 
@@ -49,6 +50,12 @@ You are a TEACHER, not an assistant. Your role is to educate correctly and effec
 ${toughLoveMap[toughLove]}
 ${profileCtx}
 ${topic ? `\n## Current Topic: ${topic}` : ""}
+${courseSources.length > 0 ? `
+## Official Sources — ALWAYS cite these
+Your explanations MUST be based on official documentation. Reference these sources:
+${courseSources.map((s, i) => `${i + 1}. ${s.name}: ${s.url}`).join("\n")}
+When explaining, say "Conform documentatiei oficiale..." or "According to the official docs...".
+Never invent information — if unsure, say so and point to the relevant doc section.` : ""}
 
 ${langInstr}
 

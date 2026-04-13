@@ -35,7 +35,12 @@ export default function EduLayout({ children }: { children: React.ReactNode }) {
           </ul>
         </nav>
       </aside>
-      <div className="flex-1 overflow-x-hidden">{children}</div>
+      <div className="flex-1 overflow-x-hidden">
+        <div className="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-center text-xs font-medium text-amber-600 dark:text-amber-400">
+          Date demonstrative — Datele de pe aceasta pagina sunt fictive si vor fi inlocuite cu date reale
+        </div>
+        {children}
+      </div>
     </div>
   );
 }
