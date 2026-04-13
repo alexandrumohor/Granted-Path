@@ -16,13 +16,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] flex items-center">
-      <div className="w-full px-5 sm:px-8 lg:px-16 xl:px-24 py-8">
+    <div className="flex items-start">
+      <div className="w-full px-5 sm:px-8 lg:px-16 xl:px-24 py-4 lg:py-6">
         <div className="grid lg:grid-cols-[1fr_1px_1fr] items-center gap-0">
 
           {/* ── LEFT ── */}
           <div className="flex flex-col justify-center pr-0 lg:pr-12">
-            <div className="anim-right delay-1 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-[13px] text-muted-foreground mb-5 w-fit">
+            <div className="anim-right delay-1 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-[13px] text-muted-foreground mb-3 w-fit">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               {stats ? `${stats.users} utilizatori activi` : "Platforma activa"}
             </div>
@@ -31,12 +31,12 @@ export default function Home() {
               Sistemul tau de invatare, <span className="text-primary">bazat pe AI</span>
             </h1>
 
-            <p className="anim-right delay-3 mt-3 max-w-[460px] text-[14px] leading-[1.65] text-muted-foreground">
+            <p className="anim-right delay-3 mt-2 max-w-[460px] text-[14px] leading-[1.65] text-muted-foreground">
               Un AI care analizeaza cum performezi, detecteaza ce uiti
               si te corecteaza cand gresesti. Nu un chatbot — un tutor real.
             </p>
 
-            <div className="anim-right delay-4 mt-5 flex items-center gap-4">
+            <div className="anim-right delay-4 mt-4 flex items-center gap-4">
               <Link href="/register">
                 <Button className="h-9 px-5 text-[13px]">
                   {tc("getStarted")}
@@ -49,7 +49,7 @@ export default function Home() {
             </div>
 
             {stats && (
-              <div className="anim-right delay-5 mt-5 flex items-center gap-4 text-[12px] text-muted-foreground">
+              <div className="anim-right delay-5 mt-3 flex items-center gap-4 text-[12px] text-muted-foreground">
                 <span><strong className="text-foreground">{stats.courses}</strong> cursuri</span>
                 <span className="h-3 w-px bg-border" />
                 <span><strong className="text-foreground">{stats.lessons}</strong> lectii</span>
@@ -59,7 +59,7 @@ export default function Home() {
             )}
 
             {/* AI Preview */}
-            <div className="anim-up delay-6 mt-5 rounded-lg border border-border bg-card overflow-hidden" style={{boxShadow:"var(--shadow-card)"}}>
+            <div className="anim-up delay-6 mt-3 rounded-lg border border-border bg-card overflow-hidden" style={{boxShadow:"var(--shadow-card)"}}>
               <div className="flex items-center gap-2 border-b border-border px-3 py-2">
                 <div className="flex gap-1">
                   <div className="h-2 w-2 rounded-full bg-muted-foreground/15" />
@@ -95,12 +95,12 @@ export default function Home() {
           <div className="hidden lg:block w-px bg-border self-stretch my-8" />
 
           {/* ── RIGHT ── */}
-          <div className="flex flex-col justify-center pl-0 lg:pl-12 mt-10 lg:mt-0 bg-secondary/50 dark:bg-transparent rounded-2xl p-6 lg:p-8 -m-2 lg:m-0">
+          <div className="flex flex-col justify-center pl-0 lg:pl-12 mt-8 lg:mt-0 bg-secondary/50 dark:bg-transparent rounded-2xl p-4 lg:p-6 -m-2 lg:m-0">
             <h2 className="anim-left delay-2 text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] lg:whitespace-nowrap">
               Un tutor care preda, nu doar raspunde
             </h2>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {[
                 { icon: Brain, title: "Adaptive learning", desc: "Ajusteaza dificultatea si formatul bazat pe performanta ta reala." },
                 { icon: BarChart3, title: "Monitorizare continua", desc: "Fiecare sesiune si raspuns analizat pentru a-ti optimiza parcursul." },
