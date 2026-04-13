@@ -10,7 +10,7 @@ const STYLES = [
   { id: "visual", label: "Visual", icon: LayoutGrid },
   { id: "practice", label: "Hands-on", icon: Code },
   { id: "conversation", label: "Conversation", icon: MessageSquare },
-  { id: "flashcards", label: "Flashcards", icon: Layers },
+  { id: "flashcards", label: "Flashcard-uri", icon: Layers },
   { id: "mix", label: "Mix", icon: Brain },
 ];
 

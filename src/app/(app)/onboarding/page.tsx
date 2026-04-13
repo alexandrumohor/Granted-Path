@@ -26,7 +26,7 @@ const GOALS = [
 const STYLES = [
   {id:"reading",label:"Reading texts",icon:BookOpen},{id:"visual",label:"Diagrams & infographics",icon:LayoutGrid},
   {id:"practice",label:"Hands-on exercises",icon:Code},{id:"conversation",label:"Conversation with AI",icon:MessageSquare},
-  {id:"flashcards",label:"Flashcards",icon:Layers},{id:"mix",label:"Mix of everything",icon:Brain},
+  {id:"flashcards",label:"Flashcard-uri",icon:Layers},{id:"mix",label:"Mix din toate",icon:Brain},
 ];
 const TIMES = [{id:"morning",label:"Morning",icon:Sun},{id:"afternoon",label:"Afternoon",icon:Sunset},{id:"evening",label:"Evening",icon:Moon},{id:"night",label:"Night",icon:CloudMoon}];
 

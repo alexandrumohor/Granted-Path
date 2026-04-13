@@ -19,10 +19,10 @@ const initialTurns: Turn[] = [
 ];
 
 const voices = [
-  { id: "alice", name: "Alice", lang: "English (US)", accent: "Natural" },
-  { id: "carlos", name: "Carlos", lang: "Spanish", accent: "Latin American" },
+  { id: "alice", name: "Alice", lang: "Engleza (US)", accent: "Natural" },
+  { id: "carlos", name: "Carlos", lang: "Spaniola", accent: "Latino-americana" },
   { id: "sofia", name: "Sofia", lang: "Română", accent: "Standard" },
-  { id: "james", name: "James", lang: "English (UK)", accent: "Received Pronunciation" },
+  { id: "james", name: "James", lang: "Engleza (UK)", accent: "Pronuntie Standard" },
 ];
 
 export default function VoiceTutorPage() {

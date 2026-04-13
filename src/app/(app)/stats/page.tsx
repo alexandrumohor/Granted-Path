@@ -5,9 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { BarChart3, Clock, BookOpen, Dumbbell, Flame, Zap, TrendingUp, TrendingDown, Calendar } from "lucide-react";
 
 const DAILY_DATA = [
-  { day: "Mon", minutes: 45 }, { day: "Tue", minutes: 30 }, { day: "Wed", minutes: 0 },
-  { day: "Thu", minutes: 60 }, { day: "Fri", minutes: 25 }, { day: "Sat", minutes: 90 },
-  { day: "Sun", minutes: 40 },
+  { day: "Lun", minutes: 45 }, { day: "Mar", minutes: 30 }, { day: "Mie", minutes: 0 },
+  { day: "Joi", minutes: 60 }, { day: "Vin", minutes: 25 }, { day: "Sam", minutes: 90 },
+  { day: "Dum", minutes: 40 },
 ];
 const maxMin = Math.max(...DAILY_DATA.map(d => d.minutes));
 

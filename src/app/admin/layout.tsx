@@ -9,15 +9,15 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/organizations", label: "Organizations", icon: Building2 },
-  { href: "/admin/subscriptions", label: "Subscriptions", icon: CreditCard },
-  { href: "/admin/support", label: "Support", icon: LifeBuoy },
-  { href: "/admin/ai-monitoring", label: "AI Monitoring", icon: Brain },
-  { href: "/admin/content", label: "Content Review", icon: FileCheck },
+  { href: "/admin/dashboard", label: "Panou Principal", icon: LayoutDashboard },
+  { href: "/admin/users", label: "Utilizatori", icon: Users },
+  { href: "/admin/organizations", label: "Organizatii", icon: Building2 },
+  { href: "/admin/subscriptions", label: "Abonamente", icon: CreditCard },
+  { href: "/admin/support", label: "Suport", icon: LifeBuoy },
+  { href: "/admin/ai-monitoring", label: "Monitorizare AI", icon: Brain },
+  { href: "/admin/content", label: "Revizuire Continut", icon: FileCheck },
   { href: "/admin/features", label: "Feature Flags", icon: ToggleRight },
-  { href: "/admin/system", label: "System Health", icon: Activity },
+  { href: "/admin/system", label: "Sanatate Sistem", icon: Activity },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -32,15 +32,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Shield className="h-4 w-4 text-red-500" />
           </div>
           <div>
-            <p className="text-sm font-semibold">Admin Panel</p>
-            <p className="text-xs text-muted-foreground">Platform Control</p>
+            <p className="text-sm font-semibold">Panou Admin</p>
+            <p className="text-xs text-muted-foreground">Control Platforma</p>
           </div>
         </div>
 
         <div className="border-b border-red-500/20 px-3 py-2">
           <div className="flex items-center gap-2 rounded-md bg-red-500/10 px-2 py-1.5">
             <AlertTriangle className="h-3 w-3 text-red-500" />
-            <p className="text-[10px] font-medium text-red-500">Restricted · Logged</p>
+            <p className="text-[10px] font-medium text-red-500">Restrictionat · Logat</p>
           </div>
         </div>
 

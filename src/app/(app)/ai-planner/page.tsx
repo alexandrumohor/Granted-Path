@@ -19,32 +19,32 @@ type Block = {
 };
 
 const week: Record<string, Block[]> = {
-  Mon: [
+  Lun: [
     { time: "09:00", title: "Cloud Architecture — Module 3", type: "study", duration: 45, energy: "high" },
-    { time: "09:45", title: "Break", type: "break", duration: 10, energy: "low" },
-    { time: "09:55", title: "Flashcard review: Python async", type: "review", duration: 15, energy: "medium" },
-    { time: "19:00", title: "Voice tutor: DI practice", type: "voice", duration: 20, energy: "medium" },
+    { time: "09:45", title: "Pauza", type: "break", duration: 10, energy: "low" },
+    { time: "09:55", title: "Revizuire flashcard-uri: Python async", type: "review", duration: 15, energy: "medium" },
+    { time: "19:00", title: "Tutor vocal: practica DI", type: "voice", duration: 20, energy: "medium" },
   ],
-  Tue: [
+  Mar: [
     { time: "09:00", title: "Kubernetes Module 1", type: "study", duration: 40, energy: "high" },
     { time: "09:40", title: "Practice quiz", type: "practice", duration: 15, energy: "medium" },
-    { time: "18:30", title: "Flashcard review: Cloud basics", type: "review", duration: 15, energy: "low" },
+    { time: "18:30", title: "Revizuire flashcard-uri: Cloud basics", type: "review", duration: 15, energy: "low" },
   ],
-  Wed: [
-    { time: "09:00", title: "Rest day — light review only", type: "review", duration: 15, energy: "low" },
-    { time: "20:00", title: "Voice tutor: conversation", type: "voice", duration: 15, energy: "low" },
+  Mie: [
+    { time: "09:00", title: "Zi de odihna — revizuire usoara", type: "review", duration: 15, energy: "low" },
+    { time: "20:00", title: "Tutor vocal: conversatie", type: "voice", duration: 15, energy: "low" },
   ],
-  Thu: [
+  Joi: [
     { time: "09:00", title: "Observability & Monitoring", type: "study", duration: 45, energy: "high" },
-    { time: "09:45", title: "Break", type: "break", duration: 10, energy: "low" },
-    { time: "09:55", title: "Practice: Grafana dashboards", type: "practice", duration: 20, energy: "medium" },
+    { time: "09:45", title: "Pauza", type: "break", duration: 10, energy: "low" },
+    { time: "09:55", title: "Practica: Grafana dashboards", type: "practice", duration: 20, energy: "medium" },
   ],
-  Fri: [
+  Vin: [
     { time: "09:00", title: "Cost Optimization module", type: "study", duration: 30, energy: "medium" },
-    { time: "09:30", title: "Weekly assessment", type: "practice", duration: 25, energy: "medium" },
+    { time: "09:30", title: "Evaluare saptamanala", type: "practice", duration: 25, energy: "medium" },
   ],
-  Sat: [{ time: "10:00", title: "Catch-up / review", type: "review", duration: 30, energy: "low" }],
-  Sun: [{ time: "10:00", title: "AI Coach session", type: "voice", duration: 20, energy: "medium" }],
+  Sam: [{ time: "10:00", title: "Recuperare / revizuire", type: "review", duration: 30, energy: "low" }],
+  Dum: [{ time: "10:00", title: "Sesiune Antrenor AI", type: "voice", duration: 20, energy: "medium" }],
 };
 
 const typeStyles: Record<Block["type"], { color: string; icon: React.ComponentType<{ className?: string }> }> = {
@@ -154,7 +154,7 @@ export default function AIPlannerPage() {
         <CardContent className="pt-6">
           <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold">
             <Sun className="h-4 w-4 text-amber-400" />
-            Your Energy Profile <span className="text-xs font-normal text-muted-foreground">(learned from 127 sessions)</span>
+            Your Energy Profile <span className="text-xs font-normal text-muted-foreground">(invatat din 127 sesiuni)</span>
           </h3>
           <div className="grid grid-cols-[repeat(24,minmax(0,1fr))] gap-0.5 md:gap-1">
             {Array.from({ length: 24 }).map((_, h) => {

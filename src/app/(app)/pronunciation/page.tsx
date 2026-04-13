@@ -27,11 +27,11 @@ const lastScore = {
   intonation: 82,
   pace: "Good",
   issues: [
-    { word: "quick", problem: "k sound unclear", severity: "minor" },
-    { word: "over", problem: "vowel shortened", severity: "minor" },
-    { word: "lazy", problem: "z sound missing", severity: "moderate" },
+    { word: "quick", problem: "sunetul k neclar", severity: "minor" },
+    { word: "over", problem: "vocala scurtata", severity: "minor" },
+    { word: "lazy", problem: "sunetul z lipseste", severity: "moderat" },
   ],
-  strengths: ["Clear articulation of consonants", "Natural rhythm", "Good stress on key words"],
+  strengths: ["Articulare clara a consoanelor", "Ritm natural", "Accent bun pe cuvintele cheie"],
 };
 
 export default function PronunciationPage() {
@@ -133,7 +133,7 @@ export default function PronunciationPage() {
                 <div className="space-y-3">
                   {lastScore.issues.map((iss, i) => (
                     <div key={i} className="flex items-start gap-3 rounded-lg border border-border/50 p-3">
-                      <div className={cn("h-2 w-2 mt-1.5 rounded-full shrink-0", iss.severity === "moderate" ? "bg-orange-500" : "bg-amber-500")} />
+                      <div className={cn("h-2 w-2 mt-1.5 rounded-full shrink-0", iss.severity === "moderat" ? "bg-orange-500" : "bg-amber-500")} />
                       <div className="flex-1">
                         <p className="text-sm font-medium">&ldquo;{iss.word}&rdquo;</p>
                         <p className="text-xs text-muted-foreground">{iss.problem}</p>

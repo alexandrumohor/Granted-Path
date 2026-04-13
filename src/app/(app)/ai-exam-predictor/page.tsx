@@ -63,7 +63,7 @@ export default function ExamPredictorPage() {
               <h2 className="mt-1 text-xl font-bold">{exam.name}</h2>
               <div className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" />{exam.date}</span>
-                <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{exam.daysAway} days away</span>
+                <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{exam.daysAway} zile ramase</span>
               </div>
             </div>
             <div className="text-center">

@@ -9,17 +9,17 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/biz/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/biz/teams", label: "Teams", icon: Users },
-  { href: "/biz/employees", label: "Employees", icon: UserCircle },
-  { href: "/biz/paths", label: "Learning Paths", icon: Route },
-  { href: "/biz/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/biz/compliance", label: "Compliance", icon: ShieldCheck },
-  { href: "/biz/content", label: "Content", icon: BookOpen },
+  { href: "/biz/dashboard", label: "Panou Principal", icon: LayoutDashboard },
+  { href: "/biz/teams", label: "Echipe", icon: Users },
+  { href: "/biz/employees", label: "Angajati", icon: UserCircle },
+  { href: "/biz/paths", label: "Parcursuri", icon: Route },
+  { href: "/biz/analytics", label: "Analize", icon: BarChart3 },
+  { href: "/biz/compliance", label: "Conformitate", icon: ShieldCheck },
+  { href: "/biz/content", label: "Continut", icon: BookOpen },
   { href: "/biz/onboarding", label: "Onboarding", icon: Sparkles },
-  { href: "/biz/integrations", label: "Integrations", icon: Plug },
-  { href: "/biz/settings", label: "Settings", icon: Settings },
-  { href: "/biz/billing", label: "Billing", icon: CreditCard },
+  { href: "/biz/integrations", label: "Integrari", icon: Plug },
+  { href: "/biz/settings", label: "Setari", icon: Settings },
+  { href: "/biz/billing", label: "Facturare", icon: CreditCard },
 ];
 
 export default function BizLayout({ children }: { children: React.ReactNode }) {
@@ -34,8 +34,8 @@ export default function BizLayout({ children }: { children: React.ReactNode }) {
             <Building2 className="h-4 w-4 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-semibold">Business Portal</p>
-            <p className="text-xs text-muted-foreground">Enterprise Admin</p>
+            <p className="text-sm font-semibold">Portal Business</p>
+            <p className="text-xs text-muted-foreground">Admin Enterprise</p>
           </div>
         </div>
         <nav className="flex-1 overflow-y-auto p-2">

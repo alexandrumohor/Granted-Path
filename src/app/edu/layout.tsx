@@ -7,13 +7,13 @@ import { LayoutDashboard, Users, BookOpen, BarChart3, FileText, Settings, Credit
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/edu/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/edu/classes", label: "Classes", icon: Users },
-  { href: "/edu/assignments", label: "Assignments", icon: FileText },
-  { href: "/edu/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/edu/content", label: "Content", icon: BookOpen },
-  { href: "/edu/settings", label: "Settings", icon: Settings },
-  { href: "/edu/billing", label: "Billing", icon: CreditCard },
+  { href: "/edu/dashboard", label: "Panou Principal", icon: LayoutDashboard },
+  { href: "/edu/classes", label: "Clase", icon: Users },
+  { href: "/edu/assignments", label: "Teme", icon: FileText },
+  { href: "/edu/analytics", label: "Analize", icon: BarChart3 },
+  { href: "/edu/content", label: "Continut", icon: BookOpen },
+  { href: "/edu/settings", label: "Setari", icon: Settings },
+  { href: "/edu/billing", label: "Facturare", icon: CreditCard },
 ];
 
 export default function EduLayout({ children }: { children: React.ReactNode }) {
@@ -25,7 +25,7 @@ export default function EduLayout({ children }: { children: React.ReactNode }) {
       <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 flex-col border-r border-border/50 bg-card/50 lg:flex">
         <div className="flex items-center gap-3 border-b border-border/50 px-4 py-3">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10"><GraduationCap className="h-4 w-4 text-primary" /></div>
-          <div><p className="text-sm font-semibold">Education Portal</p><p className="text-xs text-muted-foreground">Teacher Dashboard</p></div>
+          <div><p className="text-sm font-semibold">Portal Educatie</p><p className="text-xs text-muted-foreground">Panou Profesor</p></div>
         </div>
         <nav className="flex-1 overflow-y-auto p-2">
           <ul className="space-y-1">

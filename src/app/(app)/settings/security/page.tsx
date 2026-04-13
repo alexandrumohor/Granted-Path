@@ -12,19 +12,19 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const sessions = [
-  { id: "s1", device: "MacBook Pro", browser: "Chrome 120", os: "macOS 15.2", ip: "82.76.12.4", location: "Bucharest, RO", lastActive: "now", current: true },
-  { id: "s2", device: "iPhone 15 Pro", browser: "Granted Path App", os: "iOS 18.1", ip: "94.23.45.178", location: "Bucharest, RO", lastActive: "2h ago", current: false },
-  { id: "s3", device: "Windows PC", browser: "Firefox 122", os: "Windows 11", ip: "82.76.12.4", location: "Bucharest, RO", lastActive: "Yesterday", current: false },
-  { id: "s4", device: "iPad Air", browser: "Safari", os: "iPadOS 18", ip: "188.24.103.55", location: "Cluj-Napoca, RO", lastActive: "3 days ago", current: false },
+  { id: "s1", device: "MacBook Pro", browser: "Chrome 120", os: "macOS 15.2", ip: "82.76.12.4", location: "Bucuresti, RO", lastActive: "acum", current: true },
+  { id: "s2", device: "iPhone 15 Pro", browser: "Aplicatia Granted Path", os: "iOS 18.1", ip: "94.23.45.178", location: "Bucuresti, RO", lastActive: "acum 2h", current: false },
+  { id: "s3", device: "Windows PC", browser: "Firefox 122", os: "Windows 11", ip: "82.76.12.4", location: "Bucuresti, RO", lastActive: "Ieri", current: false },
+  { id: "s4", device: "iPad Air", browser: "Safari", os: "iPadOS 18", ip: "188.24.103.55", location: "Cluj-Napoca, RO", lastActive: "acum 3 zile", current: false },
 ];
 
 const loginHistory = [
-  { date: "Apr 11, 2026 14:32", ip: "82.76.12.4", location: "Bucharest, RO", device: "MacBook Pro · Chrome", status: "success" },
-  { date: "Apr 11, 2026 09:15", ip: "94.23.45.178", location: "Bucharest, RO", device: "iPhone 15 Pro · App", status: "success" },
-  { date: "Apr 10, 2026 22:48", ip: "82.76.12.4", location: "Bucharest, RO", device: "MacBook Pro · Chrome", status: "success" },
+  { date: "Apr 11, 2026 14:32", ip: "82.76.12.4", location: "Bucuresti, RO", device: "MacBook Pro · Chrome", status: "success" },
+  { date: "Apr 11, 2026 09:15", ip: "94.23.45.178", location: "Bucuresti, RO", device: "iPhone 15 Pro · App", status: "success" },
+  { date: "Apr 10, 2026 22:48", ip: "82.76.12.4", location: "Bucuresti, RO", device: "MacBook Pro · Chrome", status: "success" },
   { date: "Apr 10, 2026 18:02", ip: "185.74.23.12", location: "Amsterdam, NL", device: "Unknown · Chrome", status: "blocked" },
-  { date: "Apr 9, 2026 12:20", ip: "82.76.12.4", location: "Bucharest, RO", device: "MacBook Pro · Chrome", status: "success" },
-  { date: "Apr 8, 2026 08:45", ip: "92.14.88.1", location: "Bucharest, RO", device: "Windows PC · Firefox", status: "success" },
+  { date: "Apr 9, 2026 12:20", ip: "82.76.12.4", location: "Bucuresti, RO", device: "MacBook Pro · Chrome", status: "success" },
+  { date: "Apr 8, 2026 08:45", ip: "92.14.88.1", location: "Bucuresti, RO", device: "Windows PC · Firefox", status: "success" },
 ];
 
 export default function SecuritySettingsPage() {
