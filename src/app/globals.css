@@ -49,23 +49,28 @@
 }
 
 :root {
-  --background: #F5F7FB;
+  /* Level 0 — page base */
+  --background: #EEF2F7;
   --foreground: #0F172A;
+  /* Level 2 — cards, components */
   --card: #FFFFFF;
   --card-foreground: #0F172A;
   --popover: #FFFFFF;
   --popover-foreground: #0F172A;
+  /* Accent */
   --primary: #2563EB;
   --primary-foreground: #FFFFFF;
-  --secondary: #F1F5F9;
+  /* Level 1 — sections */
+  --secondary: #F8FAFC;
   --secondary-foreground: #1E293B;
+  /* Level 1 alt */
   --muted: #F1F5F9;
   --muted-foreground: #475569;
   --accent: #2563EB;
   --accent-foreground: #FFFFFF;
   --destructive: #DC2626;
-  --border: #E6EAF0;
-  --input: #E6EAF0;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
   --ring: #2563EB;
   --chart-1: #2563EB;
   --chart-2: #3B82F6;
@@ -73,14 +78,20 @@
   --chart-4: #93C5FD;
   --chart-5: #BFDBFE;
   --radius: 0.5rem;
+  /* Sidebar — Level 1 */
   --sidebar: #F1F5F9;
   --sidebar-foreground: #0F172A;
   --sidebar-primary: #2563EB;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #E8ECF4;
+  --sidebar-accent: #E2E8F0;
   --sidebar-accent-foreground: #1E293B;
-  --sidebar-border: #E6EAF0;
+  --sidebar-border: #E2E8F0;
   --sidebar-ring: #2563EB;
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-elevated: 0 8px 30px rgba(15, 23, 42, 0.1), 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-dropdown: 0 12px 40px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(15, 23, 42, 0.06);
 }
 
 .dark {
@@ -115,6 +126,11 @@
   --sidebar-accent-foreground: #E2E8F0;
   --sidebar-border: #334155;
   --sidebar-ring: #3B82F6;
+  /* Shadows dark */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-dropdown: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
 @layer base {
@@ -123,20 +139,7 @@
   html { @apply font-sans scroll-smooth; }
 }
 
-/* ─── Light mode depth & layering ─── */
-:root {
-  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
-  --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-elevated: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
-  --shadow-dropdown: 0 12px 36px rgba(15, 23, 42, 0.1), 0 4px 12px rgba(15, 23, 42, 0.05);
-}
-
-.dark {
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-dropdown: 0 12px 36px rgba(0, 0, 0, 0.5);
-}
+/* shadows defined inside :root and .dark blocks above */
 
 /* ─── Kill transitions during theme switch ─── */
 .theme-switching,
@@ -158,33 +161,11 @@
 .glow-primary { box-shadow: 0 1px 20px rgba(59, 130, 246, 0.1); }
 .glow-amber { box-shadow: 0 1px 20px rgba(59, 130, 246, 0.1); }
 
-/* ─── Light mode card depth ─── */
-:root .card-elevated,
-:root [data-slot="card"] {
-  box-shadow: var(--shadow-card);
-}
-
-:root .card-elevated:hover,
-:root [data-slot="card"]:hover {
-  box-shadow: var(--shadow-card-hover);
-}
-
-/* ─── Light mode section alternating ─── */
-:root .section-alt {
-  background-color: #F1F5F9;
-}
-
-/* ─── Light mode navbar depth ─── */
-:root header {
-  box-shadow: 0 1px 0 #E6EAF0;
-}
-
-/* ─── Button hover improvements ─── */
+/* ─── Button hover ─── */
 :root button[data-slot="button"]:hover,
 :root a button:hover {
   filter: brightness(0.95);
 }
-
 .dark button[data-slot="button"]:hover,
 .dark a button:hover {
   filter: brightness(1.1);

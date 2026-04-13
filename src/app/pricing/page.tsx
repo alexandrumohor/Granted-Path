@@ -77,7 +77,7 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-[1120px] px-6 py-16 lg:py-24">
+    <div className="mx-auto max-w-[1120px] px-6 py-16 lg:py-24 min-h-[calc(100vh-3.5rem)]">
       {/* Header */}
       <div className="text-center max-w-[480px] mx-auto mb-12">
         <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-[-0.025em]">{t("title")}</h1>

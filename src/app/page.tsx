@@ -95,7 +95,7 @@ export default function Home() {
           <div className="hidden lg:block w-px bg-border self-stretch my-8" />
 
           {/* ── RIGHT ── */}
-          <div className="flex flex-col justify-center pl-0 lg:pl-12 mt-10 lg:mt-0">
+          <div className="flex flex-col justify-center pl-0 lg:pl-12 mt-10 lg:mt-0 bg-secondary/50 dark:bg-transparent rounded-2xl p-6 lg:p-8 -m-2 lg:m-0">
             <h2 className="anim-left delay-2 text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] lg:whitespace-nowrap">
               Un tutor care preda, nu doar raspunde
             </h2>
@@ -109,7 +109,7 @@ export default function Home() {
               ].map((f, i) => {
                 const Icon = f.icon;
                 return (
-                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-[transform,border-color,box-shadow] duration-200 hover:translate-y-[-1px]`}>
+                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-[transform,border-color,box-shadow] duration-200 hover:translate-y-[-2px]`} style={{boxShadow:"var(--shadow-card)"}} onMouseEnter={e=>(e.currentTarget.style.boxShadow="var(--shadow-card-hover)")} onMouseLeave={e=>(e.currentTarget.style.boxShadow="var(--shadow-card)")}>
                     <Icon className="h-4 w-4 text-primary mb-2 transition-none" />
                     <h3 className="text-[13px] font-semibold transition-none">{f.title}</h3>
                     <p className="mt-1 text-[11px] text-muted-foreground leading-[1.5] transition-none">{f.desc}</p>
