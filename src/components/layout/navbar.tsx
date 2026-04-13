@@ -33,7 +33,7 @@ function CoursesDropdown() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150"
+        className="flex items-center gap-1 rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150"
       >
         Cursuri Disponibile
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -72,30 +72,30 @@ export function Navbar() {
   const tn = useTranslations("nav");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#141e33] backdrop-blur-xl border-b border-[#E2E8F0] dark:border-[#1f2e4d]" style={{boxShadow:"0 1px 0 rgba(0,0,0,0.04)"}}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#2563EB] dark:bg-[#1E3A8A] backdrop-blur-xl border-b border-[#1D4ED8] dark:border-[#1E3A8A]">
       <nav className="mx-auto flex h-14 max-w-[1120px] items-center px-6">
         {/* Logo — NOT a link */}
         <div className="flex items-center gap-2.5 mr-8">
           <Image src="/icon.png" alt="" width={24} height={24} className="h-6 w-6" />
-          <span className="text-[15px] font-semibold tracking-[-0.01em]">Granted Path</span>
+          <span className="text-[15px] font-semibold tracking-[-0.01em] text-white">Granted Path</span>
         </div>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 md:flex flex-1">
-          <Link href="/" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("home")}</Link>
+          <Link href="/" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("home")}</Link>
           {loggedIn && (
             <>
-              <Link href="/dashboard" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tc("dashboard")}</Link>
-              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("pricing")}</Link>
-              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("learn")}</Link>
-              <Link href="/ai-chat" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("aiChat")}</Link>
+              <Link href="/dashboard" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tc("dashboard")}</Link>
+              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("pricing")}</Link>
+              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("learn")}</Link>
+              <Link href="/ai-chat" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("aiChat")}</Link>
               <CoursesDropdown />
             </>
           )}
           {!loggedIn && (
             <>
-              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("pricing")}</Link>
-              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-[#F8FAFC] dark:bg-white/5 border border-[#E2E8F0] dark:border-[#334155] hover:bg-white hover:border-primary/30 dark:hover:bg-white/10 transition-all duration-150">{tn("learn")}</Link>
+              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("pricing")}</Link>
+              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-white/80 bg-white/10 border border-white/15 hover:bg-white/20 hover:text-white transition-all duration-150">{tn("learn")}</Link>
               <CoursesDropdown />
             </>
           )}
@@ -105,10 +105,10 @@ export function Navbar() {
         <div className="hidden items-center gap-1 md:flex">
           <LanguageSwitcher />
           <ThemeToggle />
-          <div className="ml-1 mr-2 h-4 w-px bg-border" />
+          <div className="ml-1 mr-2 h-4 w-px bg-white/20" />
           {loggedIn ? (
             <>
-              <Link href="/settings" className="flex items-center gap-2 rounded-md px-2 py-1 text-[13px] text-muted-foreground hover:text-foreground transition-colors">
+              <Link href="/settings" className="flex items-center gap-2 rounded-md px-2 py-1 text-[13px] text-white/80 hover:text-white transition-colors">
                 {session?.user?.image ? (
                   <Image src={session?.user?.image} alt="" width={20} height={20} className="h-5 w-5 rounded-full" />
                 ) : (
@@ -116,13 +116,13 @@ export function Navbar() {
                 )}
                 <span className="max-w-[100px] truncate">{session?.user?.name}</span>
               </Link>
-              <button onClick={() => signOut({ callbackUrl: "/" })} className="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted">
+              <button onClick={() => signOut({ callbackUrl: "/" })} className="p-1.5 text-white/60 hover:text-white transition-colors rounded-md hover:bg-white/10">
                 <LogOut className="h-3.5 w-3.5" />
               </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors">{tc("login")}</Link>
+              <Link href="/login" className="rounded-md px-3 py-1.5 text-[13px] text-white/80 hover:text-white transition-colors">{tc("login")}</Link>
               <Link href="/register"><Button size="sm" className="h-8 text-[13px] px-4 ml-1">{tc("getStarted")}</Button></Link>
             </>
           )}
@@ -132,7 +132,7 @@ export function Navbar() {
         <div className="flex items-center gap-1 md:hidden ml-auto">
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger className="p-2 text-muted-foreground"><Menu className="h-5 w-5" /></SheetTrigger>
+            <SheetTrigger className="p-2 text-white/80"><Menu className="h-5 w-5" /></SheetTrigger>
             <SheetContent side="right" className="w-72">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="mt-8 flex flex-col gap-1">
