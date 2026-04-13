@@ -138,6 +138,15 @@
   --shadow-dropdown: 0 12px 36px rgba(0, 0, 0, 0.5);
 }
 
+/* ─── Kill transitions during theme switch ─── */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+
 /* ─── Utilities ─── */
 .text-gradient {
   background: linear-gradient(135deg, #3B82F6, #6366F1);

@@ -8,11 +8,23 @@ function ThemeApplier() {
   const theme = useThemeStore((s) => s.theme);
   useEffect(() => {
     const root = document.documentElement;
+    // Disable all transitions during theme switch to prevent flash
+    root.style.setProperty("--theme-transition", "none");
+    root.classList.add("theme-switching");
+
     if (theme === "dark") {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
+
+    // Re-enable transitions after repaint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        root.style.removeProperty("--theme-transition");
+        root.classList.remove("theme-switching");
+      });
+    });
   }, [theme]);
   return null;
 }

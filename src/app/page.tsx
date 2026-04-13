@@ -109,10 +109,10 @@ export default function Home() {
               ].map((f, i) => {
                 const Icon = f.icon;
                 return (
-                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-all duration-200 hover:translate-y-[-1px]`}>
-                    <Icon className="h-4 w-4 text-primary mb-2" />
-                    <h3 className="text-[13px] font-semibold">{f.title}</h3>
-                    <p className="mt-1 text-[11px] text-muted-foreground leading-[1.5]">{f.desc}</p>
+                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-[transform,border-color,box-shadow] duration-200 hover:translate-y-[-1px]`}>
+                    <Icon className="h-4 w-4 text-primary mb-2 transition-none" />
+                    <h3 className="text-[13px] font-semibold transition-none">{f.title}</h3>
+                    <p className="mt-1 text-[11px] text-muted-foreground leading-[1.5] transition-none">{f.desc}</p>
                   </div>
                 );
               })}

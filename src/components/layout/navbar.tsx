@@ -33,7 +33,7 @@ function CoursesDropdown() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        className="flex items-center gap-1 rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150"
       >
         Cursuri Disponibile
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -72,7 +72,7 @@ export function Navbar() {
   const tn = useTranslations("nav");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#EBF0FF] dark:bg-[#1a2744] backdrop-blur-xl border-b border-[#D4DEFF] dark:border-[#2a3a5c]">
       <nav className="mx-auto flex h-14 max-w-[1120px] items-center px-6">
         {/* Logo — NOT a link */}
         <div className="flex items-center gap-2.5 mr-8">
@@ -82,20 +82,20 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 md:flex flex-1">
-          <Link href="/" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("home")}</Link>
+          <Link href="/" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("home")}</Link>
           {loggedIn && (
             <>
-              <Link href="/dashboard" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tc("dashboard")}</Link>
-              <Link href="/pricing" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("pricing")}</Link>
-              <Link href="/learn" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("learn")}</Link>
-              <Link href="/ai-chat" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("aiChat")}</Link>
+              <Link href="/dashboard" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tc("dashboard")}</Link>
+              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("pricing")}</Link>
+              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("learn")}</Link>
+              <Link href="/ai-chat" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("aiChat")}</Link>
               <CoursesDropdown />
             </>
           )}
           {!loggedIn && (
             <>
-              <Link href="/pricing" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("pricing")}</Link>
-              <Link href="/learn" className="rounded-md px-3 py-1.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">{tn("learn")}</Link>
+              <Link href="/pricing" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("pricing")}</Link>
+              <Link href="/learn" className="rounded-md px-3.5 py-1.5 text-[13px] font-medium text-[#334155] dark:text-[#CBD5E1] bg-white/60 dark:bg-white/5 border border-[#D4DEFF] dark:border-[#334155] hover:bg-white dark:hover:bg-white/10 hover:border-primary/30 transition-all duration-150">{tn("learn")}</Link>
               <CoursesDropdown />
             </>
           )}
