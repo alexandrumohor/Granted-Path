@@ -35,7 +35,7 @@ export function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-1 w-48 rounded-lg border border-border/50 bg-card shadow-xl">
+        <div className="absolute right-0 top-full z-50 mt-1 w-48 rounded-lg border border-border bg-card" style={{boxShadow:"var(--shadow-dropdown)"}}>
           <div className="px-3 py-2 border-b border-border/50">
             <p className="text-xs font-medium text-muted-foreground">Change Language</p>
           </div>

@@ -39,7 +39,7 @@ function CoursesDropdown() {
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute left-0 top-full mt-1.5 w-56 rounded-lg border border-border bg-card shadow-lg z-50">
+        <div className="absolute left-0 top-full mt-1.5 w-56 rounded-lg border border-border bg-card z-50" style={{boxShadow:"var(--shadow-dropdown)"}}>
           <div className="py-1">
             {courses.map(c => (
               <Link

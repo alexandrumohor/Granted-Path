@@ -59,7 +59,7 @@ export default function Home() {
             )}
 
             {/* AI Preview */}
-            <div className="anim-up delay-6 mt-5 rounded-lg border border-border bg-card overflow-hidden">
+            <div className="anim-up delay-6 mt-5 rounded-lg border border-border bg-card overflow-hidden" style={{boxShadow:"var(--shadow-card)"}}>
               <div className="flex items-center gap-2 border-b border-border px-3 py-2">
                 <div className="flex gap-1">
                   <div className="h-2 w-2 rounded-full bg-muted-foreground/15" />
@@ -109,7 +109,7 @@ export default function Home() {
               ].map((f, i) => {
                 const Icon = f.icon;
                 return (
-                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-colors`}>
+                  <div key={i} className={`anim-scale delay-${i + 4} rounded-lg border border-border bg-card p-4 hover:border-primary/30 transition-all duration-200 hover:translate-y-[-1px]`}>
                     <Icon className="h-4 w-4 text-primary mb-2" />
                     <h3 className="text-[13px] font-semibold">{f.title}</h3>
                     <p className="mt-1 text-[11px] text-muted-foreground leading-[1.5]">{f.desc}</p>

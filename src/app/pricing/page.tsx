@@ -106,7 +106,7 @@ export default function PricingPage() {
           const price = billing === "yearly" ? p.yearly : p.monthly;
           const period = p.period ? p.period + (billing === "yearly" ? "/an" : `/${tc("monthly").toLowerCase().slice(0,2)}`) : (billing === "yearly" ? "/an" : `/${tc("monthly").toLowerCase().slice(0,2)}`);
           return (
-            <div key={i} className={`flex flex-col rounded-xl border p-7 transition-all duration-300 ${p.primary ? "border-primary ring-1 ring-primary/20 bg-primary/[0.02]" : "border-border bg-card"}`} style={{ animationDelay: `${i * 0.08}s` }}>
+            <div key={i} className={`flex flex-col rounded-xl border p-7 transition-all duration-300 hover:translate-y-[-2px] ${p.primary ? "border-primary ring-1 ring-primary/20 bg-primary/[0.02]" : "border-border bg-card"}`} style={{ animationDelay: `${i * 0.08}s`, boxShadow: "var(--shadow-card)" }}>
               {p.primary && <p className="text-[11px] font-medium text-primary mb-3 uppercase tracking-wide">{t("mostPopular")}</p>}
               <h3 className="text-lg font-semibold">{p.name}</h3>
               <div className="mt-3 flex items-baseline gap-0.5">
