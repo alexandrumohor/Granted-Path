@@ -1,9 +1,34 @@
 "use client";
 import { useTranslations } from "@/hooks/use-translations";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown } from "lucide-react";
+
+function AnimatedPrice({ value }: { value: number }) {
+  const [display, setDisplay] = useState(value);
+  const prev = useRef(value);
+
+  useEffect(() => {
+    const from = prev.current;
+    const to = value;
+    prev.current = to;
+    if (from === to) return;
+
+    const duration = 400;
+    const start = performance.now();
+
+    function tick(now: number) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      setDisplay(Math.round(from + (to - from) * ease));
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, [value]);
+
+  return <>{display}</>;
+}
 
 export default function PricingPage() {
   const t = useTranslations("pricing");
@@ -76,17 +101,17 @@ export default function PricingPage() {
       </div>
 
       {/* Plans */}
-      <div className="grid gap-5 lg:grid-cols-3 mb-24">
+      <div key={billing} className="grid gap-5 lg:grid-cols-3 mb-24" style={{ animation: "pricing-fade 0.4s ease-out" }}>
         {plans.map((p, i) => {
           const price = billing === "yearly" ? p.yearly : p.monthly;
           const period = p.period ? p.period + (billing === "yearly" ? "/an" : `/${tc("monthly").toLowerCase().slice(0,2)}`) : (billing === "yearly" ? "/an" : `/${tc("monthly").toLowerCase().slice(0,2)}`);
           return (
-            <div key={i} className={`flex flex-col rounded-xl border p-7 ${p.primary ? "border-primary ring-1 ring-primary/20 bg-primary/[0.02]" : "border-border bg-card"}`}>
+            <div key={i} className={`flex flex-col rounded-xl border p-7 transition-all duration-300 ${p.primary ? "border-primary ring-1 ring-primary/20 bg-primary/[0.02]" : "border-border bg-card"}`} style={{ animationDelay: `${i * 0.08}s` }}>
               {p.primary && <p className="text-[11px] font-medium text-primary mb-3 uppercase tracking-wide">{t("mostPopular")}</p>}
               <h3 className="text-lg font-semibold">{p.name}</h3>
               <div className="mt-3 flex items-baseline gap-0.5">
-                <span className="text-[36px] font-bold tracking-tight">&euro;{price}</span>
-                <span className="text-[13px] text-muted-foreground">{price > 0 ? period : ""}</span>
+                <span className="text-[36px] font-bold tracking-tight">&euro;<AnimatedPrice value={price} /></span>
+                <span className="text-[13px] text-muted-foreground transition-opacity duration-300">{price > 0 ? period : ""}</span>
               </div>
               <p className="mt-1 text-[13px] text-muted-foreground">{p.desc}</p>
               <ul className="mt-6 flex-1 space-y-2.5">
