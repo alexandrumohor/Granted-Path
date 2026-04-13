@@ -2,91 +2,208 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Flame, Zap, Clock, Brain, BookOpen, Dumbbell, Layers, MessageSquare, ArrowRight, Target, TrendingUp, Calendar } from "lucide-react";
+import { ArrowRight, BookOpen, MessageSquare, Dumbbell, Target, Clock, Flame, Zap, Brain, ChevronRight } from "lucide-react";
 import { useTranslations } from "@/hooks/use-translations";
-
-const mock = {
-  streak:12, totalXP:1250, level:8, todayMin:24, weekGoal:150, weekProg:96,
-  courses:[
-    {id:"1",title:"Python Fundamentals",cat:"IT & Programming",progress:45,last:"2h ago"},
-    {id:"2",title:"Digital Marketing 101",cat:"Marketing",progress:28,last:"1d ago"},
-    {id:"3",title:"English Conversation B2",cat:"Languages",progress:62,last:"3h ago"},
-  ],
-  goals:[{id:"1",title:"Learn Python basics",deadline:"May 15",progress:45},{id:"2",title:"BAC Matematica",deadline:"Jun 25",progress:12}],
-  reviewDue:8, aiRec_en:"You haven't practiced Python exercises in 2 days. A quick 10-min session would prevent forgetting loops.",
-  aiRec_ro:"Nu ai exersat Python de 2 zile. O sesiune rapida de 10 minute ar preveni uitarea buclelor.",
-};
-const heat = Array.from({length:84},()=>({m:Math.random()>0.3?Math.floor(Math.random()*120):0}));
 
 export default function DashboardPage() {
   const { data: session } = useSession();
   const t = useTranslations("dashboard");
-  const tc = useTranslations("common");
   const tn = useTranslations("nav");
   const name = session?.user?.name?.split(" ")[0] || "User";
-  const d = mock;
-  const locale = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("gp-language") || "{}").state?.locale : "en";
-  const aiRec = locale === "ro" ? d.aiRec_ro : d.aiRec_en;
+
+  const activeCourse = { title: "Python Fundamentals", module: "Control Flow", lesson: "for si while loops", progress: 45, timeLeft: "12 min", slug: "python-fundamentals" };
+  const courses = [
+    { title: "English Conversation B2", progress: 62, lesson: "Work Situations", time: "8 min", slug: "english-conversation-b2" },
+    { title: "Project Management Basics", progress: 18, lesson: "Work breakdown structure", time: "15 min", slug: "project-management-basics" },
+  ];
+  const weekStats = { studied: 96, goal: 150, streak: 12, xp: 320 };
+  const goals = [
+    { title: "Termina Python basics", deadline: "15 Mai", progress: 45 },
+    { title: "BAC Matematica", deadline: "25 Iun", progress: 12 },
+  ];
 
   return (
-    <div className="p-6 lg:p-8">
-      <div className="mb-8"><h1 className="text-2xl font-bold">{t("welcome")} <span className="text-gradient">{name}</span>!</h1><p className="mt-1 text-sm text-muted-foreground">{t("keepMomentum")}</p></div>
+    <div className="p-4 lg:p-8 max-w-[1200px] mx-auto">
 
-      <Card className="mb-8 border-primary/20 bg-primary/5"><CardContent className="flex items-start gap-4 pt-6">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"><Brain className="h-5 w-5"/></div>
-        <div className="flex-1"><p className="text-sm font-medium text-primary">{t("aiRecommendation")}</p><p className="mt-1 text-sm text-muted-foreground leading-relaxed">{aiRec}</p></div>
-        <Link href="/practice"><Button size="sm">{tn("practice")}<ArrowRight className="ml-1.5 h-3.5 w-3.5"/></Button></Link>
-      </CardContent></Card>
-
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat icon={<Flame className="h-5 w-5 text-orange-500"/>} label={t("streak")} value={String(d.streak)} accent />
-        <Stat icon={<Zap className="h-5 w-5 text-primary"/>} label={t("totalXP")} value={d.totalXP.toLocaleString()} sub={`${t("level")} ${d.level}`} />
-        <Stat icon={<Clock className="h-5 w-5 text-blue-400"/>} label={t("todayStudy")} value={`${d.todayMin}m`} sub={`${d.weekProg}/${d.weekGoal}m ${t("weekProgress").toLowerCase()}`} />
-        <Stat icon={<Layers className="h-5 w-5 text-purple-400"/>} label={t("reviewDue")} value={String(d.reviewDue)} sub="flashcards" />
+      {/* ── GREETING ── */}
+      <div className="mb-6">
+        <h1 className="text-[22px] font-semibold tracking-[-0.02em]">{t("welcome")} {name}</h1>
+        <p className="mt-1 text-[14px] text-muted-foreground">{t("keepMomentum")}</p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-6">
-          <div><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-semibold">{t("activeCourses")}</h2><Link href="/learn" className="text-sm text-primary hover:underline">{tc("viewAll")}</Link></div>
-            <div className="space-y-3">{d.courses.map(c=>(
-              <Card key={c.id} className="group hover:border-primary/30 transition-all"><CardContent className="flex items-center gap-4 py-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"><BookOpen className="h-5 w-5"/></div>
-                <div className="flex-1 min-w-0"><p className="font-medium truncate">{c.title}</p><div className="mt-1 flex gap-3 text-xs text-muted-foreground"><span>{c.cat}</span><span>{c.last}</span></div><div className="mt-2 h-1.5 rounded-full bg-muted"><div className="h-1.5 rounded-full bg-primary" style={{width:`${c.progress}%`}}/></div></div>
-                <div className="text-right"><span className="text-sm font-semibold">{c.progress}%</span><Link href={`/learn/course/${c.id}`}><Button size="sm" variant="ghost" className="ml-2"><ArrowRight className="h-4 w-4"/></Button></Link></div>
-              </CardContent></Card>
-            ))}</div>
+      {/* ══════ HERO — PRIORITY ZONE ══════ */}
+      <div className="rounded-xl border border-border bg-card p-6 lg:p-8 mb-6" style={{boxShadow:"var(--shadow-card)"}}>
+        <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-3">
+              <Brain className="h-5 w-5 text-primary" />
+              <span className="text-[13px] font-medium text-primary">{t("aiRecommendation")}</span>
+            </div>
+            <h2 className="text-[20px] font-semibold">{activeCourse.title}</h2>
+            <p className="mt-1 text-[14px] text-muted-foreground">
+              {activeCourse.module} → <span className="text-foreground font-medium">{activeCourse.lesson}</span>
+            </p>
+            <div className="mt-4 flex items-center gap-4">
+              <div className="flex-1 max-w-[300px]">
+                <div className="flex items-center justify-between text-[13px] mb-1.5">
+                  <span className="text-muted-foreground">{t("progress" as string) || "Progres"}</span>
+                  <span className="font-semibold">{activeCourse.progress}%</span>
+                </div>
+                <div className="h-2 rounded-full bg-muted">
+                  <div className="h-2 rounded-full bg-primary transition-all" style={{width:`${activeCourse.progress}%`}} />
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                <span>{activeCourse.timeLeft}</span>
+              </div>
+            </div>
           </div>
-          <div><h2 className="mb-4 text-lg font-semibold">{t("studyHeatmap")}</h2><Card><CardContent className="pt-6">
-            <div className="grid grid-cols-12 gap-1">{heat.map((h,i)=>(<div key={i} className="aspect-square rounded-sm" style={{backgroundColor:h.m===0?"oklch(0.18 0.025 150)":h.m<30?"oklch(0.35 0.1 155)":h.m<60?"oklch(0.5 0.15 155)":"oklch(0.7 0.19 155)"}} title={`${h.m} min`}/>))}</div>
-            <div className="mt-3 flex items-center justify-end gap-2 text-xs text-muted-foreground"><span>-</span><div className="flex gap-1">{[0,15,45,90].map(m=>(<div key={m} className="h-3 w-3 rounded-sm" style={{backgroundColor:m===0?"oklch(0.18 0.025 150)":m<30?"oklch(0.35 0.1 155)":m<60?"oklch(0.5 0.15 155)":"oklch(0.7 0.19 155)"}}/>))}</div><span>+</span></div>
-          </CardContent></Card></div>
+          <Link href={`/learn/${activeCourse.slug}`}>
+            <Button className="h-11 px-6 text-[15px] shrink-0">
+              Continua
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+
+      {/* ══════ MAIN GRID ══════ */}
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+
+        {/* ── LEFT 70% ── */}
+        <div className="space-y-6">
+
+          {/* Active Courses */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[16px] font-semibold">{t("activeCourses")}</h3>
+              <Link href="/learn" className="text-[13px] text-primary hover:underline">{tn("learn")} →</Link>
+            </div>
+            <div className="space-y-3">
+              {courses.map((c, i) => (
+                <Link key={i} href={`/learn/${c.slug}`}>
+                  <div className="rounded-xl border border-border bg-card p-4 hover:border-primary/30 transition-all duration-150 hover:translate-y-[-1px] flex items-center gap-4" style={{boxShadow:"var(--shadow-card)"}}>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 shrink-0">
+                      <BookOpen className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[14px] font-medium truncate">{c.title}</p>
+                      <p className="text-[12px] text-muted-foreground mt-0.5">Urmatoarea: {c.lesson}</p>
+                    </div>
+                    <div className="w-28 shrink-0 hidden sm:block">
+                      <div className="flex items-center justify-between text-[12px] mb-1">
+                        <span className="text-muted-foreground">{c.progress}%</span>
+                        <span className="text-muted-foreground flex items-center gap-1"><Clock className="h-3 w-3"/>{c.time}</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-muted">
+                        <div className="h-1.5 rounded-full bg-primary" style={{width:`${c.progress}%`}} />
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Activity */}
+          <div>
+            <h3 className="text-[16px] font-semibold mb-4">{t("weekProgress")}</h3>
+            <div className="rounded-xl border border-border bg-card p-5" style={{boxShadow:"var(--shadow-card)"}}>
+              <div className="grid grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1.5 mb-1">
+                    <Clock className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-[20px] font-bold">{weekStats.studied}<span className="text-[13px] font-normal text-muted-foreground">m</span></p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">/ {weekStats.goal}m</p>
+                  <div className="mt-2 h-1 rounded-full bg-muted mx-auto max-w-[60px]">
+                    <div className="h-1 rounded-full bg-primary" style={{width:`${Math.round(weekStats.studied/weekStats.goal*100)}%`}} />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1.5 mb-1">
+                    <Flame className="h-4 w-4 text-orange-500" />
+                  </div>
+                  <p className="text-[20px] font-bold">{weekStats.streak}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">{t("streak")}</p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1.5 mb-1">
+                    <Zap className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-[20px] font-bold">{weekStats.xp}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">XP</p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1.5 mb-1">
+                    <BookOpen className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-[20px] font-bold">7</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">Lectii</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
+        {/* ── RIGHT 30% ── */}
         <div className="space-y-6">
-          <div><h2 className="mb-4 text-lg font-semibold">{t("quickActions")}</h2><div className="grid grid-cols-2 gap-2">
-            <QA href="/learn" icon={<BookOpen className="h-4 w-4"/>} label={t("startLesson")}/>
-            <QA href="/practice" icon={<Dumbbell className="h-4 w-4"/>} label={t("practiceExercise")}/>
-            <QA href="/practice/flashcards" icon={<Layers className="h-4 w-4"/>} label={t("reviewFlashcards")}/>
-            <QA href="/ai-chat" icon={<MessageSquare className="h-4 w-4"/>} label={t("openAIChat")}/>
-          </div></div>
 
-          <div><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-semibold">{t("goals")}</h2><Link href="/goals" className="text-sm text-primary hover:underline">{tc("viewAll")}</Link></div>
-            <div className="space-y-3">{d.goals.map(g=>(
-              <Card key={g.id}><CardContent className="py-4"><div className="flex items-start justify-between"><div className="flex items-start gap-3"><Target className="mt-0.5 h-4 w-4 text-primary"/><div><p className="text-sm font-medium">{g.title}</p><div className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Calendar className="h-3 w-3"/>{g.deadline}</div></div></div><span className="text-sm font-semibold">{g.progress}%</span></div><div className="mt-3 h-1.5 rounded-full bg-muted"><div className="h-1.5 rounded-full bg-primary" style={{width:`${g.progress}%`}}/></div></CardContent></Card>
-            ))}<Link href="/goals"><Button variant="outline" size="sm" className="w-full"><Target className="mr-2 h-3.5 w-3.5"/>{tc("add")} {t("goals")}</Button></Link></div>
+          {/* Quick Actions */}
+          <div>
+            <h3 className="text-[16px] font-semibold mb-4">{t("quickActions")}</h3>
+            <div className="space-y-2">
+              <Link href="/learn">
+                <Button variant="outline" className="w-full h-11 justify-start text-[14px] font-medium">
+                  <BookOpen className="mr-3 h-4 w-4 text-primary" />
+                  {t("startLesson")}
+                </Button>
+              </Link>
+              <Link href="/practice">
+                <Button variant="outline" className="w-full h-11 justify-start text-[14px] font-medium">
+                  <Dumbbell className="mr-3 h-4 w-4 text-primary" />
+                  {t("practiceExercise")}
+                </Button>
+              </Link>
+              <Link href="/ai-chat">
+                <Button variant="outline" className="w-full h-11 justify-start text-[14px] font-medium">
+                  <MessageSquare className="mr-3 h-4 w-4 text-primary" />
+                  {t("openAIChat")}
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <Card><CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary"/>{t("weekProgress")}</CardTitle></CardHeader><CardContent><div className="space-y-3">
-            <WS label={t("todayStudy")} value={`${d.weekProg}m`} max={`${d.weekGoal}m`} pct={Math.round(d.weekProg/d.weekGoal*100)}/>
-            <WS label={tc("lessons")} value="7" pct={100}/><WS label={tn("practice")} value="34" pct={100}/><WS label="XP" value="320" pct={100}/>
-          </div></CardContent></Card>
+          {/* Goals */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[16px] font-semibold">{t("goals")}</h3>
+              <Link href="/goals" className="text-[13px] text-primary hover:underline">Vezi tot</Link>
+            </div>
+            <div className="space-y-3">
+              {goals.map((g, i) => (
+                <div key={i} className="rounded-xl border border-border bg-card p-4" style={{boxShadow:"var(--shadow-card)"}}>
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start gap-2.5">
+                      <Target className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-[13px] font-medium">{g.title}</p>
+                        <p className="text-[11px] text-muted-foreground mt-0.5">{g.deadline}</p>
+                      </div>
+                    </div>
+                    <span className="text-[13px] font-semibold">{g.progress}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-muted">
+                    <div className="h-1.5 rounded-full bg-primary" style={{width:`${g.progress}%`}} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-function Stat({icon,label,value,sub,accent}:{icon:React.ReactNode;label:string;value:string;sub?:string;accent?:boolean}){return<Card><CardContent className="flex items-center gap-4 pt-6"><div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted">{icon}</div><div><p className="text-xs text-muted-foreground">{label}</p><p className={`text-2xl font-bold ${accent?"text-orange-500":""}`}>{value}</p>{sub&&<p className="text-xs text-muted-foreground">{sub}</p>}</div></CardContent></Card>;}
-function QA({href,icon,label}:{href:string;icon:React.ReactNode;label:string}){return<Link href={href}><div className="flex flex-col items-center gap-2 rounded-xl border border-border/50 bg-card p-4 text-center hover:border-primary/30 hover:bg-primary/5 transition-all"><div className="text-primary">{icon}</div><span className="text-xs font-medium">{label}</span></div></Link>;}
-function WS({label,value,max,pct}:{label:string;value:string;max?:string;pct:number}){return<div><div className="flex justify-between text-sm"><span className="text-muted-foreground">{label}</span><span className="font-medium">{value}{max&&<span className="text-muted-foreground">/{max}</span>}</span></div><div className="mt-1 h-1.5 rounded-full bg-muted"><div className="h-1.5 rounded-full bg-primary" style={{width:`${Math.min(pct,100)}%`}}/></div></div>;}
