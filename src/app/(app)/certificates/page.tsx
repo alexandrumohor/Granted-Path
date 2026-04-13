@@ -25,9 +25,9 @@ const MOCK_CERTS: Certificate[] = [
 ];
 
 const TYPE_STYLES = {
-  COMPLETION: { label: "Completion", color: "text-blue-400 border-blue-500/30 bg-blue-500/10" },
-  PROFICIENCY: { label: "Proficiency", color: "text-purple-400 border-purple-500/30 bg-purple-500/10" },
-  MASTERY: { label: "Mastery", color: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10" },
+  COMPLETION: { label: "Finalizare", color: "text-blue-400 border-blue-500/30 bg-blue-500/10" },
+  PROFICIENCY: { label: "Competenta", color: "text-purple-400 border-purple-500/30 bg-purple-500/10" },
+  MASTERY: { label: "Stapanire", color: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10" },
 };
 
 export default function CertificatesPage() {

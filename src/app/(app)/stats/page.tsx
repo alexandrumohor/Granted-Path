@@ -109,7 +109,7 @@ export default function StatsPage() {
         <Card>
           <CardHeader><CardTitle className="text-base">This Week vs Last Week</CardTitle></CardHeader>
           <CardContent className="space-y-4">
-            <CompareRow label="Study time" current={`${w.thisWeek.minutes}m`} previous={`${w.lastWeek.minutes}m`} better={w.thisWeek.minutes >= w.lastWeek.minutes} />
+            <CompareRow label="Timp studiu" current={`${w.thisWeek.minutes}m`} previous={`${w.lastWeek.minutes}m`} better={w.thisWeek.minutes >= w.lastWeek.minutes} />
             <CompareRow label="Lessons" current={String(w.thisWeek.lessons)} previous={String(w.lastWeek.lessons)} better={w.thisWeek.lessons >= w.lastWeek.lessons} />
             <CompareRow label="Exercises" current={String(w.thisWeek.exercises)} previous={String(w.lastWeek.exercises)} better={w.thisWeek.exercises >= w.lastWeek.exercises} />
             <CompareRow label="XP" current={String(w.thisWeek.xp)} previous={String(w.lastWeek.xp)} better={w.thisWeek.xp >= w.lastWeek.xp} />

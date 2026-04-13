@@ -21,9 +21,9 @@ interface Goal {
 
 const MOCK_GOALS: Goal[] = [
   { id: "1", title: "Learn Python basics", type: "SKILL", deadline: "2026-05-15", progress: 45, status: "ACTIVE", daysLeft: 35, aiTip: "You're on track. Focus on loops and functions this week." },
-  { id: "2", title: "BAC Matematica", type: "EXAM", deadline: "2026-06-25", progress: 12, status: "ACTIVE", daysLeft: 76, aiTip: "You're behind schedule. Increase daily study to 45 min to catch up." },
-  { id: "3", title: "English B2 Certificate", type: "CAREER", deadline: "2026-08-01", progress: 68, status: "ACTIVE", daysLeft: 113, aiTip: "Great progress! Focus on writing exercises to reach proficiency." },
-  { id: "4", title: "Permis Auto", type: "EXAM", deadline: "2026-04-20", progress: 100, status: "COMPLETED", daysLeft: null, aiTip: "Completed! Well done." },
+  { id: "2", title: "BAC Matematica", type: "EXAM", deadline: "2026-06-25", progress: 12, status: "ACTIVE", daysLeft: 76, aiTip: "Esti in urma cu programul. Creste studiul zilnic la 45 min pentru a recupera." },
+  { id: "3", title: "Certificat English B2", type: "CAREER", deadline: "2026-08-01", progress: 68, status: "ACTIVE", daysLeft: 113, aiTip: "Progres excelent! Concentreaza-te pe exercitii de scriere pentru a atinge competenta." },
+  { id: "4", title: "Permis Auto", type: "EXAM", deadline: "2026-04-20", progress: 100, status: "COMPLETED", daysLeft: null, aiTip: "Finalizat! Bravo." },
 ];
 
 export default function GoalsPage() {
@@ -54,7 +54,7 @@ export default function GoalsPage() {
           <CardContent className="pt-6 space-y-4">
             <div className="space-y-2"><Label>Goal Title</Label><Input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="e.g., Learn Python for data science" /></div>
             <div className="space-y-2">
-              <Label>Type</Label>
+              <Label>Tip</Label>
               <div className="flex gap-2">{["EXAM", "SKILL", "CAREER", "CURIOSITY"].map(t => (
                 <button key={t} onClick={() => setNewType(t)} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${newType === t ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>{t.charAt(0) + t.slice(1).toLowerCase()}</button>
               ))}</div>

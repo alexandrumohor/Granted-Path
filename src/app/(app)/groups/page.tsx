@@ -22,11 +22,11 @@ interface StudyGroup {
 }
 
 const MOCK_GROUPS: StudyGroup[] = [
-  { id: "1", name: "Python Beginners", description: "Learn Python together. Share tips, ask questions, challenge each other.", topic: "Python", memberCount: 14, maxMembers: 20, isPublic: true, activeChallenge: "Weekly XP Race", lastActivity: "5 min ago" },
-  { id: "2", name: "Marketing Masters", description: "Digital marketing strategies, SEO tips, and case studies.", topic: "Marketing", memberCount: 8, maxMembers: 20, isPublic: true, activeChallenge: null, lastActivity: "2h ago" },
-  { id: "3", name: "BAC 2026 Pregatire", description: "Grup de pregatire pentru BAC. Matematica, Romana, si alte materii.", topic: "Exam Prep", memberCount: 19, maxMembers: 20, isPublic: true, activeChallenge: "First to 100% on Module 3", lastActivity: "20 min ago" },
-  { id: "4", name: "JavaScript Study Club", description: "From basics to advanced JS. Weekly coding challenges.", topic: "JavaScript", memberCount: 11, maxMembers: 20, isPublic: true, activeChallenge: "Quiz Race: ES6 Features", lastActivity: "1h ago" },
-  { id: "5", name: "English Fluency Practice", description: "Practice English conversation, idioms, and grammar.", topic: "English", memberCount: 6, maxMembers: 15, isPublic: true, activeChallenge: null, lastActivity: "4h ago" },
+  { id: "1", name: "Python Beginners", description: "Invata Python impreuna. Imparte sfaturi, pune intrebari, provoaca-te reciproc.", topic: "Python", memberCount: 14, maxMembers: 20, isPublic: true, activeChallenge: "Cursa XP Saptamanala", lastActivity: "acum 5 min" },
+  { id: "2", name: "Marketing Masters", description: "Strategii de marketing digital, sfaturi SEO si studii de caz.", topic: "Marketing", memberCount: 8, maxMembers: 20, isPublic: true, activeChallenge: null, lastActivity: "acum 2h" },
+  { id: "3", name: "BAC 2026 Pregatire", description: "Grup de pregatire pentru BAC. Matematica, Romana, si alte materii.", topic: "Pregatire Examen", memberCount: 19, maxMembers: 20, isPublic: true, activeChallenge: "Primul la 100% pe Modulul 3", lastActivity: "acum 20 min" },
+  { id: "4", name: "JavaScript Study Club", description: "De la baze la JS avansat. Provocari de cod saptamanale.", topic: "JavaScript", memberCount: 11, maxMembers: 20, isPublic: true, activeChallenge: "Cursa Quiz: Functionalitati ES6", lastActivity: "acum 1h" },
+  { id: "5", name: "English Fluency Practice", description: "Practica conversatie in engleza, expresii si gramatica.", topic: "English", memberCount: 6, maxMembers: 15, isPublic: true, activeChallenge: null, lastActivity: "acum 4h" },
 ];
 
 export default function GroupsPage() {

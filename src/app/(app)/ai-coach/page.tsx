@@ -9,13 +9,13 @@ import {
 } from "lucide-react";
 
 const lastSession = {
-  date: "April 4, 2026",
+  date: "4 Aprilie, 2026",
   duration: "18 min",
-  summary: "We focused on your Python async struggles. I challenged your assumption that asyncio is always faster — you agreed after walking through the CPU-bound example. We set a commitment: you'd write one async scraper by this week.",
+  summary: "Ne-am concentrat pe problemele tale cu Python async. Ti-am contestat presupunerea ca asyncio e intotdeauna mai rapid — ai fost de acord dupa ce am parcurs exemplul CPU-bound. Am stabilit un angajament: sa scrii un scraper async saptamana aceasta.",
   commitments: [
-    { text: "Write an async scraper using aiohttp", done: true },
-    { text: "Review 5 flashcards on coroutines daily", done: true },
-    { text: "Read PEP 492 sections on async/await semantics", done: false },
+    { text: "Scrie un scraper async folosind aiohttp", done: true },
+    { text: "Revizuieste 5 flashcard-uri despre coroutine zilnic", done: true },
+    { text: "Citeste sectiunile PEP 492 despre semantica async/await", done: false },
   ],
 };
 
@@ -29,15 +29,15 @@ const weekReview = {
 };
 
 const coachQuestions = [
-  "You skipped the PEP 492 reading — was that a scheduling issue or did you find it too dense? Be honest, I'm not grading you.",
-  "Your Python async accuracy jumped from 54% to 81%. What clicked for you this week? I want to make sure we double down on what's working.",
-  "Your Kubernetes path has been untouched for 6 days. Are you still committed to the May deadline, or should we renegotiate it?",
+  "Ai sarit peste lectura PEP 492 — a fost o problema de program sau ai gasit-o prea densa? Fii sincer, nu te notez.",
+  "Acuratetea ta la Python async a sarit de la 54% la 81%. Ce a facut click saptamana asta? Vreau sa ne asiguram ca dublam ce functioneaza.",
+  "Parcursul tau Kubernetes n-a fost atins de 6 zile. Esti inca angajat la deadline-ul din Mai, sau ar trebui sa-l renegociem?",
 ];
 
 const insights = [
-  { icon: TrendingUp, type: "win", text: "You answered 3 async questions in a row without hesitation — genuine improvement, not luck." },
-  { icon: AlertTriangle, type: "concern", text: "You've been avoiding video content for 2 weeks. You told me in session 4 that videos drain you — are we still learning, or just hiding?" },
-  { icon: Lightbulb, type: "insight", text: "You learn fastest between 9am-11am based on assessment timestamps. Consider protecting that window for deep work." },
+  { icon: TrendingUp, type: "win", text: "Ai raspuns la 3 intrebari async la rand fara ezitare — imbunatatire reala, nu noroc." },
+  { icon: AlertTriangle, type: "concern", text: "Eviti continutul video de 2 saptamani. Mi-ai spus in sesiunea 4 ca video-urile te epuizeaza — inca invatam, sau ne ascundem?" },
+  { icon: Lightbulb, type: "insight", text: "Inveti cel mai rapid intre 9-11 dimineata bazat pe timestamp-urile evaluarilor. Gandeste-te sa protejezi acea fereastra pentru munca profunda." },
 ];
 
 export default function AICoachPage() {
@@ -48,7 +48,7 @@ export default function AICoachPage() {
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-3">
             <Sparkles className="h-6 w-6 text-primary" />
-            AI Coach
+            {t("title")}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
@@ -64,10 +64,10 @@ export default function AICoachPage() {
                 <Calendar className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <Badge className="mb-2 bg-primary/20 text-primary">Session 8 — ready now</Badge>
+                <Badge className="mb-2 bg-primary/20 text-primary">Sesiunea 8 — {t("sessionReady")}</Badge>
                 <h2 className="text-lg font-semibold">{t("weeklyCheckin")}</h2>
                 <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-                  I've reviewed your week. I have 3 questions for you — some will feel uncomfortable. That's the point. Sessions average 15–20 minutes.
+                  {t("sessionDesc")}
                 </p>
               </div>
             </div>
@@ -93,10 +93,10 @@ export default function AICoachPage() {
         <Card>
           <CardContent className="pt-6">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Streak</span>
+              <span className="text-muted-foreground">{t("streak")}</span>
               <Flame className="h-3.5 w-3.5 text-orange-500" />
             </div>
-            <p className="text-2xl font-bold">{weekReview.streak} <span className="text-sm font-normal text-muted-foreground">days</span></p>
+            <p className="text-2xl font-bold">{weekReview.streak} <span className="text-sm font-normal text-muted-foreground">zile</span></p>
           </CardContent>
         </Card>
         <Card>
@@ -174,7 +174,7 @@ export default function AICoachPage() {
         {/* Insights */}
         <div>
           <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-            <Brain className="h-5 w-5 text-primary" />Coach's Observations
+            <Brain className="h-5 w-5 text-primary" />{t("coachObservations")}
           </h2>
           <div className="space-y-3">
             {insights.map((ins, i) => {

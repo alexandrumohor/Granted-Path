@@ -20,16 +20,16 @@ interface KnowledgeNode {
 }
 
 const MOCK_NODES: KnowledgeNode[] = [
-  { id: "py-variables", topic: "Python Variables", category: "Python", mastery: 85, status: "REVIEWING", lastReviewed: "2 days ago", nextReviewDue: "Tomorrow", forgettingRisk: 20, relatedTopics: ["py-datatypes", "py-strings"] },
-  { id: "py-datatypes", topic: "Data Types", category: "Python", mastery: 72, status: "LEARNING", lastReviewed: "4 days ago", nextReviewDue: "Today", forgettingRisk: 45, relatedTopics: ["py-variables", "py-lists"] },
-  { id: "py-strings", topic: "String Operations", category: "Python", mastery: 60, status: "LEARNING", lastReviewed: "5 days ago", nextReviewDue: "Overdue", forgettingRisk: 60, relatedTopics: ["py-variables"] },
-  { id: "py-conditionals", topic: "If / Elif / Else", category: "Python", mastery: 90, status: "MASTERED", lastReviewed: "1 day ago", nextReviewDue: "In 7 days", forgettingRisk: 10, relatedTopics: ["py-loops"] },
-  { id: "py-loops", topic: "For & While Loops", category: "Python", mastery: 45, status: "LEARNING", lastReviewed: "6 days ago", nextReviewDue: "Overdue", forgettingRisk: 70, relatedTopics: ["py-conditionals", "py-lists"] },
-  { id: "py-lists", topic: "Lists & Tuples", category: "Python", mastery: 30, status: "LEARNING", lastReviewed: "1 week ago", nextReviewDue: "Overdue", forgettingRisk: 80, relatedTopics: ["py-datatypes", "py-loops"] },
+  { id: "py-variables", topic: "Python Variables", category: "Python", mastery: 85, status: "REVIEWING", lastReviewed: "acum 2 zile", nextReviewDue: "Maine", forgettingRisk: 20, relatedTopics: ["py-datatypes", "py-strings"] },
+  { id: "py-datatypes", topic: "Data Types", category: "Python", mastery: 72, status: "LEARNING", lastReviewed: "acum 4 zile", nextReviewDue: "Astazi", forgettingRisk: 45, relatedTopics: ["py-variables", "py-lists"] },
+  { id: "py-strings", topic: "String Operations", category: "Python", mastery: 60, status: "LEARNING", lastReviewed: "5 days ago", nextReviewDue: "Intarziat", forgettingRisk: 60, relatedTopics: ["py-variables"] },
+  { id: "py-conditionals", topic: "If / Elif / Else", category: "Python", mastery: 90, status: "MASTERED", lastReviewed: "acum 1 zi", nextReviewDue: "In 7 zile", forgettingRisk: 10, relatedTopics: ["py-loops"] },
+  { id: "py-loops", topic: "For & While Loops", category: "Python", mastery: 45, status: "LEARNING", lastReviewed: "acum 6 zile", nextReviewDue: "Intarziat", forgettingRisk: 70, relatedTopics: ["py-conditionals", "py-lists"] },
+  { id: "py-lists", topic: "Lists & Tuples", category: "Python", mastery: 30, status: "LEARNING", lastReviewed: "acum 1 saptamana", nextReviewDue: "Intarziat", forgettingRisk: 80, relatedTopics: ["py-datatypes", "py-loops"] },
   { id: "py-functions", topic: "Functions", category: "Python", mastery: 0, status: "NOT_STARTED", lastReviewed: null, nextReviewDue: null, forgettingRisk: 0, relatedTopics: ["py-variables", "py-conditionals"] },
-  { id: "seo-basics", topic: "SEO Basics", category: "Marketing", mastery: 55, status: "LEARNING", lastReviewed: "3 days ago", nextReviewDue: "Tomorrow", forgettingRisk: 35, relatedTopics: ["seo-keywords"] },
-  { id: "seo-keywords", topic: "Keyword Research", category: "Marketing", mastery: 25, status: "LEARNING", lastReviewed: "1 week ago", nextReviewDue: "Overdue", forgettingRisk: 75, relatedTopics: ["seo-basics"] },
-  { id: "en-opinions", topic: "Expressing Opinions", category: "English", mastery: 68, status: "REVIEWING", lastReviewed: "2 days ago", nextReviewDue: "In 3 days", forgettingRisk: 25, relatedTopics: [] },
+  { id: "seo-basics", topic: "SEO Basics", category: "Marketing", mastery: 55, status: "LEARNING", lastReviewed: "acum 3 zile", nextReviewDue: "Maine", forgettingRisk: 35, relatedTopics: ["seo-keywords"] },
+  { id: "seo-keywords", topic: "Keyword Research", category: "Marketing", mastery: 25, status: "LEARNING", lastReviewed: "acum 1 saptamana", nextReviewDue: "Intarziat", forgettingRisk: 75, relatedTopics: ["seo-basics"] },
+  { id: "en-opinions", topic: "Expressing Opinions", category: "English", mastery: 68, status: "REVIEWING", lastReviewed: "acum 2 zile", nextReviewDue: "In 3 zile", forgettingRisk: 25, relatedTopics: [] },
 ];
 
 const CATEGORIES = ["All", "Python", "Marketing", "English"];
@@ -155,7 +155,7 @@ export default function KnowledgeMapPage() {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Last reviewed</span>
-                  <span>{selected.lastReviewed ?? "Never"}</span>
+                  <span>{selected.lastReviewed ?? "Niciodata"}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Next review</span>

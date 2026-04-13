@@ -27,7 +27,7 @@ const week: Record<string, Block[]> = {
   ],
   Mar: [
     { time: "09:00", title: "Kubernetes Module 1", type: "study", duration: 40, energy: "high" },
-    { time: "09:40", title: "Practice quiz", type: "practice", duration: 15, energy: "medium" },
+    { time: "09:40", title: "Quiz de practica", type: "practice", duration: 15, energy: "medium" },
     { time: "18:30", title: "Revizuire flashcard-uri: Cloud basics", type: "review", duration: 15, energy: "low" },
   ],
   Mie: [
@@ -40,7 +40,7 @@ const week: Record<string, Block[]> = {
     { time: "09:55", title: "Practica: Grafana dashboards", type: "practice", duration: 20, energy: "medium" },
   ],
   Vin: [
-    { time: "09:00", title: "Cost Optimization module", type: "study", duration: 30, energy: "medium" },
+    { time: "09:00", title: "Modul Optimizare Costuri", type: "study", duration: 30, energy: "medium" },
     { time: "09:30", title: "Evaluare saptamanala", type: "practice", duration: 25, energy: "medium" },
   ],
   Sam: [{ time: "10:00", title: "Recuperare / revizuire", type: "review", duration: 30, energy: "low" }],
@@ -65,7 +65,7 @@ export default function AIPlannerPage() {
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-3">
             <Sparkles className="h-6 w-6 text-primary" />
-            AI Study Planner
+            {t("title")}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
@@ -85,7 +85,7 @@ export default function AIPlannerPage() {
             <div>
               <p className="text-sm font-semibold">{t("whyThisPlan")}</p>
               <p className="mt-2 text-sm text-muted-foreground">
-                I front-loaded your deep work Mon/Tue/Thu mornings — that's when your assessment scores are 34% higher. Wednesday is intentionally light because you've averaged 11h/week for 3 weeks and I'm seeing early fatigue signals. Voice sessions land on evenings because speaking practice works better when you're not aiming for accuracy. Your Kubernetes deadline (May 15) drove module sequencing.
+                Ti-am programat munca profunda Lun/Mar/Joi dimineata — atunci scorurile tale sunt cu 34% mai mari. Miercurea e intentionat usoara pentru ca ai avut media de 11h/saptamana 3 saptamani si vad semnale timpurii de oboseala. Sesiunile vocale sunt seara pentru ca practica de vorbire merge mai bine cand nu tintesti acuratete. Deadline-ul Kubernetes (15 Mai) a determinat ordinea modulelor.
               </p>
             </div>
           </div>

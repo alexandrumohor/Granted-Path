@@ -25,12 +25,12 @@ interface Member {
 }
 
 const MOCK_MESSAGES: GroupMessage[] = [
-  { id: "1", userId: "u1", userName: "Alex", content: "Hey everyone! Anyone working on the loops chapter?", type: "TEXT", createdAt: "10:30" },
-  { id: "2", userId: "u2", userName: "Maria", content: "Yes! I'm stuck on nested for loops. Can someone explain?", type: "TEXT", createdAt: "10:32" },
-  { id: "3", userId: "ai", userName: "Granted Path AI", content: "A nested loop is a loop inside another loop. The inner loop completes all its iterations for each iteration of the outer loop. Think of it like a clock: the minute hand (inner) goes around 60 times for each hour (outer).", type: "AI_RESPONSE", createdAt: "10:33" },
+  { id: "1", userId: "u1", userName: "Alex", content: "Salut tuturor! Lucreaza cineva la capitolul cu bucle?", type: "TEXT", createdAt: "10:30" },
+  { id: "2", userId: "u2", userName: "Maria", content: "Da! Sunt blocat la bucle imbricate. Poate explica cineva?", type: "TEXT", createdAt: "10:32" },
+  { id: "3", userId: "ai", userName: "Granted Path AI", content: "O bucla imbricata este o bucla in interiorul altei bucle. Bucla interioara completeaza toate iteratiile pentru fiecare iteratie a buclei exterioare. Gandeste-te la un ceas: minutarul (interior) face 60 de ture pentru fiecare ora (exterior).", type: "AI_RESPONSE", createdAt: "10:33" },
   { id: "4", userId: "u3", userName: "Andrei", content: "That clock analogy is perfect! Thanks AI 😄", type: "TEXT", createdAt: "10:35" },
-  { id: "5", userId: "u1", userName: "Alex", content: "Let's do the weekly quiz race! Who's in?", type: "TEXT", createdAt: "10:40" },
-  { id: "6", userId: "system", userName: "System", content: "🏆 Weekly XP Race has started! Complete as many exercises as possible by Sunday.", type: "SYSTEM", createdAt: "10:41" },
+  { id: "5", userId: "u1", userName: "Alex", content: "Hai sa facem cursa de quiz saptamanala! Cine e in?", type: "TEXT", createdAt: "10:40" },
+  { id: "6", userId: "system", userName: "Sistem", content: "🏆 Weekly XP Race has started! Complete as many exercises as possible by Sunday.", type: "SYSTEM", createdAt: "10:41" },
 ];
 
 const MOCK_MEMBERS: Member[] = [

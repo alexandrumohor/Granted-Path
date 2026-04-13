@@ -29,9 +29,9 @@ const predictions = [
 ];
 
 const criticalGaps = [
-  { topic: "Route 53 routing policies", reason: "High confidence topic but mastery below 50%", priority: "urgent" },
-  { topic: "Lambda cold starts", reason: "Appeared in 4 of last 5 similar exams", priority: "high" },
-  { topic: "IAM cross-account access", reason: "Your weakest heavy-weight topic", priority: "high" },
+  { topic: "Route 53 routing policies", reason: "Subiect cu incredere mare dar stapanire sub 50%", priority: "urgent" },
+  { topic: "Lambda cold starts", reason: "A aparut in 4 din ultimele 5 examene similare", priority: "high" },
+  { topic: "IAM cross-account access", reason: "Subiectul tau cel mai slab cu pondere mare", priority: "high" },
 ];
 
 export default function ExamPredictorPage() {
@@ -49,7 +49,7 @@ export default function ExamPredictorPage() {
       <div className="mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-3">
           <Sparkles className="h-6 w-6 text-primary" />
-          AI Exam Predictor
+          {t("title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
@@ -77,11 +77,11 @@ export default function ExamPredictorPage() {
         </CardContent>
       </Card>
 
-      {/* Critical Gaps */}
+      {/* {t("criticalGaps")} */}
       <div className="mb-6">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
           <AlertTriangle className="h-5 w-5 text-red-500" />
-          Critical Gaps
+          {t("criticalGaps")}
         </h2>
         <div className="grid gap-3 md:grid-cols-3">
           {criticalGaps.map((g, i) => (
